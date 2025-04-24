@@ -1,0 +1,106 @@
+body {
+    background-color: rgb(232, 232, 232);
+    height: 100vh;
+}
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+}
+
+.cookie {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgb(232, 232, 232);
+    box-shadow:  19px 19px 48px #989898,
+                 -19px -19px 48px #ffffff;
+}
+.cookie:active {
+    background: #e8e8e8;
+    box-shadow: inset 19px 19px 48px #9e9e9e,
+                inset -19px -19px 48px #ffffff;
+}
+.score {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    translate: -50% -50%;
+    font-size: 35px;
+    color: gray;
+}
+.score-per-sec {
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    translate: -50% -50%;
+    font-size: 25px;
+    color: gray;
+}
+.floating-number {
+    position: absolute;
+    color: gray;
+    user-select: none;
+    pointer-events: none;
+    animation: float 2s;
+}
+@keyframes float {
+    0% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
+.shop-div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 220px;
+    height: 100%;
+    background: #e8e8e8;
+    box-shadow:  40px 40px 73px #808080,
+                 -40px -40px 73px #ffffff;
+}
+.shop-title {
+    width: 100%;
+    background-color: rgb(202, 202, 202);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+.shop-body {
+    width: 220px;
+    height: calc(100vh - 80px);
+}
+.item {
+    background-color: rgb(220, 220, 220);
+    width: 218px;
+    height: 90px;
+    border: solid;
+    margin-bottom: 22px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+.item-name {
+    border-bottom: 4px solid rgb(200, 200, 200);
+    height: 55px;
+    display: grid;
+    place-content: center;
+    font-size: 22px;
+}
+.item-price-lvl {
+    display: grid;
+    place-content: center;
+    font-size: 17px;
+    height: 30px;
+}

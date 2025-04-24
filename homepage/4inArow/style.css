@@ -1,0 +1,33 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.all {
+    display: grid;
+    grid-gap: 5px;
+    border: solid;
+    background-color: rgb(70, 70, 70);
+    padding: 13px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.cube {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(160, 159, 159);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    border-radius: 15px;
+}

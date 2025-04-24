@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: rgb(50, 50, 50);
+    height: 100dvh;
+}
+.c {
+    background-color: rgb(60, 60, 60);
+    width: max(80px, 8vw);
+    height: max(80px, 8vw);
+    border: none;
+    color: black;
+    font-size: 30px;
+}
+.all {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    border: none;
+    background-color: rgb(40, 40, 40);
+    box-shadow: 0 0 10px 10px red;
+}
+.result {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    translate: -50% -50%;
+    font-size: 40px;
+}
+.score {
+    position: absolute;
+    left:50%;
+    font-size: 30px;
+    translate: -50% -50%;
+    top: 85%;
+}
+.play-again {
+    position: absolute;
+    left: 50%;
+    translate: -50% -50%;
+    top: 93%;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(60, 60, 60);
+    font-size: 18px;
+}
+.colors {
+    position: absolute;
+    left: 50%;
+    top: 5%;
+    translate: -50% -50%;
+    font-size: 30px;
+}
