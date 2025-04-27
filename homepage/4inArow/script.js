@@ -16,7 +16,7 @@ document.querySelector('.all').style.gridTemplateRows = `repeat(${Math.sqrt(numC
 const check = function(e) {
     if (disabled) return
     if(move === 'red') {
-        e.target.style.backgroundColor = 'red'
+        e.target.style.backgroundColor = 'salmon'
     } else {e.target.style.backgroundColor = 'lightblue'}
     e.target.innerHTML = move
 
@@ -24,6 +24,7 @@ const check = function(e) {
     let number = className.replace('cube', '').replace('A', '').replace(' ', '').replace('cube', '');
     number = Number(number)
     moveToPlace(number)
+    changeBackground()
 }
 
 document.querySelectorAll('.cube').forEach(cube => {
@@ -42,7 +43,7 @@ async function moveToPlace(classNumber) {
         document.querySelector(`.cube${classNumber}A`).innerHTML = ''
 
         if(move === 'red') {
-            document.querySelector(`.cube${classNumber+girdRowsColumns}A`).style.backgroundColor = 'red' //coloring
+            document.querySelector(`.cube${classNumber+girdRowsColumns}A`).style.backgroundColor = 'salmon' //coloring
             document.querySelector(`.cube${classNumber}A`).style.backgroundColor = 'rgb(160, 159, 159)' //coloring
         } else {
             document.querySelector(`.cube${classNumber+girdRowsColumns}A`).style.backgroundColor = 'lightblue' //coloring
@@ -68,13 +69,13 @@ async function moveToPlace(classNumber) {
 async function checkIfWin(player) {
     for(let i = 1; i<=(girdRowsColumns ** 2)-3; i++) {
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+1) === player && cubeInnerHtml(i+2) === player && cubeInnerHtml(i+3) === player) {
-            displayResult(player, i, i+1, i+2, i+3)
+            displayResult(player, i, i+3)
         }
     }
 
     for(let i = 1; i<=(girdRowsColumns ** 2)-3*girdRowsColumns; i++) {
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns) === player && cubeInnerHtml(i+2*girdRowsColumns) === player && cubeInnerHtml(i+3*girdRowsColumns) === player) {
-            displayResult(player, i, i+girdRowsColumns, i+2*girdRowsColumns, i+3*girdRowsColumns)
+            displayResult(player, i, i+3*girdRowsColumns)
         }
     }
     for(let i = 1; i<=girdRowsColumns**2;i++) {
@@ -83,7 +84,7 @@ async function checkIfWin(player) {
         if (i>=girdRowsColumns**2-3*girdRowsColumns) continue
         // document.querySelector(`.cube${i}A`).style.backgroundColor = 'red'
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns +1) === player && cubeInnerHtml(i+2*girdRowsColumns + 2) === player && cubeInnerHtml(i+3*girdRowsColumns + 3) === player) {
-            displayResult(player, i, i+girdRowsColumns +1, i+2*girdRowsColumns +2, i+3*girdRowsColumns+3)
+            displayResult(player, i, i+3*girdRowsColumns+3)
         }
     }
     for(let i = 1; i<=girdRowsColumns**2;i++) {
@@ -92,12 +93,12 @@ async function checkIfWin(player) {
         if (i>girdRowsColumns**2-3*girdRowsColumns) continue
         // document.querySelector(`.cube${i}A`).style.backgroundColor = 'blue'
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns -1) === player && cubeInnerHtml(i+2*girdRowsColumns - 2) === player && cubeInnerHtml(i+3*girdRowsColumns - 3) === player) {
-            displayResult(player, i, i+girdRowsColumns-1, i+2*girdRowsColumns-2, i+3*girdRowsColumns-3)
+            displayResult(player, i, i+3*girdRowsColumns-3)
         }
     } 
 }
 
-function displayResult(color, cube1, cube2, cube3, cube4) {
+function displayResult(color, cube1, cube4) {
     document.querySelectorAll('.cube').forEach(cube => {
         cube.removeEventListener('click', check)
     })
@@ -113,10 +114,18 @@ function displayResult(color, cube1, cube2, cube3, cube4) {
     let width2 = document.querySelector(`.cube${cube4}A`).getBoundingClientRect().width
 
 
-    document.querySelector('.svg').innerHTML = `<line x1="${x1+width1/2}" y1="${y1+width1/2}" x2="${x2+width2/2}" y2="${y2+width2/2}" stroke="black" stroke-width="5" />`
+    document.querySelector('.svg').innerHTML = `<line x1="${x1+width1/2}" y1="${y1+width1/2}" x2="${x2+width2/2}" y2="${y2+width2/2}" stroke="rgb(72, 72, 72)" stroke-width="5" stroke-linecap="round"/>`
 }
 
 function cubeInnerHtml(num) {
     let result = document.querySelector(`.cube${num}A`).innerHTML
     return result
+}
+function changeBackground() {
+    if(move === 'red') {
+        document.body.style.backgroundColor = 'lightblue'
+    }
+    else if (move === 'blue') {
+        document.body.style.backgroundColor = 'salmon'
+    }
 }
