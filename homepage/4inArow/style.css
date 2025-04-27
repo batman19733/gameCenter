@@ -24,8 +24,8 @@ body {
 }
 
 .cube {
-    width: min(50px, 6vw);
-    height: min(50px, 6vw);
+    width: min(50px, 9vw);
+    height: min(50px, 9vw);
     background-color: rgb(160, 159, 159);
     display: flex;
     align-items: center;
@@ -39,9 +39,8 @@ body {
     left: 50%;
     top: 7%;
     translate: -50% -50%;
-    font-size: 25px;
+    font-size: 45px;
 }
-
 svg {
     position: absolute;
     z-index: 2;
@@ -49,4 +48,39 @@ svg {
     height: 100%;
     user-select: none;
     pointer-events: none;
+}
+.side-left {
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 350px);
+    translate: -50% -50%;
+    font-size: 25px;
+    width: 170px;
+}
+.side-right {
+    position: absolute;
+    top: 50%;
+    left: calc(50% + 350px);
+    translate: -50% -50%;
+    font-size: 25px;
+    width: 170px;
+    margin-left: 40px;
+}
+
+
+.down-left {
+    position: absolute;
+    top: 94%;
+    left: calc(50% - 75px);
+    translate: -50% -50%;
+    font-size: 25px;
+    width: 170px;
+}
+.down-right {
+    position: absolute;
+    top: 94%;
+    left: calc(50% + 75px);
+    translate: -20% -50%;
+    font-size: 25px;
+    width: 170px;
 }

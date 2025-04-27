@@ -114,7 +114,7 @@ function displayResult(color, cube1, cube4) {
     let width2 = document.querySelector(`.cube${cube4}A`).getBoundingClientRect().width
 
 
-    document.querySelector('.svg').innerHTML = `<line x1="${x1+width1/2}" y1="${y1+width1/2}" x2="${x2+width2/2}" y2="${y2+width2/2}" stroke="rgb(72, 72, 72)" stroke-width="5" stroke-linecap="round"/>`
+    document.querySelector('.svg').innerHTML = `<line x1="${x1+width1/2}" y1="${y1+width1/2}" x2="${x2+width2/2}" y2="${y2+width2/2}" stroke="rgb(73, 73, 73)" stroke-width="5" stroke-linecap="round"/>`
 }
 
 function cubeInnerHtml(num) {
@@ -128,4 +128,13 @@ function changeBackground() {
     else if (move === 'blue') {
         document.body.style.backgroundColor = 'salmon'
     }
+}
+
+if (window.innerWidth >= 900) {
+    document.querySelector('.red-wins').classList.add('side-left')
+    document.querySelector('.blue-wins').classList.add('side-right')
+}
+else if (window.innerWidth < 900) {
+    document.querySelector('.red-wins').classList.add('down-left')
+    document.querySelector('.blue-wins').classList.add('down-right')
 }
