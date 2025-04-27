@@ -68,13 +68,13 @@ async function moveToPlace(classNumber) {
 async function checkIfWin(player) {
     for(let i = 1; i<=(girdRowsColumns ** 2)-3; i++) {
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+1) === player && cubeInnerHtml(i+2) === player && cubeInnerHtml(i+3) === player) {
-            displayResult(player)
+            displayResult(player, i, i+1, i+2, i+3)
         }
     }
 
     for(let i = 1; i<=(girdRowsColumns ** 2)-3*girdRowsColumns; i++) {
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns) === player && cubeInnerHtml(i+2*girdRowsColumns) === player && cubeInnerHtml(i+3*girdRowsColumns) === player) {
-            displayResult(player)
+            displayResult(player, i, i+girdRowsColumns, i+2*girdRowsColumns, i+3*girdRowsColumns)
         }
     }
     for(let i = 1; i<=girdRowsColumns**2;i++) {
@@ -83,7 +83,7 @@ async function checkIfWin(player) {
         if (i>=girdRowsColumns**2-3*girdRowsColumns) continue
         // document.querySelector(`.cube${i}A`).style.backgroundColor = 'red'
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns +1) === player && cubeInnerHtml(i+2*girdRowsColumns + 2) === player && cubeInnerHtml(i+3*girdRowsColumns + 3) === player) {
-            displayResult(player)
+            displayResult(player, i, i+girdRowsColumns +1, i+2*girdRowsColumns +2, i+3*girdRowsColumns+3)
         }
     }
     for(let i = 1; i<=girdRowsColumns**2;i++) {
@@ -92,16 +92,28 @@ async function checkIfWin(player) {
         if (i>girdRowsColumns**2-3*girdRowsColumns) continue
         // document.querySelector(`.cube${i}A`).style.backgroundColor = 'blue'
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns -1) === player && cubeInnerHtml(i+2*girdRowsColumns - 2) === player && cubeInnerHtml(i+3*girdRowsColumns - 3) === player) {
-            displayResult(player)
+            displayResult(player, i, i+girdRowsColumns-1, i+2*girdRowsColumns-2, i+3*girdRowsColumns-3)
         }
     } 
 }
 
-function displayResult(color) {
+function displayResult(color, cube1, cube2, cube3, cube4) {
     document.querySelectorAll('.cube').forEach(cube => {
         cube.removeEventListener('click', check)
     })
     document.querySelector('.result').innerHTML = `${color} won`
+
+    
+    let x1 = document.querySelector(`.cube${cube1}A`).getBoundingClientRect().x
+    let y1 = document.querySelector(`.cube${cube1}A`).getBoundingClientRect().y
+    let width1 = document.querySelector(`.cube${cube1}A`).getBoundingClientRect().width
+
+    let x2 = document.querySelector(`.cube${cube4}A`).getBoundingClientRect().x
+    let y2 = document.querySelector(`.cube${cube4}A`).getBoundingClientRect().y
+    let width2 = document.querySelector(`.cube${cube4}A`).getBoundingClientRect().width
+
+
+    document.querySelector('.svg').innerHTML = `<line x1="${x1+width1/2}" y1="${y1+width1/2}" x2="${x2+width2/2}" y2="${y2+width2/2}" stroke="black" stroke-width="5" />`
 }
 
 function cubeInnerHtml(num) {
