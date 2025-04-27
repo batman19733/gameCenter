@@ -2,10 +2,12 @@
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    
 }
-
+html,
 body {
     height: 100vh;
+    width: 100vw;
     background-color: salmon;
 }
 
@@ -14,24 +16,30 @@ body {
     grid-gap: 5px;
     border: none;
     background-color: rgb(70, 70, 70);
-    padding: 13px;
+    padding: min(2vw, 20px);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     position: absolute;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
+    width: 475px;
+    height: 475px;
+}
+.big {
+    width: 90vw;
+    height: 90vw;
 }
 
 .cube {
-    width: min(50px, 9vw);
-    height: min(50px, 9vw);
+    width: 1fr;
+    height: 1fr;
     background-color: rgb(160, 159, 159);
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
-    border-radius: 15px;
+    border-radius: 25%;
     color: transparent;
 }
 .result {
@@ -54,7 +62,7 @@ svg {
     top: 50%;
     left: calc(50% - 350px);
     translate: -50% -50%;
-    font-size: 25px;
+    font-size: 30px;
     width: 170px;
 }
 .side-right {
@@ -62,7 +70,7 @@ svg {
     top: 50%;
     left: calc(50% + 350px);
     translate: -50% -50%;
-    font-size: 25px;
+    font-size: 30px;
     width: 170px;
     margin-left: 40px;
 }
@@ -83,4 +91,34 @@ svg {
     translate: -20% -50%;
     font-size: 25px;
     width: 170px;
+}
+.playAgain {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    translate: -50% -50%;
+    font-size: 33px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.salmon {
+    box-shadow:  8px 8px 27px #a8564c,
+                 -8px -8px 27px #ffaa98;
+}
+
+.salmon:active {
+    box-shadow: inset 8px 8px 27px #a8564c,
+                inset -8px -8px 27px #ffaa98;
+}
+.blue {
+    box-shadow:  8px 8px 27px #74919a,
+                -8px -8px 27px #e6ffff;
+}
+.blue:active {
+    box-shadow: inset 8px 8px 27px #74919a,
+                inset -8px -8px 27px #e6ffff;
 }

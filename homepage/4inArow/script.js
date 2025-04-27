@@ -2,6 +2,19 @@ let html = ''
 let move = 'red'
 girdRowsColumns = 9
 let disabled = false
+let menu
+
+if (window.innerWidth >= 1150) {
+    document.querySelector('.red-wins').classList.add('side-left')
+    document.querySelector('.blue-wins').classList.add('side-right')
+    menu = 'big'
+}
+else if (window.innerWidth < 1150) {
+    document.querySelector('.red-wins').classList.add('down-left')
+    document.querySelector('.blue-wins').classList.add('down-right')
+    document.querySelector('.all').classList.add('big')
+    menu = 'small'
+}
 
 for(i=1;i<=girdRowsColumns ** 2;i++) {
     html += `<div class="cube${i}A cube"></div>\n`
@@ -115,6 +128,7 @@ function displayResult(color, cube1, cube4) {
 
 
     document.querySelector('.svg').innerHTML = `<line x1="${x1+width1/2}" y1="${y1+width1/2}" x2="${x2+width2/2}" y2="${y2+width2/2}" stroke="rgb(73, 73, 73)" stroke-width="5" stroke-linecap="round"/>`
+    playAgainButton()
 }
 
 function cubeInnerHtml(num) {
@@ -124,17 +138,18 @@ function cubeInnerHtml(num) {
 function changeBackground() {
     if(move === 'red') {
         document.body.style.backgroundColor = 'lightblue'
+        document.querySelector('.playAgain').classList.add('blue')
+        document.querySelector('.playAgain').classList.remove('salmon')
     }
     else if (move === 'blue') {
         document.body.style.backgroundColor = 'salmon'
+        document.querySelector('.playAgain').classList.add('salmon')
+        document.querySelector('.playAgain').classList.remove('blue')
     }
 }
 
-if (window.innerWidth >= 900) {
-    document.querySelector('.red-wins').classList.add('side-left')
-    document.querySelector('.blue-wins').classList.add('side-right')
-}
-else if (window.innerWidth < 900) {
-    document.querySelector('.red-wins').classList.add('down-left')
-    document.querySelector('.blue-wins').classList.add('down-right')
+function playAgainButton() {
+    if(menu === 'big') {
+        document.querySelector('.playAgain').hidden = false
+    }
 }
