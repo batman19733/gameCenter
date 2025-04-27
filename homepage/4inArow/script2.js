@@ -1,6 +1,7 @@
 let html = ''
-let move = 'X'
+let move = 'red'
 girdRowsColumns = 9
+let disabled = false
 
 for(i=1;i<=girdRowsColumns ** 2;i++) {
     html += `<div class="cube${i}A cube"></div>\n`
@@ -13,22 +14,25 @@ document.querySelector('.all').style.gridTemplateColumns = `repeat(${Math.sqrt(n
 document.querySelector('.all').style.gridTemplateRows = `repeat(${Math.sqrt(numCubed)}, 1fr)`
 
 const check = function(e) {
+    if (disabled) return
+    if(move === 'red') {
+        e.target.style.backgroundColor = 'red'
+    } else {e.target.style.backgroundColor = 'lightblue'}
     e.target.innerHTML = move
 
     const className = e.target.className;
     let number = className.replace('cube', '').replace('A', '').replace(' ', '').replace('cube', '');
     number = Number(number)
     moveToPlace(number)
-    checkIfWin(move)
-
-    move = move === 'X' ? 'O' : 'X'
 }
 
 document.querySelectorAll('.cube').forEach(cube => {
     cube.addEventListener('click', check)
 })
 
-function moveToPlace(classNumber) {
+async function moveToPlace(classNumber) {
+    disabled = true
+    await new Promise(x => setTimeout(x, 70))
     if(classNumber <= (girdRowsColumns ** 2-girdRowsColumns) && document.querySelector(`.cube${classNumber+girdRowsColumns}A`).innerHTML === '') {
         let upper;
         if(classNumber-girdRowsColumns <= 0) {
@@ -36,34 +40,41 @@ function moveToPlace(classNumber) {
         } else {upper = classNumber-girdRowsColumns}
         document.querySelector(`.cube${classNumber+girdRowsColumns}A`).innerHTML = move
         document.querySelector(`.cube${classNumber}A`).innerHTML = ''
+
+        if(move === 'red') {
+            document.querySelector(`.cube${classNumber+girdRowsColumns}A`).style.backgroundColor = 'red' //coloring
+            document.querySelector(`.cube${classNumber}A`).style.backgroundColor = 'rgb(160, 159, 159)' //coloring
+        } else {
+            document.querySelector(`.cube${classNumber+girdRowsColumns}A`).style.backgroundColor = 'lightblue' //coloring
+            document.querySelector(`.cube${classNumber}A`).style.backgroundColor = 'rgb(160, 159, 159)' //coloring 
+        }
+
+
         document.querySelector(`.cube${classNumber}A`).addEventListener('click', check) // remove click
         document.querySelector(`.cube${classNumber+girdRowsColumns}A`).removeEventListener('click', check) // one under remove click
         document.querySelector(`.cube${upper}A`).addEventListener('click', check) // one above add click
         classNumber += girdRowsColumns
-        if (classNumber < girdRowsColumns**2) {
+        if (classNumber <= girdRowsColumns**2) {
             moveToPlace(classNumber)
         }
     } else {
         document.querySelector(`.cube${classNumber}A`).removeEventListener('click', check)
+        checkIfWin(move)
+        move = move === 'red' ? 'blue' : 'red'
+        disabled = false
     }
 }
 
-function checkIfWin(player) {
+async function checkIfWin(player) {
     for(let i = 1; i<=(girdRowsColumns ** 2)-3; i++) {
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+1) === player && cubeInnerHtml(i+2) === player && cubeInnerHtml(i+3) === player) {
-            console.log(`${player} won`)
-            document.querySelectorAll('.cube').forEach(cube => {
-                cube.removeEventListener('click', check)
-            })
+            displayResult(player)
         }
     }
 
     for(let i = 1; i<=(girdRowsColumns ** 2)-3*girdRowsColumns; i++) {
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns) === player && cubeInnerHtml(i+2*girdRowsColumns) === player && cubeInnerHtml(i+3*girdRowsColumns) === player) {
-            console.log(`${player} won`)
-            document.querySelectorAll('.cube').forEach(cube => {
-                cube.removeEventListener('click', check)
-            })
+            displayResult(player)
         }
     }
     for(let i = 1; i<=girdRowsColumns**2;i++) {
@@ -72,7 +83,7 @@ function checkIfWin(player) {
         if (i>=girdRowsColumns**2-3*girdRowsColumns) continue
         // document.querySelector(`.cube${i}A`).style.backgroundColor = 'red'
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns +1) === player && cubeInnerHtml(i+2*girdRowsColumns + 2) === player && cubeInnerHtml(i+3*girdRowsColumns + 3) === player) {
-            console.log(`${player} won`)
+            displayResult(player)
         }
     }
     for(let i = 1; i<=girdRowsColumns**2;i++) {
@@ -81,14 +92,16 @@ function checkIfWin(player) {
         if (i>girdRowsColumns**2-3*girdRowsColumns) continue
         // document.querySelector(`.cube${i}A`).style.backgroundColor = 'blue'
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns -1) === player && cubeInnerHtml(i+2*girdRowsColumns - 2) === player && cubeInnerHtml(i+3*girdRowsColumns - 3) === player) {
-            console.log(`${player} won`)
+            displayResult(player)
         }
-    }
+    } 
+}
 
-
-
-
-    
+function displayResult(color) {
+    document.querySelectorAll('.cube').forEach(cube => {
+        cube.removeEventListener('click', check)
+    })
+    document.querySelector('.result').innerHTML = `${color} won`
 }
 
 function cubeInnerHtml(num) {

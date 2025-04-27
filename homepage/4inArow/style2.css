@@ -6,28 +6,37 @@
 
 body {
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .all {
     display: grid;
     grid-gap: 5px;
-    border: solid;
+    border: none;
     background-color: rgb(70, 70, 70);
     padding: 13px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
 }
 
 .cube {
-    width: 50px;
-    height: 50px;
+    width: min(50px, 6vw);
+    height: min(50px, 6vw);
     background-color: rgb(160, 159, 159);
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
     border-radius: 15px;
+    color: transparent;
+}
+.result {
+    position: absolute;
+    left: 50%;
+    top: 7%;
+    translate: -50% -50%;
+    font-size: 25px;
 }
