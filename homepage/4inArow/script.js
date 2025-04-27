@@ -151,5 +151,21 @@ function changeBackground() {
 function playAgainButton() {
     if(menu === 'big') {
         document.querySelector('.playAgain').hidden = false
+    } else {
+        document.querySelector('.playAgain').hidden = false
+        document.querySelector('.playAgain').style.top = '50%'
     }
+}
+
+function playAgain() {
+    document.querySelector('.result').innerHTML = ''
+    document.querySelectorAll('.cube').forEach(cube => {
+        cube.innerHTML = ''
+        cube.style.backgroundColor = 'rgb(160, 159, 159)'
+        cube.addEventListener('click', check)
+    })
+    document.querySelector('.svg').innerHTML = ''
+    move = 'red'
+    document.body.style.backgroundColor = 'salmon'
+    document.querySelector('.playAgain').hidden = true
 }
