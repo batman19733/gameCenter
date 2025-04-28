@@ -180,7 +180,6 @@ function playAgain() {
     move = 'red'
     document.body.style.backgroundColor = 'salmon'
     document.querySelector('.playAgain').hidden = true
-    localStorage.setItem('cubes', JSON.stringify(document.querySelector('.all').innerHTML))
 }
 
 function displayScore() {
