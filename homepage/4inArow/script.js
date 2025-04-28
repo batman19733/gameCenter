@@ -1,8 +1,15 @@
+// localStorage.clear()
 let html = ''
-let move = 'red'
+let move = JSON.parse(localStorage.getItem('move')) || 'red'
 girdRowsColumns = 9
 let disabled = false
 let menu
+let score = JSON.parse(localStorage.getItem('score')) || {
+    red: 0,
+    blue: 0
+}
+displayScore()
+
 
 if (window.innerWidth >= 1150) {
     document.querySelector('.red-wins').classList.add('side-left')
@@ -21,8 +28,10 @@ for(i=1;i<=girdRowsColumns ** 2;i++) {
     numCubed = i
 }
 
+
 const all = document.querySelector('.all');
 all.innerHTML = html
+
 document.querySelector('.all').style.gridTemplateColumns = `repeat(${Math.sqrt(numCubed)}, 1fr)`
 document.querySelector('.all').style.gridTemplateRows = `repeat(${Math.sqrt(numCubed)}, 1fr)`
 
@@ -45,6 +54,8 @@ document.querySelectorAll('.cube').forEach(cube => {
 })
 
 async function moveToPlace(classNumber) {
+    localStorage.setItem('move', JSON.stringify(move))
+    if (document.querySelector(`.cube${classNumber}A`).innerHTML === '') return
     disabled = true
     await new Promise(x => setTimeout(x, 70))
     if(classNumber <= (girdRowsColumns ** 2-girdRowsColumns) && document.querySelector(`.cube${classNumber+girdRowsColumns}A`).innerHTML === '') {
@@ -75,8 +86,11 @@ async function moveToPlace(classNumber) {
         document.querySelector(`.cube${classNumber}A`).removeEventListener('click', check)
         checkIfWin(move)
         move = move === 'red' ? 'blue' : 'red'
+        localStorage.setItem('move', JSON.stringify(move))
         disabled = false
     }
+    localStorage.setItem('move', JSON.stringify(move))
+    localStorage.setItem('cubes', JSON.stringify(document.querySelector('.all').innerHTML))
 }
 
 async function checkIfWin(player) {
@@ -116,6 +130,7 @@ function displayResult(color, cube1, cube4) {
         cube.removeEventListener('click', check)
     })
     document.querySelector('.result').innerHTML = `${color} won`
+    document.querySelector('.playAgain').hidden = false
 
     
     let x1 = document.querySelector(`.cube${cube1}A`).getBoundingClientRect().x
@@ -128,7 +143,13 @@ function displayResult(color, cube1, cube4) {
 
 
     document.querySelector('.svg').innerHTML = `<line x1="${x1+width1/2}" y1="${y1+width1/2}" x2="${x2+width2/2}" y2="${y2+width2/2}" stroke="rgb(73, 73, 73)" stroke-width="5" stroke-linecap="round"/>`
-    playAgainButton()
+
+    if (color === 'red') {
+        score.red += 1
+    } else {
+        score.blue += 1
+    }
+    displayScore()
 }
 
 function cubeInnerHtml(num) {
@@ -148,15 +169,6 @@ function changeBackground() {
     }
 }
 
-function playAgainButton() {
-    if(menu === 'big') {
-        document.querySelector('.playAgain').hidden = false
-    } else {
-        document.querySelector('.playAgain').hidden = false
-        document.querySelector('.playAgain').style.top = '50%'
-    }
-}
-
 function playAgain() {
     document.querySelector('.result').innerHTML = ''
     document.querySelectorAll('.cube').forEach(cube => {
@@ -168,4 +180,11 @@ function playAgain() {
     move = 'red'
     document.body.style.backgroundColor = 'salmon'
     document.querySelector('.playAgain').hidden = true
+    localStorage.setItem('cubes', JSON.stringify(document.querySelector('.all').innerHTML))
+}
+
+function displayScore() {
+    document.querySelector('.red-wins').innerHTML = `red wins: ${score.red}`
+    document.querySelector('.blue-wins').innerHTML = `blue wins: ${score.blue}`
+    localStorage.setItem('score', JSON.stringify(score))
 }
