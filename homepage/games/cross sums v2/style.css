@@ -29,10 +29,10 @@ body {
     border-radius: 30%;
 }
 .topNum {
-    margin-left: 5px;
+    margin-left: 10px;
 }
 .bottomNum {
-    margin-top: 5px;
+    margin-top: 10px;
 }
 .bottom {
     display: grid;
