@@ -9,6 +9,10 @@ const games = [{
 {
     name: 'guess the number',
     filename: 'guessTheNumber',
+},
+{
+    name: 'Tic Tac Toe',
+    filename: 'tictactoe',
 }
 ]
 
