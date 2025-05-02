@@ -10,8 +10,6 @@ body {
     justify-content: center;
 }
 .all {
-    width: 80vh;
-    height: 80vh;
     display: grid;
     grid-template-rows: 6vw 90%;
 }
@@ -20,19 +18,21 @@ body {
     grid-template-columns: 6vw 90%;
 }
 .top-right {
-    width: 50%;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
 }
 .bottomNum,
 .topNum {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 6vw;
-    height: 6vw;
     background-color: rgb(100, 100, 100);
     border-radius: 30%;
+}
+.topNum {
+    margin-left: 5px;
+}
+.bottomNum {
+    margin-top: 5px;
 }
 .bottom {
     display: grid;
@@ -43,4 +43,12 @@ body {
 }
 .bottom-right {
     background-color: purple;
+    display: grid;
+}
+.gameNums {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(70, 70, 70);
+    border: solid;
 }
