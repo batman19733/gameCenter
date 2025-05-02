@@ -6,7 +6,7 @@ const topRight = document.querySelector('.top-right')
 const bottomLeft = document.querySelector('.bottom-left')
 const bottomRight = document.querySelector('.bottom-right')
 for(i=1;i<=index;i++) {
-    topRight.innerHTML += `<p class='topNum t${i}a'>$</p>`
+    topRight.innerHTML += `<p class='topNum t${i}a'></p>`
 }
 for(i=1;i<=index;i++) {
     bottomLeft.innerHTML += `<p class='bottomNum b${i}a'></p>`
@@ -64,9 +64,6 @@ function q(className, dot) {
 
 
 // put numbers in top numbers and bottom 
-document.querySelectorAll('.topNum').forEach(num => {
-    num.innerHTML = randomNum(1, index**2+index)
-})
 document.querySelectorAll('.bottomNum').forEach(num => {
     num.innerHTML = randomNum(1, index**2+index)
 })
@@ -75,9 +72,8 @@ document.querySelectorAll('.bottomNum').forEach(num => {
 
 // put numbers in first row
 for (i=1;i<=index;i++) {
-    let willDo = reduce(q("b1a", "i"))
-    let nums = willDo
-    nums = reduceAgain(nums, willDo)
+    let nums = reduce(q(`b${i}a`, "i"))
+    if (nums.length > index) {nums = reduce(q(`b${i}a`, "i"))}
     
     let spots = []
     for(let i=1;i<=nums.length;i++) {
@@ -88,8 +84,13 @@ for (i=1;i<=index;i++) {
         spots.push(rNum)
     }
     
-    for(let i=0;i<=nums.length-1;i++) {
-        q(`gn${spots[i]}a`).innerHTML = nums[i]
+    for(let y=0;y<=nums.length-1;y++) {
+        let cell = q(`gn${spots[y] + (i-1) * index}a`);
+        if (cell) {
+            cell.innerHTML = nums[y];
+        } else {
+            console.warn(`Element not found`);
+        }
     }
     
     
@@ -105,9 +106,16 @@ for (i=1;i<=index;i++) {
             return numbers
         }
     }
-    function reduceAgain(nums, willDo) {
-        if (nums.length > index) {nums = willDo}
-        if (nums.length > index) (reduceAgain(nums))
-        return nums
+}
+
+for(x=1;x<=index;x++) {
+    let total = 0;
+    for(i=0+x;i<=index**2;i +=6) {
+        if (q(`gn${i}a`, 'i') !== 'NULL') {
+            num = q(`gn${i}a`, 'i')
+            num = Number(num)
+            total += num
+        }
     }
+    q(`t${x}a`).innerHTML = total
 }
