@@ -1,0 +1,46 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.all {
+    width: 80vh;
+    height: 80vh;
+    display: grid;
+    grid-template-rows: 6vw 90%;
+}
+.top {
+    display: grid;
+    grid-template-columns: 6vw 90%;
+}
+.top-right {
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+.bottomNum,
+.topNum {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6vw;
+    height: 6vw;
+    background-color: rgb(100, 100, 100);
+    border-radius: 30%;
+}
+.bottom {
+    display: grid;
+    grid-template-columns: 6vw 90%;
+}
+.bottom-left {
+    display: grid;
+}
+.bottom-right {
+    background-color: purple;
+}
