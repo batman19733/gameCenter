@@ -4,9 +4,11 @@ let move = JSON.parse(localStorage.getItem('move')) || 'red'
 girdRowsColumns = 9
 let disabled = false
 let menu
-let score = JSON.parse(localStorage.getItem('score')) || {
+let score = JSON.parse(localStorage.getItem('score'))
+if (score.red === undefined || score.blue === undefined) { score = {
     red: 0,
     blue: 0
+}
 }
 displayScore()
 
