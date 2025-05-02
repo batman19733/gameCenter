@@ -211,5 +211,5 @@ function playAgain() {
     localStorage.setItem('lives', JSON.stringify(lives))
 }
 function backToLobby() {
-    location.assign("../../mainMenu/menu.html")
+    location.assign("../../")
 }

@@ -122,3 +122,8 @@ svg {
     box-shadow: inset 8px 8px 27px #74919a,
                 inset -8px -8px 27px #e6ffff;
 }
+a {
+    color: black;
+    font-size: 30px;
+    padding-left: 50px;
+}
