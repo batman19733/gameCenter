@@ -80,6 +80,7 @@ const check = (e) => {
     if (health === 1) {document.querySelector('.heart2').hidden = true}
     if (health === 2) {document.querySelector('.heart3').hidden = true}
     checkIFwin()
+    addMiniNumbers()
 }
 
 function reGenerate() {
@@ -101,7 +102,20 @@ function reGenerate() {
         miniNumber.classList.add('miniNumber')
         miniNumber.classList.add(`b${row}m`)
         document.body.appendChild(miniNumber)
+    })
 
+    row = 0
+    document.querySelectorAll('.topNum').forEach(num => {
+        row += 1
+        num.innerHTML = randomNum(1, index**2+index-4)
+        let numCords = num.getBoundingClientRect()
+        const miniNumber = document.createElement('p')
+        miniNumber.textContent = '0'
+        miniNumber.style.top = `${numCords.top+50}px`
+        miniNumber.style.left = `${numCords.left+10}px`
+        miniNumber.classList.add('miniNumber')
+        miniNumber.classList.add(`t${row}m`)
+        document.body.appendChild(miniNumber)
     })
 
     for (let i=1;i<=index;i++) {
@@ -224,6 +238,9 @@ function checkIFwin() {
     }
 }
 function playAgain() {
+    document.querySelectorAll('.miniNumber').forEach(mini => {
+        mini.remove()
+    })
     reGenerate()
     q('result').innerHTML = ''
     q('playAgain').hidden = true
@@ -231,4 +248,32 @@ function playAgain() {
     document.querySelector('.heart1').hidden = false
     document.querySelector('.heart2').hidden = false
     document.querySelector('.heart3').hidden = false
+}
+function addMiniNumbers() {
+    for(let z=1;z<=index;z++) {
+        let innerValue = 0
+        let n = 0
+        for(let i=1;i<=index;i++) {
+            if(q(`gn${i-index+z*index}a`).classList.contains('circle')) {
+                n = q(`gn${i-index+z*index}a`).innerHTML
+                n = Number(n)
+                innerValue += n
+            }
+        }
+        innerValue = Number(innerValue)
+        q(`b${z}m`).innerHTML = innerValue
+    }
+    for(let z=1;z<=index;z++) {
+        let innerValue = 0
+        let n = 0
+        for(let i=1;i<=index**2;i += index) {
+            if(q(`gn${i-1+z}a`).classList.contains('circle')) {
+                n = q(`gn${i-1+z}a`).innerHTML
+                n = Number(n)
+                innerValue += n
+            }
+        }
+        innerValue = Number(innerValue)
+        q(`t${z}m`).innerHTML = innerValue
+    }
 }
