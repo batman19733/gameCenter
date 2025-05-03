@@ -13,6 +13,10 @@ const games = [{
 {
     name: 'Tic Tac Toe',
     filename: 'tictactoe',
+},
+{
+    name: 'cross numbers v2',
+    filename: 'crossSumsv2',
 }
 ]
 
