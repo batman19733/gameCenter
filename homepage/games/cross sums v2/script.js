@@ -133,3 +133,12 @@ for(let m=1;m<=index**2;m++) {
         q(`gn${m}a`).innerHTML = randomNum(1, 9)
     } else {q(`gn${m}a`).style.backgroundColor = 'green'}
 }
+function pickMode() {
+    document.querySelector('.erase').style.backgroundColor = 'rgb(80, 80, 80)'
+    document.querySelector('.pick').style.backgroundColor = 'rgb(60, 60, 60)'
+}
+
+function eraseMode() {
+    document.querySelector('.erase').style.backgroundColor = 'rgb(60, 60, 60)'
+    document.querySelector('.pick').style.backgroundColor = 'rgb(80, 80, 80)'
+}
