@@ -122,3 +122,21 @@ body {
     left: 80%;
     font-size: 30px;
 }
+.playAgain {
+    position: absolute;
+    top: 60%;
+    left: 80%;
+    font-size: 30px;
+    background-color: rgb(75, 75, 75);
+    padding: 10px;
+    border-radius: 15px;
+    border: solid;
+    border-width: 0.5px;
+    box-shadow:  14px 14px 23px #444444,
+                 -14px -14px 23px #535353;
+    cursor: pointer;
+}
+.playAgain:active {
+    box-shadow: inset 14px 14px 23px #444444,
+                inset -14px -14px 23px #535353;
+}

@@ -44,89 +44,8 @@ document.querySelectorAll('.topNum').forEach(num => {
 //cube size
 
 
-// make game grid
 document.querySelector('.bottom-right').style.gridTemplateColumns = `repeat(${index}, 1fr)`
 document.querySelector('.bottom-right').style.gridTemplateRows = `repeat(${index}, 1fr)`
-let nullHTML = ''
-for(let i=1;i<=index**2;i++) {
-    nullHTML += `<p class='gameNums gn${i}a'>NULL</p>`
-}
-document.querySelector('.bottom-right').innerHTML = nullHTML
-
-// make game grid
-function randomNum(from, to, max) {
-    let num = Math.floor(Math.random() * (to - from + 1)) + from;
-    if (num > max) {
-        num = max;
-    }
-    return num;
-}
-
-function q(className, dot) {
-    if (dot === 'i') {
-        return document.querySelector(`.${className}`).innerHTML
-    } else {
-        return document.querySelector(`.${className}`)
-    }
-}
-
-
-// put numbers in top numbers and bottom 
-document.querySelectorAll('.bottomNum').forEach(num => {
-    num.innerHTML = randomNum(1, index**2+index-4)
-})
-// put numbers in top numbers and bottom 
-
-
-// put numbers in first row
-for (let i=1;i<=index;i++) {
-    let nums = reduce(q(`b${i}a`, "i"))
-    if (nums.length > index) {nums = reduce(q(`b${i}a`, "i"))}
-    
-    let spots = []
-    for(let a=1;a<=nums.length;a++) {
-        let rNum = randomNum(1, index, index)
-        do {
-            rNum = randomNum(1, index, index);
-        } while (spots.includes(rNum));
-        spots.push(rNum)
-    }
-    
-    for(let y=0;y<=nums.length-1;y++) {
-        let cell = q(`gn${spots[y] + (i-1) * index}a`);
-        if (cell) {
-            cell.innerHTML = nums[y];
-        } else {
-            console.warn(`Element not found`);
-        }
-    }
-    
-    
-    function reduce(number, numbers = [], min=2) {
-        let randomNumber = randomNum(min, 9, number-1)
-        number -= randomNumber
-        numbers.push(randomNumber)
-        if (number > 9) {
-            min++
-            return reduce(number, numbers, min)
-        } else {
-            numbers.push(number)
-            return numbers
-        }
-    }
-}
-
-for(let x=1;x<=index;x++) {
-    let total = 0;
-    for(let h=0+x;h<=index**2;h +=6) {
-        if (q(`gn${h}a`, 'i') !== 'NULL') {
-            num = q(`gn${h}a`, 'i')
-            num = Number(num)
-            total += num
-        }
-    }
-    q(`t${x}a`).innerHTML = total
-}
 
 const check = (e) => {
     e.target.classList.remove('notPicked')
@@ -155,24 +74,107 @@ const check = (e) => {
             q(`gn${i}a`).removeEventListener('click', check)
         }
         q('result').innerHTML = 'you lost'
+        q('playAgain').hidden = false
     }
     if (health === 1) {document.querySelector('.heart2').hidden = true}
     if (health === 2) {document.querySelector('.heart3').hidden = true}
     checkIFwin()
 }
 
-for(let m=1;m<=index**2;m++) {
-    q(`gn${m}a`).addEventListener('click', check)
-    q(`gn${m}a`).classList.add('notPicked')
-    if(q(`gn${m}a`, 'i') === 'NULL') {
-        // q(`gn${m}a`).style.backgroundColor = 'red'
-        q(`gn${m}a`).classList.add('fake')
-        q(`gn${m}a`).innerHTML = randomNum(1, 9)
+function reGenerate() {
+    let nullHTML = ''
+    for(let i=1;i<=index**2;i++) {
+        nullHTML += `<p class='gameNums gn${i}a'>NULL</p>`
+    }
+    document.querySelector('.bottom-right').innerHTML = nullHTML
+    
+    document.querySelectorAll('.bottomNum').forEach(num => {
+        num.innerHTML = randomNum(1, index**2+index-4)
+    })
+
+    for (let i=1;i<=index;i++) {
+        let nums = reduce(q(`b${i}a`, "i"))
+        if (nums.length > index) {nums = reduce(q(`b${i}a`, "i"))}
+        
+        let spots = []
+        for(let a=1;a<=nums.length;a++) {
+            let rNum = randomNum(1, index, index)
+            do {
+                rNum = randomNum(1, index, index);
+            } while (spots.includes(rNum));
+            spots.push(rNum)
+        }
+        
+        for(let y=0;y<=nums.length-1;y++) {
+            let cell = q(`gn${spots[y] + (i-1) * index}a`);
+            if (cell) {
+                cell.innerHTML = nums[y];
+            } else {
+                console.warn(`Element not found`);
+            }
+        }
+        
+        
+        function reduce(number, numbers = [], min=2) {
+            let randomNumber = randomNum(min, 9, number-1)
+            number -= randomNumber
+            numbers.push(randomNumber)
+            if (number > 9) {
+                min++
+                return reduce(number, numbers, min)
+            } else {
+                numbers.push(number)
+                return numbers
+            }
+        }
+    }
+    
+    for(let x=1;x<=index;x++) {
+        let total = 0;
+        for(let h=0+x;h<=index**2;h +=6) {
+            if (q(`gn${h}a`, 'i') !== 'NULL') {
+                num = q(`gn${h}a`, 'i')
+                num = Number(num)
+                total += num
+            }
+        }
+        q(`t${x}a`).innerHTML = total
+    }
+
+    for(let m=1;m<=index**2;m++) {
+        q(`gn${m}a`).addEventListener('click', check)
+        q(`gn${m}a`).classList.add('notPicked')
+        if(q(`gn${m}a`, 'i') === 'NULL') {
+            // q(`gn${m}a`).style.backgroundColor = 'red' 
+            q(`gn${m}a`).classList.add('fake')
+            q(`gn${m}a`).innerHTML = randomNum(1, 9)
+        } else {
+            // q(`gn${m}a`).style.backgroundColor = 'green' 
+            q(`gn${m}a`).classList.add('real')
+        }
+    }
+
+
+}
+reGenerate()
+
+function randomNum(from, to, max) {
+    let num = Math.floor(Math.random() * (to - from + 1)) + from;
+    if (num > max) {
+        num = max;
+    }
+    return num;
+}
+
+function q(className, dot) {
+    if (dot === 'i') {
+        return document.querySelector(`.${className}`).innerHTML
     } else {
-        // q(`gn${m}a`).style.backgroundColor = 'green'
-        q(`gn${m}a`).classList.add('real')
+        return document.querySelector(`.${className}`)
     }
 }
+
+
 let mode = 'pick'
 function pickMode() {
     document.querySelector('.erase').style.backgroundColor = 'rgb(80, 80, 80)'
@@ -191,20 +193,30 @@ function eraseMode() {
 function checkIFwin() {
     let totalBad = 0
     let notPicked = 0
-    for(i=1;i<=index**2;i++) {
+    for(let i=1;i<=index**2;i++) {
         if (q(`gn${i}a`).classList.contains('fake')) {
             totalBad += 1
         }
     }
-    for(i=1;i<=index**2;i++) {
+    for(let i=1;i<=index**2;i++) {
         if (q(`gn${i}a`).classList.contains('notPicked')) {
             notPicked += 1
         }
     }
     if (totalBad === 0 && notPicked === 0) {
         q('result').innerHTML = 'you won'
-        for(i=1;i<=index**2;i++) {
+        for(let i=1;i<=index**2;i++) {
             q(`gn${i}a`).removeEventListener('click', check)
         }
+        q('playAgain').hidden = false
     }
+}
+function playAgain() {
+    reGenerate()
+    q('result').innerHTML = ''
+    q('playAgain').hidden = true
+    health = 3
+    document.querySelector('.heart1').hidden = false
+    document.querySelector('.heart2').hidden = false
+    document.querySelector('.heart3').hidden = false
 }
