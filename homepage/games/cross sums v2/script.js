@@ -56,6 +56,7 @@ const check = (e) => {
             health -= 1
             e.target.innerHTML = 'X'
             e.target.classList.add('failed')
+            e.target.classList.remove('fake')
         }
     }
     else if(mode === 'erase') {
@@ -88,8 +89,19 @@ function reGenerate() {
     }
     document.querySelector('.bottom-right').innerHTML = nullHTML
     
+    let row = 0
     document.querySelectorAll('.bottomNum').forEach(num => {
+        row += 1
         num.innerHTML = randomNum(1, index**2+index-4)
+        let numCords = num.getBoundingClientRect()
+        const miniNumber = document.createElement('p')
+        miniNumber.textContent = '0'
+        miniNumber.style.top = `${numCords.top+50}px`
+        miniNumber.style.left = `${numCords.left+10}px`
+        miniNumber.classList.add('miniNumber')
+        miniNumber.classList.add(`b${row}m`)
+        document.body.appendChild(miniNumber)
+
     })
 
     for (let i=1;i<=index;i++) {

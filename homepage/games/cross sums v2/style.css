@@ -140,3 +140,7 @@ body {
     box-shadow: inset 14px 14px 23px #444444,
                 inset -14px -14px 23px #535353;
 }
+.miniNumber {
+    position: absolute;
+    font-size: 15px;
+}
