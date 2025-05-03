@@ -1,6 +1,7 @@
 const index = 6
 const size = `7vw`
 const sizeNum = 7
+let health = 3
 
 const topRight = document.querySelector('.top-right')
 const bottomLeft = document.querySelector('.bottom-left')
@@ -127,18 +128,53 @@ for(let x=1;x<=index;x++) {
     q(`t${x}a`).innerHTML = total
 }
 
-for(let m=1;m<=index**2;m++) {
-    if(q(`gn${m}a`, 'i') === 'NULL') {
-        q(`gn${m}a`).style.backgroundColor = 'red'
-        q(`gn${m}a`).innerHTML = randomNum(1, 9)
-    } else {q(`gn${m}a`).style.backgroundColor = 'green'}
+const check = (e) => {
+    if (mode === 'pick') {
+        if (e.target.classList.contains('real')) {
+            e.target.classList.add('circle')
+        } else {
+            health -= 1
+            e.target.innerHTML = 'X'
+            e.target.classList.add('failed')
+        }
+    }
+    else if(mode === 'erase') {
+        if (e.target.classList.contains('fake')) {
+            e.target.innerHTML = ''
+            e.target.removeEventListener('click', check)
+        } else {
+            health -= 1
+            e.target.classList.add('animation')
+        }
+    }
+    if (health === 0) {
+        document.querySelector('.heart1').hidden = true
+        alert('game over! you lost')
+    }
+    if (health === 1) {document.querySelector('.heart2').hidden = true}
+    if (health === 2) {document.querySelector('.heart3').hidden = true}
 }
+
+for(let m=1;m<=index**2;m++) {
+    q(`gn${m}a`).addEventListener('click', check)
+    if(q(`gn${m}a`, 'i') === 'NULL') {
+        // q(`gn${m}a`).style.backgroundColor = 'red'
+        q(`gn${m}a`).classList.add('fake')
+        q(`gn${m}a`).innerHTML = randomNum(1, 9)
+    } else {
+        // q(`gn${m}a`).style.backgroundColor = 'green'
+        q(`gn${m}a`).classList.add('real')
+    }
+}
+let mode = 'pick'
 function pickMode() {
     document.querySelector('.erase').style.backgroundColor = 'rgb(80, 80, 80)'
     document.querySelector('.pick').style.backgroundColor = 'rgb(60, 60, 60)'
+    mode = 'pick'
 }
 
 function eraseMode() {
     document.querySelector('.erase').style.backgroundColor = 'rgb(60, 60, 60)'
     document.querySelector('.pick').style.backgroundColor = 'rgb(80, 80, 80)'
+    mode = 'erase'
 }

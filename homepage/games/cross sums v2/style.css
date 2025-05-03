@@ -43,7 +43,7 @@ body {
     display: grid;
 }
 .bottom-right {
-    background-color: purple;
+    background-color: rgb(70, 70, 70);
     display: grid;
 }
 .gameNums {
@@ -78,4 +78,40 @@ body {
 }
 .pick {
     background-color: rgb(60, 60, 60);
+}
+.circle {
+    border: solid;
+    background-color: rgb(70, 70, 70);
+    color: green;
+    border-color: black;
+}
+.failed {
+    color: red;
+    border-color: black;
+}
+.animation {
+    animation: redness 1s;
+}
+@keyframes redness{
+    0% {
+        color: black
+    }
+    100% {
+        color: red;
+    }
+}
+.heart1,
+.heart2,
+.heart3 {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin-right: 10px;
+
+}
+.hearts {
+    position: absolute;
+    top: 40%;
+    left: 75%;
+    display: flex;
 }
