@@ -72,7 +72,7 @@ function q(className, dot) {
 
 // put numbers in top numbers and bottom 
 document.querySelectorAll('.bottomNum').forEach(num => {
-    num.innerHTML = randomNum(1, index**2+index-3)
+    num.innerHTML = randomNum(1, index**2+index-4)
 })
 // put numbers in top numbers and bottom 
 
@@ -125,4 +125,11 @@ for(let x=1;x<=index;x++) {
         }
     }
     q(`t${x}a`).innerHTML = total
+}
+
+for(let m=1;m<=index**2;m++) {
+    if(q(`gn${m}a`, 'i') === 'NULL') {
+        q(`gn${m}a`).style.backgroundColor = 'red'
+        q(`gn${m}a`).innerHTML = randomNum(1, 9)
+    } else {q(`gn${m}a`).style.backgroundColor = 'green'}
 }
