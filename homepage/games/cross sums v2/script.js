@@ -129,6 +129,7 @@ for(let x=1;x<=index;x++) {
 }
 
 const check = (e) => {
+    e.target.classList.remove('notPicked')
     if (mode === 'pick') {
         if (e.target.classList.contains('real')) {
             e.target.classList.add('circle')
@@ -142,6 +143,7 @@ const check = (e) => {
         if (e.target.classList.contains('fake')) {
             e.target.innerHTML = ''
             e.target.removeEventListener('click', check)
+            e.target.classList.remove('fake')
         } else {
             health -= 1
             e.target.classList.add('animation')
@@ -149,14 +151,19 @@ const check = (e) => {
     }
     if (health === 0) {
         document.querySelector('.heart1').hidden = true
-        alert('game over! you lost')
+        for(i=1;i<=index**2;i++) {
+            q(`gn${i}a`).removeEventListener('click', check)
+        }
+        q('result').innerHTML = 'you lost'
     }
     if (health === 1) {document.querySelector('.heart2').hidden = true}
     if (health === 2) {document.querySelector('.heart3').hidden = true}
+    checkIFwin()
 }
 
 for(let m=1;m<=index**2;m++) {
     q(`gn${m}a`).addEventListener('click', check)
+    q(`gn${m}a`).classList.add('notPicked')
     if(q(`gn${m}a`, 'i') === 'NULL') {
         // q(`gn${m}a`).style.backgroundColor = 'red'
         q(`gn${m}a`).classList.add('fake')
@@ -177,4 +184,27 @@ function eraseMode() {
     document.querySelector('.erase').style.backgroundColor = 'rgb(60, 60, 60)'
     document.querySelector('.pick').style.backgroundColor = 'rgb(80, 80, 80)'
     mode = 'erase'
+}
+
+
+
+function checkIFwin() {
+    let totalBad = 0
+    let notPicked = 0
+    for(i=1;i<=index**2;i++) {
+        if (q(`gn${i}a`).classList.contains('fake')) {
+            totalBad += 1
+        }
+    }
+    for(i=1;i<=index**2;i++) {
+        if (q(`gn${i}a`).classList.contains('notPicked')) {
+            notPicked += 1
+        }
+    }
+    if (totalBad === 0 && notPicked === 0) {
+        q('result').innerHTML = 'you won'
+        for(i=1;i<=index**2;i++) {
+            q(`gn${i}a`).removeEventListener('click', check)
+        }
+    }
 }

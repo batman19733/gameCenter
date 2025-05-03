@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
 }
 body {
     height: 100dvh;
@@ -114,4 +115,10 @@ body {
     top: 40%;
     left: 75%;
     display: flex;
+}
+.result {
+    position: absolute;
+    top: 30%;
+    left: 80%;
+    font-size: 30px;
 }
