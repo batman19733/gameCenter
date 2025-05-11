@@ -47,7 +47,7 @@ body {
     border: solid;
     flex-direction: column;
     margin-left: 11px;
-    margin-bottom: 11px;
+    margin-bottom: 16px;
     cursor: pointer;
 }
 .name {
