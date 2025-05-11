@@ -73,6 +73,7 @@ function reloadShop() {
     }
     localStorage.setItem('scorePerSec', JSON.stringify(scorePerSec))
     localStorage.setItem('scorePerClick', JSON.stringify(scorePerClick))
+    updatesize()
 }
 reloadShop()
 if (score === NaN) {score = 0}
@@ -124,23 +125,26 @@ setInterval(() => {
     updateScore()
 }, 1000) 
 
-if (window.innerWidth <= 750) {
-    const cookie = document.querySelector('.cookie')
-    const score = document.querySelector('.score')
-    const scorePperSecDiv = document.querySelector('.score-per-sec')
-    cookie.style.left = `75%`
-    score.style.left = `75%`
-    scorePperSecDiv.style.left = `75%`
-    scorePperSecDiv.style.top = `20%`
 
-    document.querySelector('.shop-body').style.width = `110px`
-    document.querySelector('.shop-title').style.width = `110px`
-    document.querySelector('.shop-div').style.width = `110px`
-    document.querySelectorAll('.item').forEach(item => {
-        item.style.width = '109px'
-    })
-    document.querySelectorAll('.item-name').forEach(item => {
-        item.style.fontSize = '15px'
-    })
-    document.querySelector(`a`).style.paddingLeft = `120px`
+function updatesize() {
+    if (window.innerWidth <= 750) {
+        const cookie = document.querySelector('.cookie')
+        const score = document.querySelector('.score')
+        const scorePperSecDiv = document.querySelector('.score-per-sec')
+        cookie.style.left = `55%`
+        score.style.left = `55%`
+        scorePperSecDiv.style.left = `55%`
+        scorePperSecDiv.style.top = `20%`
+
+        document.querySelector('.shop-body').style.width = `110px`
+        document.querySelector('.shop-title').style.width = `110px`
+        document.querySelector('.shop-div').style.width = `110px`
+        document.querySelectorAll('.item').forEach(item => {
+            item.style.width = '109px'
+        })
+        document.querySelectorAll('.item-name').forEach(item => {
+            item.style.fontSize = '15px'
+        })
+        document.querySelector(`a`).style.paddingLeft = `120px`
+    }
 }
