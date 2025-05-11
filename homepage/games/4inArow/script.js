@@ -5,7 +5,8 @@ girdRowsColumns = 9
 let disabled = false
 let menu
 let score = JSON.parse(localStorage.getItem('score'))
-if (score.red === undefined || score.blue === undefined) { score = {
+
+if (score === null || score.red === undefined || score.blue === undefined) { score = {
     red: 0,
     blue: 0
 }
