@@ -78,7 +78,7 @@ html, body {
     background-color: rgb(25, 25, 25);
     border-width: 2px;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
 }
 .white-guess{
@@ -136,7 +136,7 @@ html, body {
     border: solid;
     border-color: lightblue;
     justify-content: center;
-    width: 17%;
+    width: 170px;
     position: absolute;
     padding: 10px;
     border-radius: 14px;
@@ -165,7 +165,7 @@ html, body {
     border: solid;
     border-color: lightblue;
     justify-content: center;
-    width: 12%;
+    width: 90px;
     position: absolute;
     padding: 10px;
     border-radius: 17px;
@@ -173,6 +173,7 @@ html, body {
     margin-top: 423px;
 }
 .css-dark-bar {
+    position: relative;
     background-color: rgb(25, 25, 25);
     border: solid;
     border-color: lightblue;
@@ -227,8 +228,11 @@ html, body {
     text-align: center;
 }
 a {
-    color: black;
+    color: white;
     font-size: 30px;
     padding-left: 20px;
     position: absolute;
+}
+.css-all-game {
+    width: 370px;
 }
