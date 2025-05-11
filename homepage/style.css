@@ -38,7 +38,7 @@ body {
     
 }
 .game {
-    width: max(155px, 13vw);
+    width: max(170px, 13vw);
     height: 295px;
     background-color: rgb(90, 90, 90);
     display: flex;
