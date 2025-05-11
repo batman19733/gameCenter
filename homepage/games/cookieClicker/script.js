@@ -1,5 +1,4 @@
 let score = JSON.parse(localStorage.getItem('score'))
-if(score === NaN) {score = 0}
 if (score === undefined) {score = 0}
 let scorePerClick = JSON.parse(localStorage.getItem('scorePerClick')) || 1
 let scorePerSec = JSON.parse(localStorage.getItem('scorePerSec')) || 0
@@ -76,6 +75,7 @@ function reloadShop() {
     localStorage.setItem('scorePerClick', JSON.stringify(scorePerClick))
 }
 reloadShop()
+if (score === NaN) {score = 0}
 
 
 function autoclicker(spot) {
