@@ -223,5 +223,7 @@ if (window.innerWidth < 450) {
     document.querySelector('.cdb').style.marginLeft = '0px'
     document.querySelector('.cdb').hidden = true
     document.querySelector('.css-all-game').style.width = '80vw'
-    document.body('nah swag i tryed to fix this on phones it just doesnt work :praying emoji: maybe maybe ill fix it later but the code here weired af bearly working i wont fix it for now')
+    document.body.innerHTML = 'nah swag i tryed to fix this on phones it just doesnt work :praying emoji: maybe maybe ill fix it later but the code here weired af bearly working i wont fix it for now'
+    document.body.style.display = 'flex'
+    document.body.style.alignItems = 'center'
 }
