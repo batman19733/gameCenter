@@ -1,5 +1,6 @@
 let score = JSON.parse(localStorage.getItem('score'))
 if (score === undefined) {score = 0}
+if (score === NaN) {score = 0}
 let scorePerClick = JSON.parse(localStorage.getItem('scorePerClick')) || 1
 let scorePerSec = JSON.parse(localStorage.getItem('scorePerSec')) || 0
 updateScore()
