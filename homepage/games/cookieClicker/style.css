@@ -105,8 +105,8 @@ body {
     height: 30px;
 }
 a {
+    position: absolute;
     color: black;
     font-size: 30px;
     padding-left: 240px;
-    position: absolute;
 }
