@@ -38,10 +38,13 @@ function result(move) {
         localStorage.setItem('Xwins', JSON.stringify(score.Xwins))
         updateScore()
     }
-    if (move === 'O') {
+    else if (move === 'O') {
         score.Owins++
         localStorage.setItem('Owins', JSON.stringify(score.Owins))
         updateScore()
+    }
+    else {
+        document.querySelector('.result').innerHTML = `${move}`
     }
     document.querySelector('.play-again').hidden = false
 }
@@ -53,29 +56,38 @@ function updateScore() {
 }
 
 function checkIfWin(move) {
+    let count = 0
+    for(let i=1;i<=9;i++) {
+        if(document.querySelector(`.cube${i}`).innerHTML !== '') {
+            count++
+        }
+    }
     if (document.querySelector('.cube1').innerHTML === move && document.querySelector('.cube2').innerHTML === move && document.querySelector('.cube3').innerHTML === move) {
         result(move)
     }
-    if (document.querySelector('.cube4').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube6').innerHTML === move) {
+    else if (document.querySelector('.cube4').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube6').innerHTML === move) {
         result(move)
     }
-    if (document.querySelector('.cube7').innerHTML === move && document.querySelector('.cube8').innerHTML === move && document.querySelector('.cube9').innerHTML === move) {
+    else if (document.querySelector('.cube7').innerHTML === move && document.querySelector('.cube8').innerHTML === move && document.querySelector('.cube9').innerHTML === move) {
         result(move)
     }
-    if (document.querySelector('.cube1').innerHTML === move && document.querySelector('.cube4').innerHTML === move && document.querySelector('.cube7').innerHTML === move) {
+    else if (document.querySelector('.cube1').innerHTML === move && document.querySelector('.cube4').innerHTML === move && document.querySelector('.cube7').innerHTML === move) {
         result(move)
     }
-    if (document.querySelector('.cube2').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube8').innerHTML === move) {
+    else if (document.querySelector('.cube2').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube8').innerHTML === move) {
         result(move)
     }
-    if (document.querySelector('.cube3').innerHTML === move && document.querySelector('.cube6').innerHTML === move && document.querySelector('.cube9').innerHTML === move) {
+    else if (document.querySelector('.cube3').innerHTML === move && document.querySelector('.cube6').innerHTML === move && document.querySelector('.cube9').innerHTML === move) {
         result(move)
     }
-    if (document.querySelector('.cube1').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube9').innerHTML === move) {
+    else if (document.querySelector('.cube1').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube9').innerHTML === move) {
         result(move)
     }
-    if (document.querySelector('.cube3').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube7').innerHTML === move) {
+    else if (document.querySelector('.cube3').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube7').innerHTML === move) {
         result(move)
+    }
+    else if(count === 9) {
+        result('tie')
     }
 }
 

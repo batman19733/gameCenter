@@ -100,12 +100,14 @@ async function checkIfWin(player) {
     for(let i = 1; i<=(girdRowsColumns ** 2)-3; i++) {
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+1) === player && cubeInnerHtml(i+2) === player && cubeInnerHtml(i+3) === player) {
             displayResult(player, i, i+3)
+            return
         }
     }
 
     for(let i = 1; i<=(girdRowsColumns ** 2)-3*girdRowsColumns; i++) {
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns) === player && cubeInnerHtml(i+2*girdRowsColumns) === player && cubeInnerHtml(i+3*girdRowsColumns) === player) {
             displayResult(player, i, i+3*girdRowsColumns)
+            return
         }
     }
     for(let i = 1; i<=girdRowsColumns**2;i++) {
@@ -115,6 +117,7 @@ async function checkIfWin(player) {
         // document.querySelector(`.cube${i}A`).style.backgroundColor = 'red'
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns +1) === player && cubeInnerHtml(i+2*girdRowsColumns + 2) === player && cubeInnerHtml(i+3*girdRowsColumns + 3) === player) {
             displayResult(player, i, i+3*girdRowsColumns+3)
+            return
         }
     }
     for(let i = 1; i<=girdRowsColumns**2;i++) {
@@ -124,16 +127,30 @@ async function checkIfWin(player) {
         // document.querySelector(`.cube${i}A`).style.backgroundColor = 'blue'
         if(cubeInnerHtml(i) === player && cubeInnerHtml(i+girdRowsColumns -1) === player && cubeInnerHtml(i+2*girdRowsColumns - 2) === player && cubeInnerHtml(i+3*girdRowsColumns - 3) === player) {
             displayResult(player, i, i+3*girdRowsColumns-3)
+            return
+        }
+    }
+    let count = 0
+    for(let i=1;i<=girdRowsColumns**2;i++) {
+        if(document.querySelector(`.cube${i}A`).innerHTML !== '') {
+            count++
         }
     } 
+    if(count === girdRowsColumns**2) {
+        displayResult('tie.', 'no')
+    }
 }
 
 function displayResult(color, cube1, cube4) {
     document.querySelectorAll('.cube').forEach(cube => {
         cube.removeEventListener('click', check)
     })
-    document.querySelector('.result').innerHTML = `${color} won`
     document.querySelector('.playAgain').hidden = false
+    if (cube1 === 'no') {
+        document.querySelector('.result').innerHTML = `${color}`
+        return
+    }
+    document.querySelector('.result').innerHTML = `${color} won`
 
     
     let x1 = document.querySelector(`.cube${cube1}A`).getBoundingClientRect().x
