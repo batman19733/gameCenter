@@ -220,7 +220,7 @@ if (window.innerWidth < 700) {
     document.querySelector('.css-dark-bar').hidden = true
 }
 if (window.innerWidth < 450) {
-    document.querySelector('.css-dark-bar').style.marginLeft = '0px'
-    document.querySelector('.css-dark-bar').hidden = true
+    document.querySelector('.cdb').style.marginLeft = '0px'
+    document.querySelector('.cdb').hidden = true
     document.querySelector('.css-all-game').style.width = '80vw'
 }
