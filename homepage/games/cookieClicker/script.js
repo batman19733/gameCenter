@@ -131,9 +131,9 @@ function updatesize() {
         const cookie = document.querySelector('.cookie')
         const score = document.querySelector('.score')
         const scorePperSecDiv = document.querySelector('.score-per-sec')
-        cookie.style.left = `55%`
-        score.style.left = `55%`
-        scorePperSecDiv.style.left = `55%`
+        cookie.style.left = `65%`
+        score.style.left = `65%`
+        scorePperSecDiv.style.left = `65%`
         scorePperSecDiv.style.top = `20%`
 
         document.querySelector('.shop-body').style.width = `110px`
