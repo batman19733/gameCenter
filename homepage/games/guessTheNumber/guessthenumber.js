@@ -216,8 +216,11 @@ if (window.innerWidth < 1125) {
     document.querySelector('.css-dark-bar').style.marginLeft = '0px'
 }
 if (window.innerWidth < 700) {
+        document.querySelector('.css-dark-bar').style.marginLeft = '0px'
     document.querySelector('.css-dark-bar').hidden = true
 }
 if (window.innerWidth < 450) {
+    document.querySelector('.css-dark-bar').style.marginLeft = '0px'
+    document.querySelector('.css-dark-bar').hidden = true
     document.querySelector('.css-all-game').style.width = '80vw'
 }
