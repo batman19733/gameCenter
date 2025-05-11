@@ -31,15 +31,15 @@ body {
     justify-content: center;
 }
 .games {
-    width: 97%;
+    width: 98%;
     height: 95%;
     display: flex;
     flex-wrap: wrap;
     
 }
 .game {
-    width: max(130px, 13vw);
-    height: 300px;
+    width: max(155px, 13vw);
+    height: 295px;
     background-color: rgb(90, 90, 90);
     display: flex;
     align-items: center;
