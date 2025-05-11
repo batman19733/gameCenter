@@ -31,14 +31,14 @@ body {
     justify-content: center;
 }
 .games {
-    width: 95%;
+    width: 97%;
     height: 95%;
     display: flex;
     flex-wrap: wrap;
     
 }
 .game {
-    width: min(170px, 12.3vw);
+    width: max(160px, 13vw);
     height: 300px;
     background-color: rgb(90, 90, 90);
     display: flex;
@@ -56,11 +56,11 @@ body {
 }
 .img {
     margin-top: 25px;
-    width: 150px;
+    width: 80%;
     height: 190px;
     border-radius: 15px;
 }
 img {
-    width: 145px;
+    width: 100%;
     border-radius: 15px;
 }
