@@ -4,6 +4,7 @@ if (window.innerWidth < 600) {
 }
 else {
     let score = JSON.parse(localStorage.getItem('score'))
+    if(score === NaN) {score = 0}
     if (score === undefined) {score = 0}
     let scorePerClick = JSON.parse(localStorage.getItem('scorePerClick')) || 1
     let scorePerSec = JSON.parse(localStorage.getItem('scorePerSec')) || 0
