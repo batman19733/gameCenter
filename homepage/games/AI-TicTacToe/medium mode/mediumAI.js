@@ -40,17 +40,15 @@ function q(qury) {
 }
 function getRandomPlace(place) {
     if (place === 'corner') {
-        let spot = randomNumber(0, 8)
-        if (spot === 0) {return getRandomPlace('corner')}
-        if (spot === 2) {return getRandomPlace('corner')}
-        if (spot === 8) {return getRandomPlace('corner')}
-        if (spot === 6) {return getRandomPlace('corner')}
-        if (q(`c${spot+1}a`).innerHTML !== '') {return getRandomPlace('corner')}
+        let spot = randomNumber(4, 4)
+        if (q(`c${spot+1}a`).innerHTML !== '') {return getRandomPlace()}
         return spot
     } else {
         let spot = randomNumber(1, 9)
+        console.log(spot)
+        console.log(q(`c${spot}a`).innerHTML)
         if (q(`c${spot}a`).innerHTML === '') {
-            return spot
+            return spot-1
         }
         else {
             return getRandomPlace()
