@@ -41,11 +41,10 @@ function q(qury) {
 function getRandomPlace(place) {
     if (place === 'corner') {
         let spot = randomNumber(0, 8)
-        if (spot === 1) {return getRandomPlace('corner')}
-        if (spot === 3) {return getRandomPlace('corner')}
-        if (spot === 4) {return getRandomPlace('corner')}
-        if (spot === 5) {return getRandomPlace('corner')}
-        if (spot === 7) {return getRandomPlace('corner')}
+        if (spot === 0) {return getRandomPlace('corner')}
+        if (spot === 2) {return getRandomPlace('corner')}
+        if (spot === 8) {return getRandomPlace('corner')}
+        if (spot === 6) {return getRandomPlace('corner')}
         if (q(`c${spot+1}a`).innerHTML !== '') {return getRandomPlace('corner')}
         return spot
     } else {
