@@ -10,8 +10,6 @@ body {
     align-items: center;
     justify-content: center;
 }
-
-
 .board {
     width: min(500px, 80vw);
     height: min(500px, 80vw);
@@ -45,34 +43,9 @@ body {
     font-size: 35px;
 }
 .all {
-    border: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.diff {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    translate: -50% -50%;
-    font-size: 30px;
-}
-.buttons {
-    display: flex;
-}
-.button {
-    border: solid;
-    margin-right: 10px;
-    padding: 10px;
-    border-radius: 15px;
-    cursor: pointer;
-}
-.text {
-    margin-bottom: 30px;
 }
 .cube {
     display: flex;
@@ -92,4 +65,27 @@ body {
 .PlayAgainButton:active {
     box-shadow: inset 8px 8px 16px #c7c7c7,
                 inset -8px -8px 16px #f9f9f9;
+}
+
+
+
+
+
+
+
+
+a {
+    color: black;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+}
+.back {
+    color: black;
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    font-size: 25px;
+    cursor: pointer;
 }
