@@ -5,7 +5,7 @@ let EZresult;
 let EZcheck = ''
 let EZgrid;
 
-q('diff').innerHTML = '<div class="text">what difficulty do you want to play in?</div><div class="buttons"><div class="button" onclick="play(`ez`)">ez mode</div><div class="button" onclick="play(`medium`)">medium mode</div><div class="button" onclick="play(`hard`)">hard mode</div>'
+q('diff').innerHTML = '<div class="text">what difficulty do you want to play in?</div><div class="buttons"><div class="button" onclick="play(`ez`)">ez mode</div><div class="button" onclick="play(`medium`)">medium mode</div><div class="button red" onclick="play(`hard`)">hard mode W.I.P</div>'
 
 function play(mode) {
     if(mode === 'ez') {window.location.href = 'ez mode'}
