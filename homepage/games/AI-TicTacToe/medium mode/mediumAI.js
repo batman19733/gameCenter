@@ -45,8 +45,6 @@ function getRandomPlace(place) {
         return spot
     } else {
         let spot = randomNumber(1, 9)
-        console.log(spot)
-        console.log(q(`c${spot}a`).innerHTML)
         if (q(`c${spot}a`).innerHTML === '') {
             return spot-1
         }
