@@ -293,6 +293,7 @@ function playAgain() {
     q('turn').innerHTML = 'Your turn'
     botDisabled = false
     q('PlayAgainButton').hidden = true
+    disabled = false
 
 }
 
