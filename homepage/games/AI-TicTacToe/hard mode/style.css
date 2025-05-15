@@ -17,21 +17,21 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
 }
-.c2a,
+.c1a,
+.c3a,
 .c4a,
-.c5a,
+.c6a,
 .c7a,
-.c8a,
-.c1a {
+.c0a {
     border-right: solid 10px gray;
     cursor: pointer;
 }
+.c1a,
 .c2a,
 .c3a,
 .c4a,
 .c5a,
-.c6a,
-.c1a {
+.c0a {
     border-bottom: solid 10px gray;
     cursor: pointer;
 }

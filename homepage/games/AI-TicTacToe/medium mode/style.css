@@ -88,3 +88,9 @@ a {
     font-size: 25px;
     cursor: pointer;
 }
+.warning {
+    position: absolute;
+    top: 5%;
+    font-size: 30px;
+    color: red;
+}
