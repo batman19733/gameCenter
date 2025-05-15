@@ -286,10 +286,10 @@ function checkIfWon(move) {
 }
 function playAgain() {
     grid = Array.from({ length: 3 }, () => Array(3).fill(''));
-    for(let i=0;i<=8;i++) {
-        q(`c${i}a`).innerHTML = ''
-        q(`c${i}a`).addEventListener('click', check)
-    }
+    document.querySelectorAll('.cube').forEach(cube => {
+        cube.innerHTML = ''
+        cube.addEventListener('click', check)
+    })
     q('turn').innerHTML = 'Your turn'
     botDisabled = false
     q('PlayAgainButton').hidden = true
