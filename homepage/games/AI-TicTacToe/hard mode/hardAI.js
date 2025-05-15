@@ -1,5 +1,6 @@
 let boardHTML = ''
 let disabled = false
+let botDisabled = false
 
 for(let i=0;i<=8;i++) {
     boardHTML += `<div class="cube c${i}a"></div>`
@@ -19,13 +20,20 @@ const check = async e => {
     grid[row][col] = 'X'
     if(checkIfTie()) {
         q('turn').innerHTML = 'tie'
+        q('PlayAgainButton').hidden = false
+        return
+    }  
+    if(checkIfWon('X')) {
+        console.log('WON')
         return
     } else {
         botTurn()
     }
+    
 }
 
 async function botTurn() {
+    if (botDisabled) return 
     q('turn').innerHTML = 'bot thinking...'
     await new Promise(x => setTimeout(x, 700))
     q('turn').innerHTML = 'Your turn'
@@ -250,12 +258,52 @@ function placeAtCenter() {
     } else {return false}
 }
 
+function checkIfWon(move) {
+    for(let row of grid) {
+        let count = 0
+        for(let cell of row) {
+            if(cell === move) {
+                count++
+            }
+        }
+        if(count === 3) {
+            result(move)
+        }
+    }
+    for(let cell = 0; cell < 3; cell++) {
+        let count = 0
+        for(let row = 0; row <3; row++) {
+            if(grid[row][cell] === move) {
+                count++
+            }
+        }
+        if(count === 3) {
+            result(move)
+        }
+    }
+    if(q('c0a').innerHTML === move && q('c4a').innerHTML === move && q('c8a').innerHTML === move) {result(move)}
+    if(q('c2a').innerHTML === move && q('c4a').innerHTML === move && q('c6a').innerHTML === move) {result(move)}
+}
+function playAgain() {
+    grid = Array.from({ length: 3 }, () => Array(3).fill(''));
+    for(let i=0;i<=8;i++) {
+        q(`c${i}a`).innerHTML = ''
+        q(`c${i}a`).addEventListener('click', check)
+    }
+    q('turn').innerHTML = 'Your turn'
+    botDisabled = false
+    q('PlayAgainButton').hidden = true
+
+}
+
 function back() {
     window.location.href = '../'
 }
 function result(turn) {
     q(`turn`).innerHTML = `${turn} won!`
+    botDisabled = true
     document.querySelectorAll('.cube').forEach(cube => {
         cube.removeEventListener('click', check)
     })
+    q('PlayAgainButton').hidden = false
 }
