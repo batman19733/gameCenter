@@ -14,14 +14,12 @@ for(i = 1; i<=9; i++) {
             checkIfWin(player)
             player = 'O'
             document.querySelector('.cube${i}').disabled = true
-            document.querySelector('.all').style.boxShadow = '0 0 10px 10px blue'
             }
         else if (player === 'O') {
             document.querySelector('.cube${i}').innerHTML = 'O'
             checkIfWin(player)
             player = 'X'
             document.querySelector('.cube${i}').disabled = true
-            document.querySelector('.all').style.boxShadow = '0 0 10px 10px red'
         }
     
     });`

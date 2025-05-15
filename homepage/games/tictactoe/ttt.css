@@ -1,18 +1,18 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 body {
-    background-color: rgb(50, 50, 50);
     height: 100dvh;
 }
 .c {
-    background-color: rgb(60, 60, 60);
+    background-color: white;
     width: max(80px, 8vw);
     height: max(80px, 8vw);
-    border: none;
     color: black;
     font-size: 30px;
+    border: none;
 }
 .all {
     position: absolute;
@@ -22,10 +22,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 20px;
     border: none;
-    background-color: rgb(40, 40, 40);
-    box-shadow: 0 0 10px 10px red;
 }
 .result {
     position: absolute;
@@ -48,8 +45,15 @@ body {
     top: 93%;
     width: 100px;
     height: 40px;
-    background-color: rgb(60, 60, 60);
     font-size: 18px;
+    border-radius: 12px;
+    border: none;
+    box-shadow:  10px 10px 31px #bababa,
+             -10px -10px 31px #ffffff;
+}
+.play-again:active {
+    box-shadow: inset 10px 10px 31px #bababa,
+            inset -10px -10px 31px #ffffff;
 }
 .colors {
     position: absolute;
@@ -60,7 +64,25 @@ body {
 }
 a {
     color: black;
-    font-size: 30px;
+    font-size: 40px;
     padding-left: 20px;
     position: absolute;
+}
+.c7,
+.c8,
+.c5,
+.c4,
+.c2,
+.c1 {
+    border-right: solid;
+    border-width: 5px;
+}
+.c2,
+.c3,
+.c4,
+.c5,
+.c6,
+.c1 {
+    border-bottom: solid;
+    border-width: 5px;
 }
