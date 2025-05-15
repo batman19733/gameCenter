@@ -3,6 +3,10 @@
     margin: 0;
     user-select: none;
     font-family: Arial, Helvetica, sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 body {
     display: flex;
