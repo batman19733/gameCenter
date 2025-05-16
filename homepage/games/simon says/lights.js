@@ -20,7 +20,7 @@ if (window.innerWidth <= 500) {
 let path = []
 
 let playerPath = []
-let count = 0
+let count = -1
 let disabled = false
 const check = async e => {
     if (disabled) return
@@ -29,11 +29,14 @@ const check = async e => {
     if(className) {className = Number(className.replace('l', '').replace('a', ''))}
     playerPath.push(className)
 
+    count++
     if (path[count] === playerPath[count]) {
+        q(`l${className}a`).style.backgroundColor = 'lightgreen'
+        await new Promise(x => setTimeout(x, 300))
+        q(`l${className}a`).style.backgroundColor = 'white'
         disabled = false
-        await new Promise(x => setTimeout(x, 500))
-        count++
-        if (count === path.length) {
+        await new Promise(x => setTimeout(x, 200))
+        if (count+1 === path.length) {
             playerPath = []
             another()
         }
@@ -53,7 +56,7 @@ document.querySelectorAll('.light').forEach(light => {
 })
 
 async function another() {
-    count = 0
+    count = -1
     q('turn').innerHTML = 'WAIT!!'
     document.querySelectorAll('.light').forEach(light => {
         light.removeEventListener('click', check)
