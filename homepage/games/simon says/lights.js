@@ -23,8 +23,6 @@ let playerPath = []
 let count = -1
 let disabled = false
 const check = async e => {
-    if (disabled) return
-    disabled = true
     let className = e.target.className.split(' ')[1]
     if(className) {className = Number(className.replace('l', '').replace('a', ''))}
     playerPath.push(className)
@@ -34,8 +32,6 @@ const check = async e => {
         q(`l${className}a`).style.backgroundColor = 'lightgreen'
         await new Promise(x => setTimeout(x, 300))
         q(`l${className}a`).style.backgroundColor = 'white'
-        disabled = false
-        await new Promise(x => setTimeout(x, 200))
         if (count+1 === path.length) {
             playerPath = []
             another()
@@ -72,7 +68,6 @@ async function another() {
         await new Promise(x => setTimeout(x, 500))
         q(`l${spot}a`).style.backgroundColor = 'white'
     }
-    disabled = false
     q('turn').innerHTML = 'Your turn.'
     document.querySelectorAll('.light').forEach(light => {
         light.addEventListener('click', check)
