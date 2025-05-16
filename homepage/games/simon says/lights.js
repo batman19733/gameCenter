@@ -29,9 +29,6 @@ const check = async e => {
     if(className) {className = Number(className.replace('l', '').replace('a', ''))}
     playerPath.push(className)
 
-    console.log(path)
-    console.log(playerPath)
-    console.log(count)
     if (path[count] === playerPath[count]) {
         disabled = false
         await new Promise(x => setTimeout(x, 500))
@@ -45,6 +42,7 @@ const check = async e => {
         document.querySelectorAll('.light').forEach(light => {
             light.removeEventListener('click', check)
         })
+        q('playAgainButton').hidden = false
         return
     }
     
@@ -85,4 +83,14 @@ function q(qury) {
 }
 function randomNumber(from, to) {
     return Math.floor(Math.random() * (to - from + 1)) + from;
+}
+function playAgain() {
+    q('playAgainButton').hidden = true
+    q('start').hidden = false
+    count = 0
+    path = []
+    playerPath = []
+    q('turn').innerHTML = 'Your turn.'
+    q('score').innerHTML = 'score: 0'
+    score = 0
 }
