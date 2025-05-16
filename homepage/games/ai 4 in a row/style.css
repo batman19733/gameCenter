@@ -1,0 +1,32 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+}
+body {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.board {
+    width: 70vh;
+    height: 70vh;
+    background-color: rgb(70, 70, 70);
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: 5px;
+    padding: 20px;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+}
+.cube {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(160, 160, 160);
+    border-radius: 15px;
+    aspect-ratio: 1 / 1;
+    color: transparent;
+}

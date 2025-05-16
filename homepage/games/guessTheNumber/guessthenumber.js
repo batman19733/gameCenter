@@ -3,15 +3,14 @@ if (randomNumber === null) {
     randomNumber = pickNumber()
 }
 saveNumber()
-let lives = 0
-lives = JSON.parse(localStorage.getItem('lives'))
-if(lives === null || lives === 0) {
+let lives = JSON.parse(localStorage.getItem('lives'))
+if(!lives || lives === 0) {
     setLives()
     randomNumber = pickNumber()
 }
 let color;
-let winRate;
-winRate = JSON.parse(localStorage.getItem('winRate')) || 0
+let winRate = JSON.parse(localStorage.getItem('winRate'))
+if (!winRate) {winRate = 0}
 document.querySelector('.js-win-rate').innerHTML = `win rate: ${winRate}%`
 color = JSON.parse(localStorage.getItem('colorL'))
 let playAgianS = `<br>do you wish to play agian?<br><button class="css-yes-button ${color}-yes" onclick="playAgain()">yes</button><button class="css-no-button ${color}-no" onclick="backToLobby()">no</button>`

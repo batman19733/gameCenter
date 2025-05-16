@@ -18,7 +18,6 @@ if (window.innerWidth <= 500) {
 }
 
 let path = []
-
 let playerPath = []
 let count = -1
 let disabled = false
@@ -54,6 +53,7 @@ document.querySelectorAll('.light').forEach(light => {
 async function another() {
     count = -1
     q('turn').innerHTML = 'WAIT!!'
+    q('turn').style.color = 'red'
     document.querySelectorAll('.light').forEach(light => {
         light.removeEventListener('click', check)
     })
@@ -69,12 +69,11 @@ async function another() {
         q(`l${spot}a`).style.backgroundColor = 'white'
     }
     q('turn').innerHTML = 'Your turn.'
+    q('turn').style.color = 'lightgreen'
     document.querySelectorAll('.light').forEach(light => {
         light.addEventListener('click', check)
     })
 }
-
-
 
 function q(qury) {
     return document.querySelector(`.${qury}`)
