@@ -35,7 +35,7 @@ const check = async e => {
 async function botTurn() {
     if (botDisabled) return 
     q('turn').innerHTML = 'bot thinking...'
-    await new Promise(x => setTimeout(x, 700))
+    await new Promise(x => setTimeout(x, 350))
     q('turn').innerHTML = 'Your turn'
     let spot = checkIfCanWin('O')
     if(spot) {
@@ -61,13 +61,21 @@ async function botTurn() {
                 let numSpot = turnTOnumberFromArray(spot)
                 q(`c${numSpot}a`).innerHTML = 'O'
             } else {
-                if(!checkIfAtCenter()) {
-                    if(!checkIfAtCorner()) {
-                        let spot = placeAtIndex()
-                        q(`c${spot}a`).innerHTML = 'O'
-                        q(`c${spot}a`).removeEventListener('click', check)
-                        let [row, col] = turnTOarrayNumber(spot)
-                        grid[row][col] = 'O'
+                let spot = checkForBartovMove()
+                if (spot) {
+                    let [row, col] = spot
+                    grid[row][col] = 'O'
+                    let numSpot = turnTOnumberFromArray(spot)
+                    q(`c${numSpot}a`).innerHTML = 'O'
+                } else {
+                    if(!checkIfAtCenter()) {
+                        if(!checkIfAtCorner()) {
+                            let spot = placeAtIndex()
+                            q(`c${spot}a`).innerHTML = 'O'
+                            q(`c${spot}a`).removeEventListener('click', check)
+                            let [row, col] = turnTOarrayNumber(spot)
+                            grid[row][col] = 'O'
+                        }
                     }
                 }
             }
@@ -140,6 +148,35 @@ function checkForTringle() {
         return turnTOarrayNumber('8')
     }
 }
+function checkForBartovMove() {
+    if (q('c0a').innerHTML === 'X' && q('c5a').innerHTML === 'X' && q('c1a').innerHTML === '' && q('c2a').innerHTML === '') {
+        return turnTOarrayNumber('1')
+    }
+    if (q('c0a').innerHTML === 'X' && q('c7a').innerHTML === 'X' && q('c3a').innerHTML === '' && q('c6a').innerHTML === '') {
+        return turnTOarrayNumber('3')
+    }
+
+    if (q('c2a').innerHTML === 'X' && q('c3a').innerHTML === 'X' && q('c1a').innerHTML === '' && q('c0a').innerHTML === '') {
+        return turnTOarrayNumber('1')
+    }
+    if (q('c2a').innerHTML === 'X' && q('c7a').innerHTML === 'X' && q('c8a').innerHTML === '' && q('c5a').innerHTML === '') {
+        return turnTOarrayNumber('5')
+    }
+
+    if (q('c6a').innerHTML === 'X' && q('c1a').innerHTML === 'X' && q('c0a').innerHTML === '' && q('c3a').innerHTML === '') {
+        return turnTOarrayNumber('3')
+    }
+    if (q('c6a').innerHTML === 'X' && q('c5a').innerHTML === 'X' && q('c8a').innerHTML === '' && q('c7a').innerHTML === '') {
+        return turnTOarrayNumber('7')
+    }
+
+    if (q('c8a').innerHTML === 'X' && q('c1a').innerHTML === 'X' && q('c5a').innerHTML === '' && q('c2a').innerHTML === '') {
+        return turnTOarrayNumber('5')
+    }
+    if (q('c8a').innerHTML === 'X' && q('c3a').innerHTML === 'X' && q('c7a').innerHTML === '' && q('c6a').innerHTML === '') {
+        return turnTOarrayNumber('7')
+    }
+}
 function checkIfAtCenter() {
     if (q('c4a').innerHTML === 'X') {
         let spot = placeAtCorner()
@@ -207,7 +244,7 @@ function placeAtCorner() {
         if (q(`c${x}a`).innerHTML === '') {
             return x
         }
-        else {return placeAtCorner}
+        else {return placeAtCorner()}
     }
 
 }
