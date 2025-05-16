@@ -21,6 +21,10 @@ const games = [{
 {
     name: 'AI Tic Tac Toe',
     filename: 'AI-TicTacToe',
+},
+{
+    name: 'simon says',
+    filename: 'simon says',
 }
 ]
 
