@@ -63,11 +63,11 @@ async function another() {
     let randomNum = randomNumber(1,8)
     path.push(randomNum)
     for(i=0;i<path.length;i++) {
+        await new Promise(x => setTimeout(x, 400))
         let spot = path[i]
         q(`l${spot}a`).style.backgroundColor = 'red'
         await new Promise(x => setTimeout(x, 500))
         q(`l${spot}a`).style.backgroundColor = 'white'
-        await new Promise(x => setTimeout(x, 500))
     }
     disabled = false
     q('turn').innerHTML = 'Your turn.'
