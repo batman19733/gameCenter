@@ -46,3 +46,16 @@ a {
     left: 20px;
     font-size: 30px;
 }
+.PlayAgainButton {
+    margin-left: 50px;
+    font-size: 30px;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow:  8px 8px 16px #c7c7c7,
+                 -8px -8px 16px #f9f9f9;
+    cursor: pointer;
+}
+.PlayAgainButton:active {
+    box-shadow: inset 8px 8px 16px #c7c7c7,
+                inset -8px -8px 16px #f9f9f9;
+}

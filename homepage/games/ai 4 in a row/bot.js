@@ -1,4 +1,9 @@
 let index = 9
+if (window.innerWidth <= 450) {
+    q('PlayAgainButton').style.position = 'absolute'
+    q('PlayAgainButton').style.top = '90%'
+}
+
 
 let boardHTML = ''
 for(let i=0; i<index**2;i++) {
@@ -48,7 +53,6 @@ async function moveDown(classNum, player, color) {
         return
     }
 }
-
 async function before() {
     if(didXwon('r', 'r', 'r', 'r')) {
         gameOver('red won!')
@@ -59,7 +63,6 @@ async function before() {
     q('turn').innerHTML = 'Your turn'
     bestMove()
 }
-
 function bestMove() {
     let nums = findLowestPos()
     let score;
@@ -73,7 +76,6 @@ function bestMove() {
     if (br) {place(br); return}
     let bb = canStopHelp('b', 'b')
     if (bb) {place(bb); return}
-
     for(let [row, col] of nums) {
         grid[row][col] = 'b'
         score = minimax(3, false)
@@ -101,17 +103,13 @@ function place(spot) {
     q(`c${turnToNumberFromArray([row, col])}a`).removeEventListener('click', check)
     disabled = false
 }
-
-
 document.querySelectorAll('.cube').forEach(cube => {
     cube.addEventListener('click', check)
 })
-
 function minimax(depth, isMaximizing) {
     if (depth === 0 || didXwon('b', 'b', 'b', 'b') || didXwon('r', 'r', 'r', 'r') || Draw()) {
         return evaluateBoard()
     }
-
     if(isMaximizing) {
         let nums = findLowestPos()
         let score;
@@ -183,7 +181,6 @@ function nearRED() {
         }
     }
 }
-
 function canStopHelp(color1, color2) {
     for(let row=0; row<grid.length-1; row++) { 
         for(let col=0; col<index-3;col++) {
@@ -261,7 +258,6 @@ function Draw() {
         return false
     }
 }
-
 function findLowestPos() {
     let allNums = []
     for(let col =0; col<index;col++) {
@@ -299,5 +295,16 @@ function gameOver(text) {
     q('turn').innerHTML = text
     document.querySelectorAll('.cube').forEach(cube => {
         cube.removeEventListener('click', check)
+    })
+    q('PlayAgainButton').hidden = false
+}
+function playAgain() {
+    grid = Array.from({ length: index }, () => Array(index).fill(''));
+    q('PlayAgainButton').hidden = true
+    document.querySelectorAll('.cube').forEach(cube => {
+        cube.innerHTML = ''
+        cube.addEventListener('click', check)
+        disabled = false
+        cube.style.backgroundColor = 'rgb(160, 160, 160)'
     })
 }
