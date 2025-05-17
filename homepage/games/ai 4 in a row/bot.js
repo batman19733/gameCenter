@@ -151,7 +151,7 @@ function evaluateBoard() {
     if (didXwon('r', 'r', 'r', 'r')) score += -5000 // lose
 
     if (didXwon('r', 'r', 'r', '')) score += -500 // almost lose
-    if (didXwon('', 'r', 'r', 'r')) score += -700 // almost lose
+    if (didXwon('', 'r', 'r', 'r')) score += -500 // almost lose
     if (didXwon('r', '', 'r', 'r')) score += -500 // almost lose
     if (didXwon('r', 'r', '', 'r')) score += -500 // almost lose
 
