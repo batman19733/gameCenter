@@ -11,8 +11,8 @@ body {
     justify-content: center;
 }
 .board {
-    width: min(80vw, 600px);
-    height: min(80vw, 600px);
+    width: min(90vw, 600px);
+    height: min(90vw, 600px);
     background-color: rgb(70, 70, 70);
     display: grid;
     grid-template-columns: repeat(9, 1fr);
