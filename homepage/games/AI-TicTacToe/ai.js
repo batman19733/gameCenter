@@ -16,7 +16,7 @@ function play(mode) {
 
     else if (mode === 'hard') {window.location.href = 'hard mode'}
 
-    else if (mode === 'minimax') {window.location.href = 'hard mode'}
+    else if (mode === 'minimax') {window.location.href = 'minimax mode'}
 
 
     else {

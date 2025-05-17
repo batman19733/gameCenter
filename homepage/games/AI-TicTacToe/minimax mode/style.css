@@ -1,0 +1,96 @@
+* {
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    display: flex;
+    height: 100dvh;
+    align-items: center;
+    justify-content: center;
+}
+.board {
+    width: min(500px, 80vw);
+    height: min(500px, 80vw);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+.c1a,
+.c3a,
+.c4a,
+.c6a,
+.c7a,
+.c0a {
+    border-right: solid 10px gray;
+    cursor: pointer;
+}
+.c1a,
+.c2a,
+.c3a,
+.c4a,
+.c5a,
+.c0a {
+    border-bottom: solid 10px gray;
+    cursor: pointer;
+}
+.turn {
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+}
+.all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cube {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+}
+.PlayAgainButton {
+    margin-top: 20px;
+    font-size: 30px;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow:  8px 8px 16px #c7c7c7,
+                 -8px -8px 16px #f9f9f9;
+    cursor: pointer;
+}
+.PlayAgainButton:active {
+    box-shadow: inset 8px 8px 16px #c7c7c7,
+                inset -8px -8px 16px #f9f9f9;
+}
+
+
+
+
+
+
+
+a {
+    color: black;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+}
+.back {
+    color: black;
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    font-size: 25px;
+    cursor: pointer;
+}
+.warning {
+    position: absolute;
+    top: 5%;
+    font-size: 30px;
+    color: red;
+}
