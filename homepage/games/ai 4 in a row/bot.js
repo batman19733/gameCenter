@@ -22,18 +22,133 @@ const check = async e => {
     moveDown(classNum, 'r', 'salmon')
 }
 
-function botTurn() {
-    let result = minimax(grid, 3, true)
-    if (result.bot)
+async function moveDown(classNum, player, color) {
+    await new Promise(x => setTimeout(x, 100))
+    let [row, col] = turnToArrayFromNumber(classNum)
+    if(row+1 < index && grid[row+1][col] === '') {
+        q(`c${classNum}a`).addEventListener('click', check) // add click event before going down
+        q(`c${classNum+index}a`).removeEventListener('click', check) // remove event listener to the one below
 
+        q(`c${classNum}a`).innerHTML = '' // remove text
+        q(`c${classNum}a`).style.backgroundColor = 'rgb(160, 160, 160)' // remove color
+
+        q(`c${classNum+index}a`).innerHTML = player // add text to 1 under
+        q(`c${classNum+index}a`).style.backgroundColor = color // add color to 1 under
+
+        grid[row][col] = ''
+        grid[row+1][col] = player
+        classNum += index
+        let [r, c] = turnToArrayFromNumber(classNum)
+        if (r +1 < index) {moveDown(classNum, player, color)} else {
+            botTurn()
+            return
+        }
+    } else {
+        botTurn()
+        return
+    }
+}
+
+function botTurn() {
+    miniMax()
     disabled = false
 }
+
 
 document.querySelectorAll('.cube').forEach(cube => {
     cube.addEventListener('click', check)
 })
 
-function checkIfCanWin(move) {
+function miniMax(depth, botTurn) {
+    let testGrid = copyGrid()
+    let lowestNums = findLowestPos(testGrid)
+    if (depth === 0 ) {
+        return evaluateBoard(testGrid)
+    }
+
+    let bestScore = 0
+    let bestMove = null
+    
+    if(botTurn = true) {
+        for(let [row, col] of lowestNums) {
+            testGrid[row][col] = 'b'
+            let score = evaluateBoard(testGrid)
+            miniMax(depth -1, botTurn = false)
+            if (score > bestScore) {
+                bestScore = score
+                bestMove = [row, col]
+            }
+        }
+    } else {
+        for(let [row, col] of lowestNums) {
+            testGrid[row][col] = 'r'
+            let score = evaluateBoard(testGrid)
+            miniMax(depth -1, botTurn = true)
+            if (score > bestScore) {
+                bestScore = score
+                bestMove = [row, col]
+            }
+        }
+    }
+
+    if(bestMove !== null) {
+        let [row, col] = bestMove
+        grid[row][col] = 'b'
+        let classNum = turnToNumberFromArray(bestMove)
+        q(`c${classNum}a`).innerHTML = 'b'
+        q(`c${classNum}a`).removeEventListener('click', check)
+        q(`c${classNum}a`).style.backgroundColor = 'lightblue'
+    }
+}
+
+function evaluateBoard(testGrid, willBotWin) {
+    let score = 0
+    if(willBotWin) {
+        if (didXwon(testGrid, 'b', 'b', 'b', 'b')) {score += Infinity}
+        else if (didXwon(testGrid, 'r', 'r', 'r', 'b')) {score += 1000}
+        else if (didXwon(testGrid, 'r', 'r', 'b', 'r')) {score += 1000}
+        else if (didXwon(testGrid, 'r', 'b', 'r', 'r')) {score += 1000}
+        else if (didXwon(testGrid, 'b', 'r', 'r', 'r')) {score += 1000}
+    }
+    else {
+        if (didXwon(testGrid, 'r', 'r', 'r', 'r')) {score += Infinity}
+        else if (didXwon(testGrid, 'b', 'b', 'b', 'r')) {score += 1000}
+        else if (didXwon(testGrid, 'b', 'b', 'r', 'b')) {score += 1000}
+        else if (didXwon(testGrid, 'b', 'r', 'b', 'b')) {score += 1000}
+        else if (didXwon(testGrid, 'r', 'b', 'b', 'b')) {score += 1000}
+    }
+    return score
+}
+
+function didXwon(gridP, move1, move2, move3, move4) {
+    let grid = gridP
+    for(let row=0; row<grid.length; row++) { // Check win in row
+        for(let col=0; col<index-3;col++) {
+            if(grid[row][col] === move1 && grid[row][col+1] === move2 && grid[row][col+2] === move3 && grid[row][col+3] === move4) {
+                return true
+            }
+        }
+    }
+
+    for(let col=0; col<grid.length; col++) { // Check win in col
+        for(let row=0; row<index-3;row++) {
+            if(grid[row][col] === move1 && grid[row+1][col] === move2 && grid[row+2][col] === move3 && grid[row+3][col] === move4) {
+                return true
+            }
+        }
+    }
+
+    for(let row=0; row<grid.length-3; row++) { // Check win in row
+        for(let col=0; col<index-3;col++) {
+            if(grid[row][col] === move1 && grid[row+1][col+1] === move2 && grid[row+2][col+2] === move3 && grid[row+3][col+3] === move4) {
+                return true
+            }
+        }
+    }
+    return false
+}
+function checkIfCanWin(gridE, move) {
+    let grid = gridE
     for(let row=0;row<grid.length;row++) { // Check win in row
         for(let col=0; col<index-3;col++) {
             if(grid[row][col] === move && grid[row][col+1] === move && grid[row][col+2] === move && grid[row][col+3] === '') {
@@ -117,46 +232,34 @@ function checkIfCanWin(move) {
     }
 
     
-
+    return false
 }
 
-
-
-
-
-
-
-async function moveDown(classNum, player, color) {
-    await new Promise(x => setTimeout(x, 100))
-    let [row, col] = turnToArrayFromNumber(classNum)
-    if(row+1 < index && grid[row+1][col] === '') {
-        q(`c${classNum}a`).addEventListener('click', check) // add click event before going down
-        q(`c${classNum+index}a`).removeEventListener('click', check) // remove event listener to the one below
-
-        q(`c${classNum}a`).innerHTML = '' // remove text
-        q(`c${classNum}a`).style.backgroundColor = 'rgb(160, 160, 160)' // remove color
-
-        q(`c${classNum+index}a`).innerHTML = player // add text to 1 under
-        q(`c${classNum+index}a`).style.backgroundColor = color // add color to 1 under
-
-        grid[row][col] = ''
-        grid[row+1][col] = player
-        classNum += index
-        let [r, c] = turnToArrayFromNumber(classNum)
-        if (r +1 < index) {moveDown(classNum, player, color)} else {
-            botTurn()
-            return
+function copyGrid() {
+    return grid.map(row => [...row]);
+}
+function findLowestPos(fakeGrid) {
+    let allNums = []
+    let grid = fakeGrid
+    for(let col =0; col<index;col++) {
+        if (grid[0][col] === '') {
+            let [r, c] = goDownGrid(fakeGrid, 0, col)
+            allNums.push([r, c])
         }
-    } else {
-        botTurn()
-        return
     }
+    return allNums
 }
-
-function minimax(grid, depth, isBotTurn) {
-    return { score: 0, move: null };
+function goDownGrid(grid, row, col) {
+    if (row + 1 < index) {
+        if (grid[row + 1][col] === '') {
+            return goDownGrid(grid, row + 1, col)
+        } else  {
+            return [row, col]
+        } 
+    } else {
+        return [row, col]
+    } 
 }
-
 function q(qury) {
     return document.querySelector(`.${qury}`)
 }
