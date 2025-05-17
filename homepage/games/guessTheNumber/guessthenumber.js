@@ -1,3 +1,14 @@
+if (window.innerWidth < 1125) {
+    document.body.innerHTML = 'this game doesnt work on phones'
+    document.body.style.display = 'flex'
+    document.body.style.alignItems = 'center'
+    document.body.style.justifyContent = 'center'
+    document.body.style.fontSize = '30px'
+}
+
+
+
+
 randomNumber = JSON.parse(localStorage.getItem('number'))
 if (randomNumber === null) {
     randomNumber = pickNumber()
@@ -210,19 +221,4 @@ function playAgain() {
 }
 function backToLobby() {
     location.assign("../../")
-}
-if (window.innerWidth < 1125) {
-    document.querySelector('.css-dark-bar').style.marginLeft = '0px'
-}
-if (window.innerWidth < 700) {
-        document.querySelector('.css-dark-bar').style.marginLeft = '0px'
-    document.querySelector('.css-dark-bar').hidden = true
-}
-if (window.innerWidth < 450) {
-    document.querySelector('.cdb').style.marginLeft = '0px'
-    document.querySelector('.cdb').hidden = true
-    document.querySelector('.css-all-game').style.width = '80vw'
-    document.body.innerHTML = 'nah swag i tryed to fix this on phones it just doesnt work :praying emoji: maybe maybe ill fix it later but the code here weired af bearly working i wont fix it for now'
-    document.body.style.display = 'flex'
-    document.body.style.alignItems = 'center'
 }

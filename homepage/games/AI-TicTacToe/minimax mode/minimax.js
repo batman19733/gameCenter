@@ -7,7 +7,6 @@ for(let i=0;i<=8;i++) {
 q('board').innerHTML = boardHTML
 q('turn').innerHTML = 'Your turn'
 
-
 let grid = Array.from({ length: 3 }, () => new Array(3).fill(''));
 const check = async e => {
     if (disabled) return
@@ -64,6 +63,7 @@ function bestMove() {
     let result = checkIfWon('O')
     if (result) {
         q('turn').innerHTML = 'O won!'
+        q('PlayAgainButton').hidden = false
         document.querySelectorAll('.cube').forEach(cube => {
             cube.removeEventListener('click', check)
         })
@@ -171,11 +171,6 @@ function turnTOnumberFromArray(array) {
 function q(qury) {
     return document.querySelector(`.${qury}`)
 }
-
-function randomNumber(from, to) {
-    return Math.floor(Math.random() * (to - from + 1)) + from;
-}
-
 function back() {
     window.location.href = '../'
 }

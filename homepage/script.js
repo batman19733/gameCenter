@@ -25,6 +25,10 @@ const games = [{
 {
     name: 'simon says',
     filename: 'simon says',
+},
+{
+    name: 'ai 4 in a row',
+    filename: 'ai 4 in a row',
 }
 ]
 
