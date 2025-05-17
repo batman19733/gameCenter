@@ -23,14 +23,16 @@ body {
     left: 50%;
     translate: -50% -50%;
     font-size: 30px;
+    width: 80vw;
 }
 .buttons {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
 }
 .button {
     border: solid;
-    margin-right: 10px;
-    padding: 10px;
+    padding: 8px;
     border-radius: 15px;
     cursor: pointer;
 }
