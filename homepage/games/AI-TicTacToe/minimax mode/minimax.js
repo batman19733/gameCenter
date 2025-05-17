@@ -53,6 +53,11 @@ function bestMove() {
         q(`c${turnTOnumberFromArray([move.row, move.col])}a`).removeEventListener('click', check)
     } else {
         q('turn').innerHTML = 'draw'
+        q('PlayAgainButton').hidden = false
+        document.querySelectorAll('.cube').forEach(cube => {
+            cube.removeEventListener('click', check)
+        })
+        disabled = true
         return
     }
     q(`c${turnTOnumberFromArray([move.row, move.col])}a`).innerHTML = 'O'
@@ -173,4 +178,15 @@ function randomNumber(from, to) {
 
 function back() {
     window.location.href = '../'
+}
+function playAgain() {
+    q('PlayAgainButton').hidden = true
+    document.querySelectorAll('.cube').forEach(cube => {
+        cube.addEventListener('click', check)
+        cube.innerHTML = ''
+    })
+    grid = Array.from({ length: 3 }, () => new Array(3).fill(''));
+    q('turn').innerHTML = 'Your turn'
+    disabled = false
+
 }
