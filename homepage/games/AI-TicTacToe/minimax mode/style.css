@@ -24,7 +24,6 @@ body {
 .c7a,
 .c0a {
     border-right: solid 10px gray;
-    cursor: pointer;
 }
 .c1a,
 .c2a,
@@ -33,7 +32,6 @@ body {
 .c5a,
 .c0a {
     border-bottom: solid 10px gray;
-    cursor: pointer;
 }
 .turn {
     margin-bottom: 60px;
@@ -52,6 +50,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 60px;
+    cursor: pointer;
 }
 .PlayAgainButton {
     margin-top: 20px;

@@ -1,7 +1,7 @@
 let index = 9
 if (window.innerWidth <= 450) {
     q('PlayAgainButton').style.position = 'absolute'
-    q('PlayAgainButton').style.top = '90%'
+    q('PlayAgainButton').style.top = '80%'
 }
 
 
@@ -69,13 +69,17 @@ function bestMove() {
     let bestScore = -Infinity
     let move;
     let rr = canStopHelp('r', 'r')
-    if (rr) {place(rr); return}
+    if (rr) {place(rr); }
     let rb = canStopHelp('r', 'b')
-    if (rr) {place(rb); return}
+    if (rr) {place(rb); }
     let br = canStopHelp('b', 'r')
-    if (br) {place(br); return}
+    if (br) {place(br); }
     let bb = canStopHelp('b', 'b')
-    if (bb) {place(bb); return}
+    if (bb) {place(bb);}
+    if(didXwon('b', 'b', 'b', 'b') === true) {
+        gameOver('blue won!')
+        return
+    }
     for(let [row, col] of nums) {
         grid[row][col] = 'b'
         score = minimax(3, false)
@@ -89,7 +93,7 @@ function bestMove() {
     q(`c${turnToNumberFromArray([move.row, move.col])}a`).innerHTML = 'b'
     q(`c${turnToNumberFromArray([move.row, move.col])}a`).style.backgroundColor = 'lightblue'
     q(`c${turnToNumberFromArray([move.row, move.col])}a`).removeEventListener('click', check)
-    if(didXwon('b', 'b', 'b', 'b')) {
+    if(didXwon('b', 'b', 'b', 'b') === true) {
         gameOver('blue won!')
         return
     }

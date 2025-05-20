@@ -11,15 +11,15 @@ body {
     justify-content: center;
 }
 .board {
-    width: min(90vw, 600px);
-    height: min(90vw, 600px);
+    width: min(80vw, 600px);
+    height: min(80vw, 600px);
     background-color: rgb(70, 70, 70);
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-gap: 5px;
-    padding: 20px;
-    border-top-left-radius: 35px;
-    border-top-right-radius: 35px;
+    padding: min(20px, 5%);
+    border-top-left-radius: min(35px, 6%);
+    border-top-right-radius: min(35px, 6%);
 }
 .cube {
     display: flex;
@@ -46,16 +46,10 @@ a {
     left: 20px;
     font-size: 30px;
 }
-.PlayAgainButton {
-    margin-left: 50px;
+.modes {
+    color: black;
+    position: absolute;
+    top: 55px;
+    left: 20px;
     font-size: 30px;
-    padding: 10px;
-    border-radius: 15px;
-    box-shadow:  8px 8px 16px #c7c7c7,
-                 -8px -8px 16px #f9f9f9;
-    cursor: pointer;
-}
-.PlayAgainButton:active {
-    box-shadow: inset 8px 8px 16px #c7c7c7,
-                inset -8px -8px 16px #f9f9f9;
 }

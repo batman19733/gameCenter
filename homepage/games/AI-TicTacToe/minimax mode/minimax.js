@@ -115,15 +115,9 @@ document.querySelectorAll('.cube').forEach(cube => {
 })
 
 function evaluate() {
-    if (checkIfWon('O')) {
-        return 10
-    }
-    if (checkIfWon('X')) {
-        return -10
-    }
-    if (ifDraw()) {
-        return 0
-    }
+    if (checkIfWon('O')) {return 10}
+    if (checkIfWon('X')) {return -10}
+    if (ifDraw()) {return 0}
     return 0
 }
 
