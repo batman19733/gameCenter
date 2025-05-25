@@ -30,7 +30,7 @@ async function bestMove() {
     let bestScore = -Infinity
     for (let [row, col] of nums) {
         grid[row][col] = 'b'
-        let score = minimax(6, false)
+        let score = minimax(7, false)
         grid[row][col] = ''
         if (score > bestScore) {
             bestScore = score
