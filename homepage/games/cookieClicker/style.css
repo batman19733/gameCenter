@@ -131,7 +131,7 @@ body {
 /* Floating Score Animation */
 .floating-number {
     position: absolute;
-    color: var(--text-primary, #1a1a1a);
+    color: gray;
     font-weight: 600;
     pointer-events: none;
     animation: float 1.5s ease-out forwards;

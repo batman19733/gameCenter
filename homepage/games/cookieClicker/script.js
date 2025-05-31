@@ -1,6 +1,5 @@
 let score = JSON.parse(localStorage.getItem('scoreCookieClicker'))
 if (score === NaN) {score = 0}
-console.log(score)
 let scorePerClick = JSON.parse(localStorage.getItem('scorePerClick')) || 1
 let scorePerSec = JSON.parse(localStorage.getItem('scorePerSec')) || 0
 updateScore()
@@ -29,6 +28,54 @@ let shopItems = [{
     lvl: 0,
     action: 'superMinerPoints(',
     spot: 3
+}, {
+    name: 'golden cursor +5 click',
+    price: 5000,
+    lvl: 0,
+    action: 'goldenCursorPoints(',
+    spot: 4
+}, {
+    name: 'ultra autoclicker +10 per/s',
+    price: 1500,
+    lvl: 0,
+    action: 'ultraAutoclicker(',
+    spot: 5
+}, {
+    name: 'diamond miner +100 per/s',
+    price: 50000,
+    lvl: 0,
+    action: 'diamondMinerPoints(',
+    spot: 6
+}, {
+    name: 'platinum drill +500 per/s',
+    price: 250000,
+    lvl: 0,
+    action: 'platinumDrillPoints(',
+    spot: 7
+}, {
+    name: 'time warper +50 click',
+    price: 100000,
+    lvl: 0,
+    action: 'timeWarperPoints(',
+    spot: 8
+}, {
+    name: 'quantum core +1000 per/s',
+    price: 1000000,
+    lvl: 0,
+    action: 'quantumCorePoints(',
+    spot: 9
+}, {
+    name: 'infinity clicker +500 click',
+    price: 750000,
+    lvl: 0,
+    action: 'infinityClickerPoints(',
+    spot: 10
+}, {
+    name: 'black hole miner +5000 per/s',
+    price: 10000000,
+    lvl: 0,
+    action: 'blackHoleMinerPoints(',
+    spot: 11
 }]
 
 for(i=0; i<shopItems.length;i++) {
@@ -72,7 +119,6 @@ function reloadShop() {
     }
     localStorage.setItem('scorePerSec', JSON.stringify(scorePerSec))
     localStorage.setItem('scorePerClick', JSON.stringify(scorePerClick))
-    updatesize()
 }
 reloadShop()
 if (score === NaN) {score = 0}
@@ -104,6 +150,62 @@ function superMinerPoints(spot) {
     }
 }
 
+function goldenCursorPoints(spot) {
+    if (score - shopItems[spot].price >= 0) {
+        scorePerClick += 5
+        reloadItem(spot, 1.3)
+    }
+}
+
+function ultraAutoclicker(spot) {
+    if (score - shopItems[spot].price >= 0) {
+        scorePerSec += 10
+        reloadItem(spot, 1.3)
+    }
+}
+
+function diamondMinerPoints(spot) {
+    if (score - shopItems[spot].price >= 0) {
+        scorePerSec += 100
+        reloadItem(spot, 1.4)
+    }
+}
+
+function platinumDrillPoints(spot) {
+    if (score - shopItems[spot].price >= 0) {
+        scorePerSec += 500
+        reloadItem(spot, 1.5)
+    }
+}
+
+function timeWarperPoints(spot) {
+    if (score - shopItems[spot].price >= 0) {
+        scorePerClick += 50
+        reloadItem(spot, 1.5)
+    }
+}
+
+function quantumCorePoints(spot) {
+    if (score - shopItems[spot].price >= 0) {
+        scorePerSec += 1000
+        reloadItem(spot, 1.6)
+    }
+}
+
+function infinityClickerPoints(spot) {
+    if (score - shopItems[spot].price >= 0) {
+        scorePerClick += 500
+        reloadItem(spot, 1.6)
+    }
+}
+
+function blackHoleMinerPoints(spot) {
+    if (score - shopItems[spot].price >= 0) {
+        scorePerSec += 5000
+        reloadItem(spot, 1.7)
+    }
+}
+
 function updateScore() {
     score = Math.round(score);
     localStorage.setItem('scoreCookieClicker', JSON.stringify(score))
@@ -124,23 +226,3 @@ setInterval(() => {
     updateScore()
 }, 1000) 
 
-
-function updatesize() {
-    if (window.innerWidth <= 750) {
-        document.querySelector('.cookie').style.left = `65%`
-        document.querySelector('.score').style.left = `65%`
-        document.querySelector('.score-per-sec').style.left = `65%`
-        document.querySelector('.score-per-sec').style.top = `20%`
-
-        document.querySelector('.shop-body').style.width = `110px`
-        document.querySelector('.shop-title').style.width = `110px`
-        document.querySelector('.shop-div').style.width = `110px`
-        document.querySelectorAll('.item').forEach(item => {
-            item.style.width = '109px'
-        })
-        document.querySelectorAll('.item-name').forEach(item => {
-            item.style.fontSize = '15px'
-        })
-        document.querySelector(`a`).style.paddingLeft = `120px`
-    }
-}
