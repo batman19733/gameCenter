@@ -164,14 +164,22 @@ body {
     color: #4a4a4a;
 }
 a {
-    position: absolute;
-    color: #1a1a1a;
-    font-size: 30px;
-    top: 20px;
-    left: 20px;
+    position: fixed;
     text-decoration: none;
-    transition: color 0.2s ease;
+    color: var(--text-primary);
+    box-shadow: var(--shadow-before);
+    top: 1.25rem;
+    left: 1.25rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 1rem;
+    font-size: 1.875rem;
 }
+
 a:hover {
-    color: #4a4a4a;
+    transform: translateX(-2px);
+    box-shadow: var(--shadow-after);
+}
+a:active {
+    transform: translateX(-5px);
+    box-shadow: var(--shadow-before);
 }
