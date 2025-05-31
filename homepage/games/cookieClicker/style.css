@@ -1,112 +1,235 @@
-body {
-    background-color: rgb(232, 232, 232);
-    height: 100vh;
+:root {
+    --primary-bg: #e8e8e8;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --accent-color: #4a90e2;
 }
+
 * {
     padding: 0;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     user-select: none;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--primary-bg);
+    min-height: 100vh;
+    color: var(--text-primary);
+    overflow: hidden;
+}
+
+.game-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Shop Styles */
+.shop-div {
+    width: 280px;
+    height: 100vh;
+    background: var(--primary-bg);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    z-index: 10;
+}
+
+.shop-title {
+    width: 100%;
+    background-color: white;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shop-body {
+    width: 100%;
+    height: calc(100vh - 80px);
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+/* Item Styles */
+.item {
+    background-color: white;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    transition: all 0.2s ease;
+}
+
+.item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.item-name {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.item-price-lvl {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* Cookie and Stats Styles */
+.cookie-div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+}
+
+.stats {
+    position: absolute;
+    top: 20%;
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.score {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 1rem;
 }
 
 .cookie {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
+    border: none;
     border-radius: 50%;
-    background: rgb(232, 232, 232);
-    box-shadow:  19px 19px 48px #989898,
-                 -19px -19px 48px #ffffff;
+    background: var(--primary-bg);
+    box-shadow: 20px 20px 60px #c5c5c5,
+                -20px -20px 60px #ffffff;
+    cursor: pointer;
+    transition: transform 0.1s ease;
 }
+
+.cookie:hover {
+    transform: scale(1.02);
+}
+
 .cookie:active {
-    background: #e8e8e8;
-    box-shadow: inset 19px 19px 48px #9e9e9e,
-                inset -19px -19px 48px #ffffff;
+    transform: scale(0.98);
+    box-shadow: inset 20px 20px 60px #c5c5c5,
+                inset -20px -20px 60px #ffffff;
 }
-.score {
-    position: absolute;
-    left: 50%;
-    top: 30%;
-    translate: -50% -50%;
-    font-size: 35px;
-    color: gray;
-}
-.score-per-sec {
-    position: absolute;
-    left: 50%;
-    top: 25%;
-    translate: -50% -50%;
-    font-size: 25px;
-    color: gray;
-}
+
+/* Floating Score Animation */
 .floating-number {
     position: absolute;
-    color: gray;
-    user-select: none;
+    color: var(--text-primary, #1a1a1a);
+    font-weight: 600;
     pointer-events: none;
-    animation: float 2s;
+    animation: float 1.5s ease-out forwards;
+    font-size: 1.25rem;
 }
+
 @keyframes float {
     0% {
         opacity: 1;
-        transform: translateY(0px);
+        transform: translateY(0);
     }
     100% {
         opacity: 0;
         transform: translateY(-50px);
     }
 }
-.shop-div {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 220px;
-    height: 100%;
-    background: #e8e8e8;
-    box-shadow:  40px 40px 73px #808080,
-                 -40px -40px 73px #ffffff;
+
+/* Back Button */
+.back-button {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1.875rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 1rem;
+    background-color: white;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+    z-index: 20;
 }
-.shop-title {
-    width: 100%;
-    background-color: rgb(202, 202, 202);
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 25px;
+
+.back-button:hover {
+    transform: translateX(-2px);
+    box-shadow: var(--shadow-md);
 }
-.shop-body {
-    width: 220px;
-    height: calc(100vh - 80px);
-}
-.item {
-    background-color: rgb(220, 220, 220);
-    width: 218px;
-    height: 90px;
-    border: solid;
-    margin-bottom: 22px;
-    cursor: pointer;
-    border-radius: 20px;
-}
-.item-name {
-    border-bottom: 4px solid rgb(200, 200, 200);
-    height: 55px;
-    display: grid;
-    place-content: center;
-    font-size: 22px;
-}
-.item-price-lvl {
-    display: grid;
-    place-content: center;
-    font-size: 17px;
-    height: 30px;
-}
-a {
-    position: absolute;
-    color: black;
-    font-size: 30px;
-    padding-left: 240px;
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .shop-div {
+        width: 100%;
+        height: 50vh;
+        order: 2;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .shop-title {
+        flex-shrink: 0; /* Prevents the title from shrinking */
+    }
+
+    .shop-body {
+        flex: 1;
+        height: auto;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        padding: 1rem;
+    }
+
+    .cookie-div {
+        height: 50vh;
+        order: 1;
+        padding: 1rem;
+    }
+
+    .stats {
+        position: relative;
+        top: 0;
+        margin-bottom: 2rem;
+    }
+
+    .cookie {
+        width: 180px;
+        height: 180px;
+    }
+
+    .back-button {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+    }
 }

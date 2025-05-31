@@ -1,10 +1,9 @@
-let score = JSON.parse(localStorage.getItem('score'))
+let score = JSON.parse(localStorage.getItem('scoreCookieClicker'))
 if (score === NaN) {score = 0}
+console.log(score)
 let scorePerClick = JSON.parse(localStorage.getItem('scorePerClick')) || 1
 let scorePerSec = JSON.parse(localStorage.getItem('scorePerSec')) || 0
 updateScore()
-
-
 
 let shopItems = [{
     name: 'curser points +1',
@@ -44,7 +43,7 @@ for(i=0; i<shopItems.length;i++) {
 
 document.querySelector('.cookie').addEventListener('click', (e) => {
     score += scorePerClick
-    localStorage.setItem('score', JSON.stringify(score))
+    localStorage.setItem('scoreCookieClicker', JSON.stringify(score))
     document.querySelector('.score').innerHTML = `score: ${score}`
     floatingNumber = document.createElement('p')
     floatingNumber.style.left = `${e.pageX}px`
@@ -107,7 +106,7 @@ function superMinerPoints(spot) {
 
 function updateScore() {
     score = Math.round(score);
-    localStorage.setItem('score', JSON.stringify(score))
+    localStorage.setItem('scoreCookieClicker', JSON.stringify(score))
     document.querySelector('.score').innerHTML = `score: ${score}`
     document.querySelector('.score-per-sec').innerHTML = `score per/s: ${scorePerSec}`
 }
@@ -128,13 +127,10 @@ setInterval(() => {
 
 function updatesize() {
     if (window.innerWidth <= 750) {
-        const cookie = document.querySelector('.cookie')
-        const score = document.querySelector('.score')
-        const scorePperSecDiv = document.querySelector('.score-per-sec')
-        cookie.style.left = `65%`
-        score.style.left = `65%`
-        scorePperSecDiv.style.left = `65%`
-        scorePperSecDiv.style.top = `20%`
+        document.querySelector('.cookie').style.left = `65%`
+        document.querySelector('.score').style.left = `65%`
+        document.querySelector('.score-per-sec').style.left = `65%`
+        document.querySelector('.score-per-sec').style.top = `20%`
 
         document.querySelector('.shop-body').style.width = `110px`
         document.querySelector('.shop-title').style.width = `110px`

@@ -4,21 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>clicker</title>
+    <title>Cookie Clicker</title>
 </head>
 <body>
-    <div class="shop-div">
-        <div class="shop-title">Shop</div>
-        <div class="shop-body"></div>
-    </div>
-    
-    <div class="cookie-div">
-        <div class="score-per-sec">score per/s: 0</div>
-        <div class="score">score: 0</div>
-        <div class="cookie"></div>
-    </div>
+    <a href="../../index.html" class="back-button">←</a>
 
-    <a href="../../index.html">back</a>
+    <main class="game-container">
+        <aside class="shop-div">
+            <h1 class="shop-title">Shop</h1>
+            <div class="shop-body"></div>
+        </aside>
+        
+        <div class="cookie-div">
+            <div class="stats">
+                <div class="score-per-sec">Score per/s: <span>0</span></div>
+                <div class="score">Score: <span>0</span></div>
+            </div>
+            <button class="cookie" aria-label="Click cookie"></button>
+        </div>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>

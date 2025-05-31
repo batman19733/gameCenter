@@ -1,99 +1,172 @@
-let player = 'X'
-let html = ''
+class TicTacToe {
+    constructor() {
+        // Load saved game state or initialize new game
+        const savedState = this.loadGameState();
+        
+        if (savedState) {
+            this.currentPlayer = savedState.currentPlayer;
+            this.board = savedState.board;
+            this.gameActive = savedState.gameActive;
+            this.score = savedState.score;
+        } else {
+            this.currentPlayer = 'X';
+            this.board = Array(9).fill('');
+            this.gameActive = true;
+            this.score = {
+                X: parseInt(localStorage.getItem('Xwins')) || 0,
+                O: parseInt(localStorage.getItem('Owins')) || 0
+            };
+        }
 
-let score = {
-    Xwins: 0,
-    Owins: 0
-}
-updateScore()
+        // DOM elements
+        this.cells = document.querySelectorAll('.cell');
+        this.result = document.querySelector('.result');
+        this.playAgainBtn = document.querySelector('.play-again');
+        this.currentPlayerDisplay = document.querySelector('.current-player');
+        this.xScoreDisplay = document.querySelector('.x-score');
+        this.oScoreDisplay = document.querySelector('.o-score');
 
-for(i = 1; i<=9; i++) {
-    html += `document.querySelector('.cube${i}').addEventListener('click', () => {
-        if (player === 'X') {
-            document.querySelector('.cube${i}').innerHTML = 'X'
-            checkIfWin(player)
-            player = 'O'
-            document.querySelector('.cube${i}').disabled = true
+        // Initialize
+        this.initializeGame();
+        this.updateScore();
+        
+        // If there's a saved game, restore the board display
+        if (savedState) {
+            this.restoreBoardDisplay();
+            if (!this.gameActive) {
+                this.playAgainBtn.hidden = false;
+                if (this.checkWin()) {
+                    this.result.textContent = `${this.currentPlayer} Wins!`;
+                } else if (this.checkDraw()) {
+                    this.result.textContent = "It's a Draw!";
+                }
             }
-        else if (player === 'O') {
-            document.querySelector('.cube${i}').innerHTML = 'O'
-            checkIfWin(player)
-            player = 'X'
-            document.querySelector('.cube${i}').disabled = true
-        }
-    
-    });`
-}
-eval(html)
-
-function result(move) {
-    document.querySelector('.result').innerHTML = `${move} won!`
-    for(i = 1; i<=9; i++) {
-        document.querySelector(`.cube${i}`).disabled = true
-    }
-    if (move === 'X') {
-        score.Xwins++
-        localStorage.setItem('Xwins', JSON.stringify(score.Xwins))
-        updateScore()
-    }
-    else if (move === 'O') {
-        score.Owins++
-        localStorage.setItem('Owins', JSON.stringify(score.Owins))
-        updateScore()
-    }
-    else {
-        document.querySelector('.result').innerHTML = `${move}`
-    }
-    document.querySelector('.play-again').hidden = false
-}
-
-function updateScore() {
-    score.Owins = JSON.parse(localStorage.getItem('Owins')) || 0
-    score.Xwins = JSON.parse(localStorage.getItem('Xwins')) || 0
-    document.querySelector('.score').innerHTML = `X-wins: ${score.Xwins}, O-wins: ${score.Owins}`
-}
-
-function checkIfWin(move) {
-    let count = 0
-    for(let i=1;i<=9;i++) {
-        if(document.querySelector(`.cube${i}`).innerHTML !== '') {
-            count++
         }
     }
-    if (document.querySelector('.cube1').innerHTML === move && document.querySelector('.cube2').innerHTML === move && document.querySelector('.cube3').innerHTML === move) {
-        result(move)
+
+    saveGameState() {
+        const gameState = {
+            currentPlayer: this.currentPlayer,
+            board: this.board,
+            gameActive: this.gameActive,
+            score: this.score
+        };
+        localStorage.setItem('tictactoeState', JSON.stringify(gameState));
     }
-    else if (document.querySelector('.cube4').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube6').innerHTML === move) {
-        result(move)
+
+    loadGameState() {
+        const savedState = localStorage.getItem('tictactoeState');
+        return savedState ? JSON.parse(savedState) : null;
     }
-    else if (document.querySelector('.cube7').innerHTML === move && document.querySelector('.cube8').innerHTML === move && document.querySelector('.cube9').innerHTML === move) {
-        result(move)
+
+    restoreBoardDisplay() {
+        this.cells.forEach((cell, index) => {
+            const value = this.board[index];
+            if (value) {
+                cell.textContent = value;
+                cell.dataset.player = value;
+                cell.disabled = true;
+            }
+        });
+        this.currentPlayerDisplay.textContent = this.currentPlayer;
     }
-    else if (document.querySelector('.cube1').innerHTML === move && document.querySelector('.cube4').innerHTML === move && document.querySelector('.cube7').innerHTML === move) {
-        result(move)
+
+    initializeGame() {
+        this.cells.forEach(cell => {
+            cell.addEventListener('click', () => this.handleCellClick(cell));
+        });
+
+        this.playAgainBtn.addEventListener('click', () => this.resetGame());
     }
-    else if (document.querySelector('.cube2').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube8').innerHTML === move) {
-        result(move)
+
+    handleCellClick(cell) {
+        const index = cell.dataset.index;
+
+        if (this.board[index] === '' && this.gameActive) {
+            this.board[index] = this.currentPlayer;
+            cell.textContent = this.currentPlayer;
+            cell.dataset.player = this.currentPlayer;
+            cell.disabled = true;
+
+            if (this.checkWin()) {
+                this.handleWin();
+            } else if (this.checkDraw()) {
+                this.handleDraw();
+            } else {
+                this.switchPlayer();
+            }
+            
+            // Save game state after each move
+            this.saveGameState();
+        }
     }
-    else if (document.querySelector('.cube3').innerHTML === move && document.querySelector('.cube6').innerHTML === move && document.querySelector('.cube9').innerHTML === move) {
-        result(move)
+
+    checkWin() {
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+            [0, 4, 8], [2, 4, 6]             // Diagonals
+        ];
+
+        return winPatterns.some(pattern => {
+            const [a, b, c] = pattern;
+            return this.board[a] &&
+                   this.board[a] === this.board[b] &&
+                   this.board[a] === this.board[c];
+        });
     }
-    else if (document.querySelector('.cube1').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube9').innerHTML === move) {
-        result(move)
+
+    checkDraw() {
+        return this.board.every(cell => cell !== '');
     }
-    else if (document.querySelector('.cube3').innerHTML === move && document.querySelector('.cube5').innerHTML === move && document.querySelector('.cube7').innerHTML === move) {
-        result(move)
+
+    handleWin() {
+        this.gameActive = false;
+        this.result.textContent = `${this.currentPlayer} Wins!`;
+        this.score[this.currentPlayer]++;
+        localStorage.setItem(`${this.currentPlayer}wins`, this.score[this.currentPlayer]);
+        this.updateScore();
+        this.playAgainBtn.hidden = false;
+        this.saveGameState();
     }
-    else if(count === 9) {
-        result('tie')
+
+    handleDraw() {
+        this.gameActive = false;
+        this.result.textContent = "It's a Draw!";
+        this.playAgainBtn.hidden = false;
+        this.saveGameState();
+    }
+
+    switchPlayer() {
+        this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+        this.currentPlayerDisplay.textContent = this.currentPlayer;
+    }
+
+    updateScore() {
+        this.xScoreDisplay.textContent = this.score.X;
+        this.oScoreDisplay.textContent = this.score.O;
+    }
+
+    resetGame() {
+        this.board = Array(9).fill('');
+        this.gameActive = true;
+        this.currentPlayer = 'X';
+        this.currentPlayerDisplay.textContent = this.currentPlayer;
+        this.result.textContent = '';
+        this.playAgainBtn.hidden = true;
+
+        this.cells.forEach(cell => {
+            cell.textContent = '';
+            cell.disabled = false;
+            cell.dataset.player = '';
+        });
+        
+        // Save the reset game state
+        this.saveGameState();
     }
 }
 
-function playAgain() {
-    for(i = 1; i<=9; i++) {
-        document.querySelector(`.cube${i}`).innerHTML = ''
-        document.querySelector(`.cube${i}`).disabled = false
-    }
-    document.querySelector('.result').innerHTML = ''
-    document.querySelector('.play-again').hidden = true
-}
+// Initialize the game
+document.addEventListener('DOMContentLoaded', () => {
+    new TicTacToe();
+});

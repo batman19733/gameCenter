@@ -9,26 +9,32 @@
 </head>
 
 <body>
-    <div class="colors" hidden>red = X, blue = O</div>
+    <a href="../../index.html" class="back-button">←</a>
 
-    <div class="result"></div>
+    <main class="game-container">
+        <div class="game-info">
+            <h1 class="result"></h1>
+            <p class="turn-indicator">Current Turn: <span class="current-player">X</span></p>
+        </div>
 
-    <div class="all">
-        <button class="c cube1 c1"></button>
-        <button class="c cube2 c2"></button>
-        <button class="c cube3 c3"></button>
-        <button class="c cube4 c4"></button>
-        <button class="c cube5 c5"></button>
-        <button class="c cube6 c6"></button>
-        <button class="c cube7 c7"></button>
-        <button class="c cube8 c8"></button>
-        <button class="c cube9 c9"></button>
-    </div>
-    
-    <div class="score">X-wins: 0, O-wins: 0</div>
-    <button hidden class="play-again" onclick="playAgain()">play again</button>
-    
-    <a href="../../index.html">back</a>
+        <div class="board">
+            <button class="cell" data-index="0"></button>
+            <button class="cell" data-index="1"></button>
+            <button class="cell" data-index="2"></button>
+            <button class="cell" data-index="3"></button>
+            <button class="cell" data-index="4"></button>
+            <button class="cell" data-index="5"></button>
+            <button class="cell" data-index="6"></button>
+            <button class="cell" data-index="7"></button>
+            <button class="cell" data-index="8"></button>
+        </div>
+
+        <div class="game-controls">
+            <p class="score">X wins: <span class="x-score">0</span> | O wins: <span class="o-score">0</span></p>
+            <button class="play-again" hidden>Play Again</button>
+        </div>
+    </main>
+
     <script src="ttt.js"></script>
 </body>
 
