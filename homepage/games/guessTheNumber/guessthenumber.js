@@ -5,10 +5,6 @@ if (window.innerWidth < 1125) {
     document.body.style.justifyContent = 'center'
     document.body.style.fontSize = '30px'
 }
-
-
-
-
 randomNumber = JSON.parse(localStorage.getItem('number'))
 if (randomNumber === null) {
     randomNumber = pickNumber()
@@ -36,13 +32,12 @@ let bottomDIV = 0;
     document.querySelector('.css-dark-bar').innerHTML = `<div class="range-bar1"></div><div class="range-bar2"></div><div class="range-bar3"></div>`
 //}
 let score = JSON.parse(localStorage.getItem('score'))
-if (score.red === undefined) {
+if (score.wins === undefined) {
     score = {
         wins: 0,
         losses: 0
     }
 }
-document.querySelector('.js-div-show-score').innerHTML = `wins: ${score.wins} losses: ${score.losses}`
 
 document.body.addEventListener("keydown", (event) => {
     if (event.key === 'w') {

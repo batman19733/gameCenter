@@ -262,14 +262,14 @@ function q(className, dot) {
 
 let mode = 'pick'
 function pickMode() {
-    document.querySelector('.erase').style.backgroundColor = 'rgb(80, 80, 80)'
-    document.querySelector('.pick').style.backgroundColor = 'rgb(60, 60, 60)'
+    document.querySelector('.erase').style.backgroundColor = 'white'
+    document.querySelector('.pick').style.backgroundColor = '#f0f0f0'
     mode = 'pick'
 }
 
 function eraseMode() {
-    document.querySelector('.erase').style.backgroundColor = 'rgb(60, 60, 60)'
-    document.querySelector('.pick').style.backgroundColor = 'rgb(80, 80, 80)'
+    document.querySelector('.erase').style.backgroundColor = '#f0f0f0'
+    document.querySelector('.pick').style.backgroundColor = 'white'
     mode = 'erase'
 }
 
