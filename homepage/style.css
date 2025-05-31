@@ -82,3 +82,8 @@ img {
     border-radius: 12px;
     object-fit: cover;
 }
+.red {
+    background-color: var(--error-color);
+    font-weight: bold;
+    font-size: larger;
+}
