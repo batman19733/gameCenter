@@ -14,12 +14,12 @@ if (score === null || score.red === undefined || score.blue === undefined) { sco
 displayScore()
 
 
-if (window.innerWidth >= 1150) {
+if (window.innerWidth >= 620) {
     document.querySelector('.red-wins').classList.add('side-left')
     document.querySelector('.blue-wins').classList.add('side-right')
     menu = 'big'
 }
-else if (window.innerWidth < 1150) {
+else if (window.innerWidth < 620) {
     document.querySelector('.red-wins').classList.add('down-left')
     document.querySelector('.blue-wins').classList.add('down-right')
     document.querySelector('.all').classList.add('big')
