@@ -1,0 +1,52 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.board {
+    width: min(600px, 85vw);
+    height: min(600px, 85vw);
+    background-color: rgb(0,0,0);
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    padding: 20px;
+}
+.darkCube {
+    background-color: #5C3317;
+}
+.whiteCube {
+    background-color: rgb(240, 217, 181);
+}
+.red {
+    background-color: red;
+}
+.blackPiece {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    background-color: #1f1f1f;
+    border: solid black 5px;
+    border-radius: 50%;
+}
+.whitePiece {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    background-color: white;
+    border: solid black 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.grayPiece {
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    background-color: gray;
+    border: solid black 3px;
+    border-radius: 50%;
+    cursor: pointer;
+}
