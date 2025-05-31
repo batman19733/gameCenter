@@ -2,13 +2,12 @@
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    
 }
 html,
 body {
     height: 100vh;
     width: 100vw;
-    background-color: salmon;
+    background-color: var(--default-bg);
 }
 
 .all {
@@ -106,21 +105,26 @@ svg {
 }
 
 .salmon {
-    box-shadow:  8px 8px 27px #a8564c,
-                 -8px -8px 27px #ffaa98;
+    box-shadow: var(--shadow-before)
+
+}
+.salmon:hover {
+    box-shadow: var(--shadow-after);
 }
 
 .salmon:active {
-    box-shadow: inset 8px 8px 27px #a8564c,
-                inset -8px -8px 27px #ffaa98;
+    box-shadow: inset 4px 4px 12px gray
 }
 .blue {
-    box-shadow:  8px 8px 27px #74919a,
-                -8px -8px 27px #e6ffff;
+    box-shadow: var(--shadow-before)
+
 }
+.blue:hover {
+    box-shadow: var(--shadow-after);
+}
+
 .blue:active {
-    box-shadow: inset 8px 8px 27px #74919a,
-                inset -8px -8px 27px #e6ffff;
+    box-shadow: inset 4px 4px 12px gray
 }
 a {
     position: fixed;

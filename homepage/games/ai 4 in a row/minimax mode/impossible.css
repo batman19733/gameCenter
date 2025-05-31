@@ -9,6 +9,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--default-bg);
 }
 .board {
     width: min(80vw, 600px);

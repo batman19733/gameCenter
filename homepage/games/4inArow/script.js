@@ -178,12 +178,10 @@ function cubeInnerHtml(num) {
 }
 function changeBackground() {
     if(move === 'red') {
-        document.body.style.backgroundColor = 'lightblue'
         document.querySelector('.playAgain').classList.add('blue')
         document.querySelector('.playAgain').classList.remove('salmon')
     }
     else if (move === 'blue') {
-        document.body.style.backgroundColor = 'salmon'
         document.querySelector('.playAgain').classList.add('salmon')
         document.querySelector('.playAgain').classList.remove('blue')
     }
@@ -198,7 +196,6 @@ function playAgain() {
     })
     document.querySelector('.svg').innerHTML = ''
     move = 'red'
-    document.body.style.backgroundColor = 'salmon'
     document.querySelector('.playAgain').hidden = true
 }
 

@@ -5,6 +5,7 @@ html, body {
     padding: 0;
     display: flex;
     overflow-x: hidden;
+    background-color: var(--default-bg);
 }
 
 .dark-body{
@@ -229,7 +230,7 @@ html, body {
     text-align: center;
 }
 a {
-    color: white;
+    color: red;
     font-size: 30px;
     padding-left: 20px;
     position: absolute;

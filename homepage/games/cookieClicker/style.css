@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: var(--primary-bg);
+    background-color: var(--default-bg);
     min-height: 100vh;
     color: var(--text-primary);
     overflow: hidden;

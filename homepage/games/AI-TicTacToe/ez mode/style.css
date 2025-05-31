@@ -9,6 +9,7 @@ body {
     height: 100dvh;
     align-items: center;
     justify-content: center;
+    background-color: var(--default-bg);
 }
 .board {
     width: min(500px, 80vw);
