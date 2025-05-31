@@ -2,7 +2,7 @@ let lightsHTML = ''
 
 score = 0
 for(let i=1;i<=8;i++) {
-    lightsHTML += `<div class="light l${i}a">light</div>`
+    lightsHTML += `<div class="light l${i}a"></div>`
 }
 q('lights').innerHTML = lightsHTML
 q('lights').style.gridTemplateRows = 'repeat(2, 1fr)'

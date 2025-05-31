@@ -4,17 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>simon says</title>
+    <title>Simon Says</title>
 </head>
 <body>
-    <div class="start" onclick="another(); q('start').hidden = true">start</div>
-    <div class="all">
-        <div class="turn">Your turn.</div>
-        <div class="score">score: 0</div>
-        <div class="lights"></div>
+    <a href="../../index.html" class="back-button">←</a>
+    
+    <div class="game-container">
+        <button class="start" onclick="another(); q('start').hidden = true">Start Game</button>
+        
+        <div class="all">
+            <div class="game-status">
+                <div class="turn">Your turn.</div>
+                <div class="score">Score: 0</div>
+            </div>
+            <div class="lights"></div>
+        </div>
+        
+        <button class="play-again-button" onclick="playAgain()" hidden>Play Again</button>
     </div>
-    <a href="../../index.html">back</a>
-    <div class="playAgainButton" onclick="playAgain()" hidden>play again</div>
+    
     <script src="lights.js"></script>
 </body>
 </html>
