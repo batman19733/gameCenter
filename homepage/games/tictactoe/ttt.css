@@ -1,13 +1,5 @@
 :root {
-    --primary-bg: #f8f9fa;
-    --board-bg: #ffffff;
-    --text-primary: #1a1a1a;
-    --text-secondary: #666;
-    --x-color: #e74c3c;
-    --o-color: #3498db;
     --border-color: rgba(0, 0, 0, 0.1);
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --cell-size: min(20vw, 120px);
 }
 
@@ -63,7 +55,7 @@ body {
     background-color: var(--board-bg);
     padding: 1rem;
     border-radius: 1rem;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-after);
 }
 
 .cell {
@@ -81,7 +73,7 @@ body {
 .cell:hover:not(:disabled) {
     background-color: rgba(0, 0, 0, 0.02);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-before);
 }
 
 .cell:disabled {
@@ -90,11 +82,11 @@ body {
 }
 
 .cell[data-player="X"] {
-    color: var(--x-color);
+    color: var(--redish-color);
 }
 
 .cell[data-player="O"] {
-    color: var(--o-color);
+    color: var(--blueish-color);
 }
 
 /* Game Controls Styles */
@@ -127,7 +119,7 @@ body {
 
 .play-again:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-after);
 }
 
 /* Back Button */
@@ -141,13 +133,13 @@ body {
     padding: 0.75rem 1.25rem;
     border-radius: 1rem;
     background-color: var(--board-bg);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-before);
     transition: all 0.2s ease;
 }
 
 .back-button:hover {
     transform: translateX(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-after);
 }
 
 /* Responsive Design */

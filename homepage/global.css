@@ -11,6 +11,9 @@
     --card-bg: #ffffff;
     --text-primary: #1a1a1a;
     --text-secondary: #666;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-} 
+    --shadow-before: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-after: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --error-color: #ef4444;
+    --redish-color: #e74c3c;
+    --blueish-color: #3498db;
+}

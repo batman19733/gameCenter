@@ -123,7 +123,18 @@ svg {
                 inset -8px -8px 27px #e6ffff;
 }
 a {
-    color: black;
-    font-size: 30px;
-    padding-left: 50px;
+    position: fixed;
+    text-decoration: none;
+    color: var(--text-primary);
+    box-shadow: var(--shadow-before);
+    top: 1.25rem;
+    left: 1.25rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 1rem;
+    font-size: 1.875rem;
+}
+
+a:hover {
+    transform: translateX(-2px);
+    box-shadow: var(--shadow-after);
 }

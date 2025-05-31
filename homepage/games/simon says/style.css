@@ -7,15 +7,6 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-:root {
-    --primary-bg: #f8f9fa;
-    --card-bg: #ffffff;
-    --text-primary: #1a1a1a;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --border-radius: 16px;
-}
-
 body {
     display: flex;
     align-items: center;
@@ -74,15 +65,16 @@ body {
     background-color: var(--card-bg);
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 1rem 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-sm);
+    border-radius: 16px;
+    box-shadow: var(--shadow-before);
     transition: all 0.2s ease;
     margin-bottom: 2rem;
+    color: black;
 }
 
 .start:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-after);
     background-color: #f0f0f0;
 }
 
@@ -94,7 +86,7 @@ body {
     cursor: pointer;
     border-radius: 50%;
     background-color: var(--card-bg);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-before);
     transition: all 0.2s ease;
     touch-action: manipulation;
     min-width: 60px;
@@ -108,7 +100,7 @@ body {
 
 .light:hover {
     transform: scale(1.05);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-after);
 }
 
 .back-button {
@@ -121,13 +113,13 @@ body {
     padding: 0.75rem 1.25rem;
     border-radius: 1rem;
     background-color: var(--card-bg);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-before);
     transition: all 0.2s ease;
 }
 
 .back-button:hover {
     transform: translateX(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-after);
     background-color: #f0f0f0;
 }
 
@@ -137,15 +129,15 @@ body {
     background-color: var(--card-bg);
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 1rem 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-sm);
+    border-radius: 16px;
+    box-shadow: var(--shadow-before);
     transition: all 0.2s ease;
     margin-top: 2rem;
 }
 
 .play-again-button:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-after);
     background-color: #f0f0f0;
 }
 
