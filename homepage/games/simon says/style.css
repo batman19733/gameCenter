@@ -4,6 +4,7 @@
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     user-select: none;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -31,6 +32,13 @@ body {
     width: 100%;
     max-width: 800px;
     padding: 2rem;
+}
+
+.all {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .lights {
@@ -88,6 +96,14 @@ body {
     background-color: var(--card-bg);
     box-shadow: var(--shadow-sm);
     transition: all 0.2s ease;
+    touch-action: manipulation;
+    min-width: 60px;
+    min-height: 60px;
+}
+
+.light:active {
+    transform: scale(0.95);
+    background-color: #f0f0f0;
 }
 
 .light:hover {
@@ -136,6 +152,11 @@ body {
 @media (max-width: 640px) {
     .game-container {
         padding: 1rem;
+        width: 100%;
+    }
+    
+    .all {
+        width: 100%;
     }
     
     .score {
@@ -146,14 +167,39 @@ body {
         font-size: 1.25rem;
     }
     
-    .start-button,
+    .start,
     .play-again-button {
-        font-size: 1rem;
-        padding: 0.75rem 1.5rem;
+        font-size: 1.25rem;
+        padding: 1rem 2rem;
+        min-height: 60px;
+        min-width: 120px;
     }
     
     .back-button {
         font-size: 1.5rem;
-        padding: 0.5rem 1rem;
+        padding: 0.75rem 1.25rem;
+        top: 0.75rem;
+        left: 0.75rem;
+    }
+
+    .lights {
+        gap: 12px;
+        margin-top: 1.5rem;
+    }
+
+    .game-status {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .lights {
+        gap: 8px;
+    }
+    
+    .start,
+    .play-again-button {
+        font-size: 1.125rem;
+        padding: 0.875rem 1.75rem;
     }
 }

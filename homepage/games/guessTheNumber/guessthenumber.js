@@ -1,10 +1,3 @@
-if (window.innerWidth < 1125) {
-    document.body.innerHTML = 'this game doesnt work on phones'
-    document.body.style.display = 'flex'
-    document.body.style.alignItems = 'center'
-    document.body.style.justifyContent = 'center'
-    document.body.style.fontSize = '30px'
-}
 randomNumber = JSON.parse(localStorage.getItem('number'))
 if (randomNumber === null) {
     randomNumber = pickNumber()
@@ -142,7 +135,6 @@ function render() {
                 document.querySelector('.js-input-guess').setAttribute('max', `${maxNum}`)
                 localStorage.setItem('max', JSON.stringify(maxNum))
                 barHight = maxNum-minNum
-                console.log(barHight)
                 topDIV = 100-barHight-bottomDIV
                 bottomDIV = 100-barHight-topDIV
                 document.querySelector('.range-bar1').setAttribute('style', `height: ${topDIV}%;`)
@@ -159,7 +151,6 @@ function render() {
                 barHight = maxNum-minNum
                 bottomDIV = 100-barHight-topDIV
                 topDIV = 100-barHight-bottomDIV
-                console.log(barHight)
                 document.querySelector('.range-bar1').setAttribute('style', `height: ${topDIV}%;`)
                 document.querySelector('.range-bar2').setAttribute('style', `height: ${barHight}%;`)
                 document.querySelector('.range-bar3').setAttribute('style', `height: ${bottomDIV}%;`)

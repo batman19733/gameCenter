@@ -4,6 +4,7 @@ html, body {
     margin: 0;
     padding: 0;
     display: flex;
+    overflow-x: hidden;
 }
 
 .dark-body{
@@ -235,4 +236,112 @@ a {
 }
 .css-all-game {
     width: 370px;
+}
+
+/* Mobile responsive styles */
+@media screen and (max-width: 768px) {
+    .white-div,
+    .dark-div {
+        width: 85%;
+        height: auto;
+        min-height: 300px;
+        position: relative;
+        margin: 20px auto;
+    }
+
+    .css-all-game {
+        width: 90%;
+    }
+
+    .middle {
+        width: 90%;
+        height: auto;
+    }
+
+    .all2 {
+        width: 90%;
+    }
+
+    .first-36,
+    .last-36 {
+        display: none;
+    }
+
+    .css-dark-bar {
+        display: none;
+    }
+
+    .css-input-and-button {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .white-input,
+    .dark-input {
+        width: 80%;
+        max-width: 300px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .white-guess,
+    .dark-guess {
+        width: 120px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .css-show-score {
+        position: relative;
+        margin-top: 20px;
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .css-win-rate {
+        position: relative;
+        margin-top: 20px;
+        width: 60%;
+        max-width: 200px;
+    }
+
+    a {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        font-size: 24px;
+        background-color: rgba(25, 25, 25, 0.8);
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+    }
+}
+
+/* Additional adjustments for very small screens */
+@media screen and (max-width: 380px) {
+    .white-div,
+    .dark-div {
+        padding: 15px;
+    }
+
+    .white-title,
+    .dark-title {
+        font-size: 20px;
+    }
+
+    .white-input,
+    .dark-input {
+        font-size: 16px;
+        height: 40px;
+    }
+
+    .white-guess,
+    .dark-guess {
+        width: 100px;
+        height: 40px;
+        font-size: 16px;
+    }
 }
