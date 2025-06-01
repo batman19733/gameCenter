@@ -89,7 +89,7 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
     border-radius: 50%;
-    background-color: var(--card-bg);
+    background-color: var(--dark-white);
     box-shadow: var(--shadow-before);
     transition: all 0.2s ease;
     touch-action: manipulation;
