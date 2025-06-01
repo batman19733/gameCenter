@@ -14,6 +14,8 @@ body {
 .all {
     display: grid;
     grid-template-rows: 6vw 90%;
+    width: 90vw;
+    max-width: 800px;
 }
 .top {
     display: grid;
@@ -21,6 +23,8 @@ body {
 }
 .top-right {
     display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
 }
 .bottomNum,
 .topNum {
@@ -31,6 +35,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     color: #1a1a1a;
+    font-size: clamp(16px, 2vw, 24px);
 }
 .topNum {
     margin-left: 10px;
@@ -58,11 +63,12 @@ body {
     border-radius: 8px;
     color: #1a1a1a;
     transition: background-color 0.2s ease;
+    font-size: clamp(16px, 2vw, 24px);
 }
 .modes-div {
     position: absolute;
     top: 40%;
-    left: 10%;
+    left: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,8 +122,8 @@ body {
 .heart1,
 .heart2,
 .heart3 {
-    width: 100px;
-    height: 100px;
+    width: clamp(40px, 6vw, 100px);
+    height: clamp(40px, 6vw, 100px);
     background-color: #ef4444;
     margin-right: 10px;
     border-radius: 8px;
@@ -133,14 +139,14 @@ body {
     position: absolute;
     top: 30%;
     left: 80%;
-    font-size: 30px;
+    font-size: clamp(20px, 3vw, 30px);
     color: #1a1a1a;
 }
 .playAgain {
     position: absolute;
     top: 60%;
     left: 80%;
-    font-size: 30px;
+    font-size: clamp(20px, 3vw, 30px);
     background-color: white;
     padding: 15px 25px;
     border-radius: 12px;
@@ -182,4 +188,25 @@ a:hover {
 a:active {
     transform: translateX(-5px);
     box-shadow: var(--shadow-before);
+}
+@media (max-width: 768px) {
+    .all {
+        width: 95vw;
+    }
+    
+    .modes-div {
+        left: 5%;
+    }
+    
+    .hearts {
+        left: 70%;
+    }
+    
+    .result {
+        left: 70%;
+    }
+    
+    .playAgain {
+        left: 70%;
+    }
 }

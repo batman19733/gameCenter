@@ -77,6 +77,10 @@ body {
     box-shadow: var(--shadow-after);
     background-color: #f0f0f0;
 }
+.start:active {
+    transform: translateY(2px);
+    box-shadow: var(--shadow-before);
+}
 
 .light {
     display: flex;
@@ -93,15 +97,16 @@ body {
     min-height: 60px;
 }
 
+.light:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-after);
+}
+
 .light:active {
     transform: scale(0.95);
     background-color: #f0f0f0;
 }
 
-.light:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-after);
-}
 
 .back-button {
     position: absolute;
@@ -112,7 +117,7 @@ body {
     font-size: 1.875rem;
     padding: 0.75rem 1.25rem;
     border-radius: 1rem;
-    background-color: var(--card-bg);
+    background-color: white;
     box-shadow: var(--shadow-before);
     transition: all 0.2s ease;
 }
@@ -120,7 +125,11 @@ body {
 .back-button:hover {
     transform: translateX(-2px);
     box-shadow: var(--shadow-after);
-    background-color: #f0f0f0;
+    background-color: var(--dark-white);
+}
+.back-button:active {
+    transform: translateX(-5px);
+    box-shadow: var(--shadow-before);
 }
 
 .play-again-button {

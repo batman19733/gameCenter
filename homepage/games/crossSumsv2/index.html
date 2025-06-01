@@ -8,33 +8,41 @@
     <title>cross sums</title>
 </head>
 <body>
-    <a href="../../index.html">←</a>
+    <div class="game-container">
+        <a href="../../index.html" class="back-button">←</a>
 
-    <div class="modes-div">
-        <p class="mode-title">mode</p>
-        <div class="modes">
-            <div class="mode pick" onclick="pickMode()">pick</div>
-            <div class="mode erase" onclick="eraseMode()">erase</div>
+        <div class="game-controls">
+            <div class="modes-div">
+                <p class="mode-title">mode</p>
+                <div class="modes">
+                    <div class="mode pick" onclick="pickMode()">pick</div>
+                    <div class="mode erase" onclick="eraseMode()">erase</div>
+                </div>
+            </div>
+
+            <div class="game-status">
+                <div class="hearts">
+                    <div class="heart1"></div>
+                    <div class="heart2"></div>
+                    <div class="heart3"></div>
+                </div>
+                <div class="result"></div>
+                <div class="playAgain" onclick="playAgain()" hidden>play again</div>
+            </div>
         </div>
-    </div>
 
-    <div class="playAgain" onclick="playAgain()" hidden>play again</div>
-    <div class="result"></div>
-    <div class="hearts">
-        <div class="heart1"></div>
-        <div class="heart2"></div>
-        <div class="heart3"></div>
-    </div>
+        <div class="game-board">
+            <div class="all">
+                <div class="top">
+                    <div class="top-left"></div>
+                    <div class="top-right"></div>
+                </div>
 
-    <div class="all">
-        <div class="top">
-            <div class="top-left"></div>
-            <div class="top-right"></div>
-        </div>
-
-        <div class="bottom">
-            <div class="bottom-left"></div>
-            <div class="bottom-right"></div>
+                <div class="bottom">
+                    <div class="bottom-left"></div>
+                    <div class="bottom-right"></div>
+                </div>
+            </div>
         </div>
     </div>
 
