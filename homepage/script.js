@@ -32,12 +32,17 @@ const games = [{
 }, {
     name: 'not finished!',
     filename: 'none'
+}, {
+    name: 'css tools',
+    filename: 'tool'
 }
 ]
 
 games.forEach(game => {
     if (game.filename === 'none') {
         document.querySelector('.games').innerHTML += `<div class="game red" onclick='alert("this game is not finished!")'><div class="name red">${game.name}</div><div class="img"><img src="imgs/${game.filename}.png" alt=""></div></div>`
+    } else if (game.filename === 'tool') {
+        document.querySelector('.games').innerHTML += `<div class="game tool" onclick='window.location.href="games/${game.filename}"'><div class="name">${game.name}</div><div class="img tool">⚙️</div></div>`
     } else {
         document.querySelector('.games').innerHTML += `<div class="game" onclick='window.location.href="games/${game.filename}"'><div class="name">${game.name}</div><div class="img"><img src="imgs/${game.filename}.png" alt=""></div></div>`
     }
