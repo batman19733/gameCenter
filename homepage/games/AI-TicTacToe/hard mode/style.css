@@ -56,7 +56,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 60px;
+    font-size: 70px;
 }
 .PlayAgainButton {
     margin-top: 20px;
@@ -70,27 +70,4 @@ body {
 .PlayAgainButton:active {
     box-shadow: inset 8px 8px 16px #c7c7c7,
                 inset -8px -8px 16px #f9f9f9;
-}
-
-
-
-
-
-
-
-
-a {
-    color: black;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 30px;
-}
-.back {
-    color: black;
-    position: absolute;
-    top: 70px;
-    left: 20px;
-    font-size: 25px;
-    cursor: pointer;
 }

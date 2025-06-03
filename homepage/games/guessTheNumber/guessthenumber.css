@@ -176,7 +176,7 @@ html, body {
 }
 .css-dark-bar {
     position: relative;
-    background-color: rgb(25, 25, 25);
+    background-color: white;
     border: solid;
     border-color: lightblue;
     width: 5%;
@@ -270,6 +270,7 @@ a {
 
     .css-dark-bar {
         display: none;
+        background-color: white;
     }
 
     .css-input-and-button {

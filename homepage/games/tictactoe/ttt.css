@@ -13,7 +13,7 @@
 body {
     min-height: 100vh;
     background-color: var(--default-bg);
-    color: var(--text-primary);
+    color: var(--light-dark);
     display: grid;
     place-items: center;
 }
@@ -26,7 +26,6 @@ body {
     padding: 2rem;
 }
 
-/* Game Info Styles */
 .game-info {
     text-align: center;
 }
@@ -40,7 +39,7 @@ body {
 
 .turn-indicator {
     font-size: 1.25rem;
-    color: var(--text-secondary);
+    color: var(--light-gray);
 }
 
 .current-player {
@@ -63,7 +62,7 @@ body {
     height: var(--cell-size);
     border: 2px solid var(--border-color);
     border-radius: 0.5rem;
-    background: var(--board-bg);
+    background: white;
     font-size: calc(var(--cell-size) * 0.6);
     font-weight: 600;
     cursor: pointer;
@@ -73,7 +72,7 @@ body {
 .cell:hover:not(:disabled) {
     background-color: rgba(0, 0, 0, 0.02);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-before);
+    box-shadow: var(--light-shadow);
 }
 
 .cell:disabled {
@@ -82,7 +81,7 @@ body {
 }
 
 .cell[data-player="X"] {
-    color: var(--redish-color);
+    color: var(--dark-red);
 }
 
 .cell[data-player="O"] {
@@ -97,20 +96,20 @@ body {
 .score {
     font-size: 1.25rem;
     margin-bottom: 1rem;
-    color: var(--text-secondary);
+    color: var(--light-gray);
 }
 
 .x-score, .o-score {
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--light-dark);
 }
 
 .play-again {
     padding: 0.75rem 2rem;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--text-primary);
-    background-color: var(--board-bg);
+    color: var(--light-dark);
+    background-color: white;
     border: 1px solid var(--border-color);
     border-radius: 0.75rem;
     cursor: pointer;
@@ -119,30 +118,9 @@ body {
 
 .play-again:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-after);
+    box-shadow: var(--light-shadow);
 }
 
-/* Back Button */
-.back-button {
-    position: fixed;
-    top: 1.25rem;
-    left: 1.25rem;
-    color: var(--text-primary);
-    text-decoration: none;
-    font-size: 1.875rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 1rem;
-    background-color: var(--board-bg);
-    box-shadow: var(--shadow-before);
-    transition: all 0.2s ease;
-}
-
-.back-button:hover {
-    transform: translateX(-2px);
-    box-shadow: var(--shadow-after);
-}
-
-/* Responsive Design */
 @media (max-width: 480px) {
     :root {
         --cell-size: min(25vw, 100px);

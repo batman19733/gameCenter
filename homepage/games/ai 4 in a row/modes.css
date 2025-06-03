@@ -1,10 +1,8 @@
- body {
+body {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100dvh;
-    background-color: var(--default-bg);
-    color: var(--text-primary);
     padding: 2rem;
     margin: 0;
     padding: 0;
@@ -23,7 +21,6 @@
     margin-bottom: 3rem;
     text-align: center;
     font-weight: 600;
-    color: var(--text-primary);
     letter-spacing: -0.5px;
 }
 
@@ -35,7 +32,7 @@
 }
 
 .mode {
-    background-color: var(--card-bg);
+    background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 1em;
     padding: 1.5rem;
@@ -43,19 +40,16 @@
     font-size: 1.125rem;
     font-weight: 500;
     transition: all 0.2s ease;
-    box-shadow: var(--shadow-before);
-    color: var(--text-primary);
+    box-shadow: var(--light-shadow);
 }
 
 .mode:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
     background-color: #f0f0f0;
 }
 
 .mode:active {
     transform: translateY(1px);
-    box-shadow: var(--shadow-before);
 }
 
 .minimaxMode {
@@ -67,25 +61,6 @@
     background-color: #2d2d2d;
 }
 
-.back-button {
-    position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-    color: var(--text-primary);
-    text-decoration: none;
-    font-size: 1.875rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 1rem;
-    background-color: white;
-    box-shadow: var(--shadow-before);
-    transition: all 0.2s ease;
-}
-
-.back-button:hover {
-    transform: translateX(-2px);
-    box-shadow: var(--shadow-after);
-    background-color: #f0f0f0;
-}
 
 @media (max-width: 640px) {
     body {

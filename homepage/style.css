@@ -63,8 +63,8 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 .game:active {
-    transform: translateY(3px);
-    box-shadow: var(--shadow-after);
+    transform: translateY(6px);
+    box-shadow: var(--inset-shadow);
 }
 .name {
     display: flex;
@@ -87,9 +87,13 @@ img {
     object-fit: cover;
 }
 .red {
-    background-color: var(--error-color);
+    background-color: var(--error-red);
     font-weight: bold;
     font-size: larger;
+}
+.red:active {
+    box-shadow: inset 7px 7px 18px #a52f2f,
+                inset -7px -7px 18px #ff5959;
 }
 .tool {
     background-color: var(--blueish-color);
@@ -97,4 +101,11 @@ img {
     align-items: center;
     justify-content: center;
     font-size: 130px;
+}
+.tool-name {
+    font-size: 30px;
+}
+.tool-frame:active {
+    box-shadow: inset 7px 7px 18px #246997,
+                inset -7px -7px 18px #44c7ff;
 }

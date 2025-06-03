@@ -9,7 +9,7 @@
 body {
     background-color: var(--default-bg);
     min-height: 100vh;
-    color: var(--text-primary);
+    color: var(--text-important);
     overflow: hidden;
 }
 
@@ -22,8 +22,8 @@ body {
 .shop-div {
     width: 280px;
     height: 100vh;
-    background: var(--primary-bg);
-    box-shadow: var(--shadow-after);
+    background: var(--default-bg);
+    box-shadow: var(--normal-shadow);
     position: relative;
     z-index: 10;
 }
@@ -37,7 +37,7 @@ body {
     justify-content: center;
     font-size: 1.75rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--text-important);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -62,7 +62,7 @@ body {
 
 .item:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-after);
+    box-shadow: var(--light-shadow);
 }
 
 .item-name {
@@ -115,7 +115,7 @@ body {
     box-shadow: 20px 20px 60px #c5c5c5,
                 -20px -20px 60px #ffffff;
     cursor: pointer;
-    transition: transform 0.1s ease;
+    transition: transform 0.2s ease;
 }
 
 .cookie:hover {
@@ -128,7 +128,6 @@ body {
                 inset -20px -20px 60px #ffffff;
 }
 
-/* Floating Score Animation */
 .floating-number {
     position: absolute;
     color: gray;
@@ -149,28 +148,9 @@ body {
     }
 }
 
-/* Back Button */
-.back-button {
-    position: fixed;
-    top: 1.25rem;
-    right: 1.25rem;
-    color: var(--text-primary);
-    text-decoration: none;
-    font-size: 1.875rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 1rem;
-    background-color: white;
-    box-shadow: var(--shadow-before);
-    transition: all 0.2s ease;
-    z-index: 20;
-}
 
-.back-button:hover {
-    transform: translateX(-2px);
-    box-shadow: var(--shadow-after);
-}
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .game-container {
         flex-direction: column;
@@ -222,4 +202,7 @@ body {
         font-size: 1.5rem;
         padding: 0.5rem 1rem;
     }
+}
+.back-to-homePage {
+    left: 94%;
 }

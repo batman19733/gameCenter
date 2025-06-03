@@ -12,8 +12,6 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100dvh;
-    background-color: var(--default-bg);
-    color: var(--text-primary);
 }
 
 .game-container {
@@ -49,12 +47,10 @@ body {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: var(--text-primary);
 }
 
 .turn {
     font-size: 1.5rem;
-    color: var(--text-primary);
     opacity: 0.9;
 }
 
@@ -62,11 +58,11 @@ body {
     position: relative;
     font-size: 1.5rem;
     cursor: pointer;
-    background-color: var(--card-bg);
+    background-color: var(--darker-white);
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 1rem 2rem;
     border-radius: 16px;
-    box-shadow: var(--shadow-before);
+    box-shadow: var(--light-shadow);
     transition: all 0.2s ease;
     margin-bottom: 2rem;
     color: black;
@@ -74,12 +70,12 @@ body {
 
 .start:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-after);
+    box-shadow: var(--light-shadow);
     background-color: #f0f0f0;
 }
 .start:active {
     transform: translateY(2px);
-    box-shadow: var(--shadow-before);
+    box-shadow: var(--light-shadow);
 }
 
 .light {
@@ -89,8 +85,8 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
     border-radius: 50%;
-    background-color: var(--dark-white);
-    box-shadow: var(--shadow-before);
+    background-color: var(--darker-white);
+    box-shadow: var(--light-shadow);
     transition: all 0.2s ease;
     touch-action: manipulation;
     min-width: 60px;
@@ -99,37 +95,11 @@ body {
 
 .light:hover {
     transform: scale(1.05);
-    box-shadow: var(--shadow-after);
+    box-shadow: var(--light-shadow);
 }
-
 .light:active {
     transform: scale(0.95);
     background-color: #f0f0f0;
-}
-
-
-.back-button {
-    position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-    color: var(--text-primary);
-    text-decoration: none;
-    font-size: 1.875rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 1rem;
-    background-color: white;
-    box-shadow: var(--shadow-before);
-    transition: all 0.2s ease;
-}
-
-.back-button:hover {
-    transform: translateX(-2px);
-    box-shadow: var(--shadow-after);
-    background-color: var(--dark-white);
-}
-.back-button:active {
-    transform: translateX(-5px);
-    box-shadow: var(--shadow-before);
 }
 
 .play-again-button {
@@ -139,14 +109,14 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 1rem 2rem;
     border-radius: 16px;
-    box-shadow: var(--shadow-before);
+    box-shadow: var(--light-shadow);
     transition: all 0.2s ease;
     margin-top: 2rem;
 }
 
 .play-again-button:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-after);
+    box-shadow: var(--light-shadow);
     background-color: #f0f0f0;
 }
 

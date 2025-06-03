@@ -51,7 +51,7 @@ const check = async e => {
         q('score').innerHTML = 'wrong! you lost';
         disabled = true;
         removeAllEventListeners();
-        q('playAgainButton').hidden = false;
+        q('play-again-button').hidden = false;
         return;
     }
 }
@@ -110,7 +110,7 @@ function randomNumber(from, to) {
     return Math.floor(Math.random() * (to - from + 1)) + from;
 }
 function playAgain() {
-    q('playAgainButton').hidden = true;
+    q('play-again-button').hidden = true;
     q('start').hidden = false;
     count = 0;
     path = [];
