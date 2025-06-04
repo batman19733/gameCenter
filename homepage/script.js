@@ -30,8 +30,8 @@ const games = [{
     name: 'ai 4 in a row',
     filename: 'ai 4 in a row',
 }, {
-    name: 'not finished!',
-    filename: 'none'
+    name: 'checkers, W.I.P!',
+    filename: 'checkers none'
 }, {
     name: 'css tools',
     filename: 'tool'
@@ -41,6 +41,8 @@ const games = [{
 games.forEach(game => {
     if (game.filename === 'none') {
         document.querySelector('.games').innerHTML += `<div class="game red" onclick='alert("this game is not finished!")'><div class="name red">${game.name}</div><div class="img"><img src="imgs/${game.filename}.png" alt=""></div></div>`
+    } else if (game.filename.includes('none')) {
+        document.querySelector('.games').innerHTML += `<div class="game red" onclick='window.location.href="games/${game.filename}"'><div class="name red">${game.name}</div><div class="img"><img src="imgs/none.png" alt=""></div></div>` 
     } else if (game.filename === 'tool') {
         document.querySelector('.games').innerHTML += `<div class="game tool tool-frame" onclick='window.location.href="games/${game.filename}"'><div class="name tool-name">${game.name}</div><div class="img tool">⚙️</div></div>`
     } else {

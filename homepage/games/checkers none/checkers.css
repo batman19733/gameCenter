@@ -1,0 +1,40 @@
+.board {
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: min(600px, 85vw);
+    height: min(600px, 85vw);
+    padding: min(20px, 4vw);
+    border-radius: 20px;
+}
+.cube {
+    background-color: var(--light-gray);
+}
+.dark {
+    background-color: var(--light-dark);
+}
+.light {
+    background-color: lightgray;
+}
+.ava {
+    cursor: pointer;
+}
+.piece {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    background-color: black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 5px gray;
+    color: transparent;
+}
+.white {
+    background-color: lightgray;
+}
+.gray {
+    background-color: gray;
+    cursor: pointer;
+}

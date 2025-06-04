@@ -60,3 +60,10 @@ body {
 .back-down {
     top: 3em;
 }
+.center { /* can center the body element*/
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
