@@ -15,8 +15,10 @@ for(i=0; i<8**2;i++) {
 }
 let moves = []
 let oldSpot;
+let oldspot2 = [];
 function findMove(e) {
     oldSpot = []
+    oldspot2 = []
     if (moves[0] !== undefined) {
         moves.forEach(move => {
             let [row, col] = move
@@ -30,8 +32,8 @@ function findMove(e) {
     if (row !== 0) {
         if (col === 0 && grid[row-1][col+1] === null) {moves.push([row-1, col+1])}
         if (col === 7 && grid[row-1][col-1] === null) {moves.push([row-1, col-1])} else {
-            if(grid[row-1][col+1] === null) {moves.push([row-1, col+1])}
-            if(grid[row-1][col-1] === null) {moves.push([row-1, col-1])}
+            if(grid[row-1][col+1] === null) {moves.push([row-1, col+1]); oldSpot.push([row, col])}
+            if(grid[row-1][col-1] === null) {moves.push([row-1, col-1]); oldSpot.push([row, col])}
         }
         if (col >= 2 & row >= 2) {
             if (grid[row-1][col-1] === 'b' & grid[row-2][col-2] === null) {moves.push([row-2, col-2]);oldSpot.push([row-1, col-1])}
@@ -39,7 +41,7 @@ function findMove(e) {
         if (col <= 5 & row >= 2) {
             if (grid[row-1][col+1] === 'b' & grid[row-2][col+2] === null) {moves.push([row-2, col+2]);oldSpot.push([row-1, col+1])}
         }
-        oldSpot.push([row, col])
+        oldspot2.push([row, col])
         moves.forEach(move => {
             let [row, col] = move
             num = TTNFA([row, col])
@@ -54,12 +56,29 @@ async function moveTo(spot) {
         q(`c${num}a`).innerHTML = ''
         moves = []
     })
-    oldSpot.forEach(spot => {
-        q(`c${TTNFA(spot)}a`).innerHTML = ''
-        let [row, col] = spot
-        grid[row][col] = null
-        oldSpot = []
-    })
+    let row
+    let col
+    if (oldSpot[0] !== undefined) {
+            [row, col] = oldSpot[0]
+    }
+    if (oldspot2[0] !== undefined) {
+        if (grid[row-1][col-1] === 'w') {
+            let [row, col] = oldSpot[0]
+            q(`c${TTNFA(oldSpot[0])}a`).innerHTML = ''
+            grid[row][col] = null
+            oldSpot = []
+        } else if (oldspot2[1] !== undefined){
+            let [row, col] = oldSpot[1]
+            q(`c${TTNFA(oldSpot[1])}a`).innerHTML = ''
+            grid[row][col] = null
+            oldSpot = []
+        }
+    }
+    let [row3, col3] = oldspot2[0]
+    q(`c${TTNFA(oldspot2[0])}a`).innerHTML = ''
+    grid[row3][col3] = null
+    oldSpot2 = []
+
     q(`c${TTNFA(spot)}a`).innerHTML = `<div class="piece p${TTNFA(spot)}w white ava" onclick="findMove(event)">w</div>`
     let [row2, col2] = spot
     grid[row2][col2] = 'w'
