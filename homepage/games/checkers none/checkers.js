@@ -1,154 +1,177 @@
 const index = 8
 let boardHTML = ''
-for(i=0; i<8**2;i++) {
-    let [row, col] = TTAFN(i)
-    boardHTML+= `<div class="c${i}a cube ${row % 2 === 0? (col % 2 === 0? 'light':'dark'):(col % 2 === 1? 'light':'dark')}"></div>`
-}
-q('board').innerHTML = boardHTML // make board
-let grid = Array.from({length: index}, () => Array(index).fill(null)) // make grid
-for(i=0; i<8**2;i++) {
-    let [row, col] = TTAFN(i)
-    isDark = row < 3? (row % 2 === 0? (col % 2 === 1? true:false):(col % 2 === 0? true:false)):false
-    isWhite = row > 4? (row % 2 === 1? (col % 2 === 0? true:false):(col % 2 ===1? true:false)):false
-    if (isDark) {grid[row][col] = 'b'; q(`c${TTNFA([row, col])}a`).innerHTML = `<div class="piece p${TTNFA([row, col])}b black">b</div>`}
-    if (isWhite) {grid[row][col] = 'w'; q(`c${TTNFA([row, col])}a`).innerHTML = `<div class="piece p${TTNFA([row, col])}w white ava" onclick="findMove(event)">w</div>`}
-}
-let moves = []
-let oldSpot;
-let oldspot2 = [];
-function findMove(e) {
-    oldSpot = []
-    oldspot2 = []
-    if (moves[0] !== undefined) {
-        moves.forEach(move => {
-            let [row, col] = move
-            num = TTNFA([row, col])
-            q(`c${num}a`).innerHTML = ''
-            moves = []
-        })
-    }
-    classNum = Number(e.target.className.split(' ')[1].replace(/[^0-9]/g, ''))
-    let [row, col] = TTAFN(classNum)
-    if (row !== 0) {
-        if (col === 0 && grid[row-1][col+1] === null) {moves.push([row-1, col+1])}
-        if (col === 7 && grid[row-1][col-1] === null) {moves.push([row-1, col-1])} else {
-            if(grid[row-1][col+1] === null) {moves.push([row-1, col+1]); oldSpot.push([row, col])}
-            if(grid[row-1][col-1] === null) {moves.push([row-1, col-1]); oldSpot.push([row, col])}
-        }
-        if (col >= 2 & row >= 2) {
-            if (grid[row-1][col-1] === 'b' & grid[row-2][col-2] === null) {moves.push([row-2, col-2]);oldSpot.push([row-1, col-1])}
-        }
-        if (col <= 5 & row >= 2) {
-            if (grid[row-1][col+1] === 'b' & grid[row-2][col+2] === null) {moves.push([row-2, col+2]);oldSpot.push([row-1, col+1])}
-        }
-        oldspot2.push([row, col])
-        moves.forEach(move => {
-            let [row, col] = move
-            num = TTNFA([row, col])
-            q(`c${num}a`).innerHTML = `<div onclick="moveTo([${row}, ${col}])" class="piece gray p${num}g">g</div>`
-        })
-    }
-}
-async function moveTo(spot) {
-    moves.forEach(move => {
-        let [row, col] = move
-        num = TTNFA([row, col])
-        q(`c${num}a`).innerHTML = ''
-        moves = []
-    })
-    let row
-    let col
-    if (oldSpot[0] !== undefined) {
-            [row, col] = oldSpot[0]
-    }
-    if (oldspot2[0] !== undefined) {
-        if (grid[row-1][col-1] === 'w') {
-            let [row, col] = oldSpot[0]
-            q(`c${TTNFA(oldSpot[0])}a`).innerHTML = ''
-            grid[row][col] = null
-            oldSpot = []
-        } else if (oldspot2[1] !== undefined){
-            let [row, col] = oldSpot[1]
-            q(`c${TTNFA(oldSpot[1])}a`).innerHTML = ''
-            grid[row][col] = null
-            oldSpot = []
-        }
-    }
-    let [row3, col3] = oldspot2[0]
-    q(`c${TTNFA(oldspot2[0])}a`).innerHTML = ''
-    grid[row3][col3] = null
-    oldSpot2 = []
 
-    q(`c${TTNFA(spot)}a`).innerHTML = `<div class="piece p${TTNFA(spot)}w white ava" onclick="findMove(event)">w</div>`
-    let [row2, col2] = spot
-    grid[row2][col2] = 'w'
-    await new Promise(resolve => setTimeout(resolve, 200))
-    bestMove()
+const whitePiece = num => `<div class="piece white p${num}w" onclick="showGrayMoves(event)">w</div>`
+const grayPiece = (num, spot) => `<div class="piece gray g${num}g" onclick="moveTo(${spot}, ${num})">g</div>`
+const blackPiece = num => `<div class="piece black p${num}b">b</div>`
+for(i = 0; i<index**2;i++) {
+    boardHTML += `<div class="cube c${i}a center-div"></div>`
 }
-function bestMove() {
-    const moves = findLagelMoves()
-    let bestScore = -Infinity
-    let doMove = {}
-    moves.forEach(move => {
-        let [row, col] = move
+q('board').innerHTML = boardHTML
+grid = Array.from({length: index}, () => Array(index).fill(null))
+
+for(i = 0; i<index**2;i++) {
+    let [row, col] = TTAFN(i)
+    const whiteCube = row % 2 === 1? (col % 2 === 1? true:false):(col % 2 === 0? true:false)
+    const black = row < 3? (row % 2 === 0? (col % 2 === 1? true:false):(col % 2 === 0? true:false)):false
+    const white = row > 4? (row % 2 === 0? (col % 2 === 1? true:false):(col % 2 === 0? true:false)):false
+    if (whiteCube) {q(`c${i}a`).classList.add('light')} else {q(`c${i}a`).classList.add('dark')}
+    if (white) {
+        q(`c${i}a`).innerHTML = whitePiece(i)
+        let [row, col] = TTAFN(i)
+        grid[row][col] = 'w'
+    }
+    if (black) {
+        q(`c${i}a`).innerHTML = blackPiece(i)
         grid[row][col] = 'b'
-        score = minimax()
-        grid[row][col] = null
-        if(score > bestScore) {
-            bestScore = score
-            doMove = {row, col}
+    }
+}
+let grayMoves = []
+function showGrayMoves(e) {
+    classNum = Number(e.target.className.split(' ')[2].replace(/[^0-9]/g, ''))
+    let [row, col] = TTAFN(classNum)
+    if (grayMoves[0] !== undefined) {
+        grayMoves.forEach(move => {
+            let [row, col] = move
+            q(`c${TTNFA([row, col])}a`).innerHTML = ''
+            grayMoves = []
+        })
+    } // remove old gray pieces
+
+    if (grid[row-1]?.[col-1] === null) {
+        q(`c${TTNFA([row-1, col-1])}a`).innerHTML = grayPiece(TTNFA([row-1, col-1]), 1)
+        grayMoves.push([row-1, col-1])
+    }
+    if (grid[row-1]?.[col+1] === null) {
+        q(`c${TTNFA([row-1, col+1])}a`).innerHTML = grayPiece(TTNFA([row-1, col+1]), 2)
+        grayMoves.push([row-1, col+1])
+    }
+    if(grid[row-1]?.[col-1] === 'b' & grid[row-2]?.[col-2] === null) {
+        q(`c${TTNFA([row-2, col-2])}a`).innerHTML = grayPiece(TTNFA([row-2, col-2]), 3)
+        grayMoves.push([row-2, col-2])
+    }
+    if(grid[row-1]?.[col+1] === 'b' & grid[row-2]?.[col+2] === null) {
+        q(`c${TTNFA([row-2, col+2])}a`).innerHTML = grayPiece(TTNFA([row-2, col+2]), 4)
+        grayMoves.push([row-2, col+2])
+    }   // show avaiable moves
+}
+function moveTo(spot, num) {
+    if (grayMoves[0] !== undefined) {
+        grayMoves.forEach(move => {
+            let [row, col] = move
+            q(`c${TTNFA([row, col])}a`).innerHTML = ''
+            grayMoves = []
+        })
+    } // remove old gray pieces
+    let [row, col] = TTAFN(num)
+    grid[row][col] = 'w'
+    q(`c${num}a`).innerHTML = whitePiece(num)
+    if (spot === 1) {grid[row+1][col+1] = null; q(`c${TTNFA([row+1, col+1])}a`).innerHTML = ''}
+    else if (spot === 2) {grid[row+1][col-1] = null; q(`c${TTNFA([row+1, col-1])}a`).innerHTML = ''}
+    else if (spot === 3) {grid[row+2][col+2] = null; q(`c${TTNFA([row+2, col+2])}a`).innerHTML = ''; grid[row+1][col+1] = null; q(`c${TTNFA([row+1, col+1])}a`).innerHTML = ''}
+    else if (spot === 4) {grid[row+2][col-2] = null; q(`c${TTNFA([row+2, col-2])}a`).innerHTML = ''; grid[row+1][col-1] = null; q(`c${TTNFA([row+1, col-1])}a`).innerHTML = ''}
+    botTurn()
+}
+function botTurn() {
+    let moves = findLegalMoves()
+    let bestScore = -Infinity
+    let score;
+    let bestMove;
+    moves.forEach(move => {
+        grid[move.put.row][move.put.col] = 'b'
+        grid[move.remove.row][move.remove.col] = null
+        if (move.kill !== undefined) {
+            grid[move.kill.row][move.kill.col] = null
         }
-        
+        score = minimax()
+        grid[move.put.row][move.put.col] = null
+        grid[move.remove.row][move.remove.col] = 'b'
+        if (move.kill !== undefined) {
+            grid[move.kill.row][move.kill.col] = 'w'
+        }
+
+        if (score > bestScore) {
+            bestScore = score
+            bestMove = {
+                put: {row: move.put.row, col: move.put.col},
+                remove: {row: move.remove.row, col: move.remove.col},
+                
+            }
+            if (move.kill !== undefined) {
+                bestMove.kill = {row: move.kill.row, col: move.kill.col}
+            }
+        }
     })
-    let {row, col} = doMove
-    if (doMove.row === undefined) {
-        console.log('you won or tie')
-        return
+    grid[bestMove.put.row][bestMove.put.col] = 'b'
+    q(`c${TTNFA([bestMove.put.row, bestMove.put.col])}a`).innerHTML = blackPiece() // put
+
+    grid[bestMove.remove.row][bestMove.remove.col] = null
+    q(`c${TTNFA([bestMove.remove.row, bestMove.remove.col])}a`).innerHTML = '' // remove
+
+    if (bestMove.kill !== undefined) {
+        grid[bestMove.kill.row][bestMove.kill.col] = null
+        q(`c${TTNFA([bestMove.kill.row, bestMove.kill.col])}a`).innerHTML = '' // kill
     }
-    grid[row][col] = 'b'
-    q(`c${TTNFA([row, col])}a`).innerHTML = `<div class="piece p${TTNFA([row, col])}b black">b</div>`
-    let remove;
-    if (row !== 0) {
-        if (col === 0 && grid[row-1][col+1] === 'b') {remove = [row-1, col+1]}
-        else if (col === 7 && grid[row-1][col-1] === 'b') {remove = [row-1, col-1]}
-        else if(grid[row-1][col+1] === 'b') {remove = [row-1, col+1]}
-        else if(grid[row-1][col-1] === 'b') {remove = [row-1, col-1]}
-    }
-    let [row2, col2] = remove
-    grid[row2][col2] = null
-    q(`c${TTNFA([row2, col2])}a`).innerHTML = ''
 }
 function minimax() {
     return 1
 }
-function findLagelMoves() {
-    let legalMoves = []
-    for(let i=0; i<index**2;i++) {
-        let [row, col] = TTAFN(i)
-        if (row !== 0) {
-            if (grid[row][col] === null) {
-                isDark = row % 2 === 0? (col % 2 === 1? true:false):(col % 2 === 0? true:false)
-                if (col === 0 & grid[row-1][col+1] === 'b') {legalMoves.push([row, col])}
-                else if (col === 7 && grid[row-1][col-1] === 'b') {legalMoves.push([row, col])}
-                else {
-                    if(grid[row-1][col-1] === 'b') {legalMoves.push([row, col])}
-                    else if(grid[row-1][col+1] === 'b') {legalMoves.push([row, col])}
+function findLegalMoves() {
+    let putANDremove = []
+    for(let row = 0; row<index; row++) {
+        for(let col = 0; col<index; col++) {
+            isBlack = row % 2 === 0? (col % 2 === 1? true:false):(col % 2 === 0? true:false)
+            if (isBlack) {
+                if (grid[row][col] === null) {
+                    if(grid[row-1]?.[col-1] === 'b') {
+                        putANDremove.push({
+                            put: {row, col},
+                            remove: {row: row-1, col: col-1}
+                        })
+                    }
+                    if(grid[row-1]?.[col+1] === 'b') {
+                        putANDremove.push({
+                            put: {row, col},
+                            remove: { row: row-1, col: col+1}
+                        })
+                    }
+                    if(grid[row-1]?.[col-1] === 'w' & grid[row-2]?.[col-2] === 'b') {
+                        putANDremove.push({
+                            put: {row, col},
+                            remove: { row: row-2, col: col-2},
+                            kill: { row: row-1, col: col-1}
+                        })
+                    }
+                    if(grid[row-1]?.[col+1] === 'w' & grid[row-2]?.[col+2] === 'b') {
+                        putANDremove.push({
+                            put: {row, col},
+                            remove: { row: row-2, col: col+2},
+                            kill: { row: row-1, col: col+1}
+                        })
+                    }
+
                 }
             }
         }
-    }
-    return legalMoves
+    } 
+    return putANDremove
 }
+
+
+
+
+
+
 
 function q(qury) {
     return document.querySelector(`.${qury}`)
+} 
+function TTNFA(spot) {
+    let [row, col] = spot
+    return row*index+col
 }
-function TTAFN (num) {
+function TTAFN(num) {
     row = Math.floor(num / index)
     col = num % index
     return [row, col]
-}
-function TTNFA(array) {
-    let [row, col] = array
-    return row * index + col
 }
