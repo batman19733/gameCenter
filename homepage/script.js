@@ -30,8 +30,11 @@ const games = [{
     name: 'ai 4 in a row',
     filename: 'ai 4 in a row',
 }, {
-    name: 'checkers, W.I.P!',
-    filename: 'checkers none'
+    name: 'checkers<br>not finished',
+    filename: 'checkers'
+}, {
+    name: 'W.I.P!!',
+    filename: 'none'
 }, {
     name: 'css tools',
     filename: 'tool'

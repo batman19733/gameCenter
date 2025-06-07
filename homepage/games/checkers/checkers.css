@@ -38,3 +38,13 @@
     height: 50%;
     cursor: pointer;
 }
+.all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.result {
+    margin-bottom: 45px;
+    font-size: 40px
+}
