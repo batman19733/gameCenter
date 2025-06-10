@@ -33,8 +33,8 @@ const games = [{
     name: 'checkers<br>not finished',
     filename: 'checkers'
 }, {
-    name: 'W.I.P!!',
-    filename: 'none'
+    name: 'chess W.I.P!!',
+    filename: 'chess none'
 }, {
     name: 'css tools',
     filename: 'tool'

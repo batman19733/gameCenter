@@ -71,9 +71,11 @@ function moveTo(spot, num) {
     else if (spot === 3) {grid[row+2][col+2] = null; q(`c${TTNFA([row+2, col+2])}a`).innerHTML = ''; grid[row+1][col+1] = null; q(`c${TTNFA([row+1, col+1])}a`).innerHTML = ''}
     else if (spot === 4) {grid[row+2][col-2] = null; q(`c${TTNFA([row+2, col-2])}a`).innerHTML = ''; grid[row+1][col-1] = null; q(`c${TTNFA([row+1, col-1])}a`).innerHTML = ''}
     checkIfGameIsOver()
+    q('result').innerHTML = 'bot thinking...'
     botTurn()
 }
-function botTurn() {
+async function botTurn() {
+    await new Promise(x => setTimeout(x, 1))
     let moves = findLegalMoves('b')
     let bestScore = -Infinity
     let score;
@@ -84,7 +86,7 @@ function botTurn() {
         if (move.kill !== undefined) {
             grid[move.kill.row][move.kill.col] = null
         }
-        score = minimax(4, false)
+        score = minimax(5, false)
         grid[move.put.row][move.put.col] = null
         grid[move.remove.row][move.remove.col] = 'b'
         if (move.kill !== undefined) {
@@ -95,8 +97,7 @@ function botTurn() {
             bestScore = score
             bestMove = {
                 put: {row: move.put.row, col: move.put.col},
-                remove: {row: move.remove.row, col: move.remove.col},
-                
+                remove: {row: move.remove.row, col: move.remove.col}, 
             }
             if (move.kill !== undefined) {
                 bestMove.kill = {row: move.kill.row, col: move.kill.col}
@@ -113,6 +114,7 @@ function botTurn() {
         grid[bestMove.kill.row][bestMove.kill.col] = null
         q(`c${TTNFA([bestMove.kill.row, bestMove.kill.col])}a`).innerHTML = '' // kill
     }
+    q('result').innerHTML = 'Your turn'
     checkIfGameIsOver()
 }
 function minimax(depth, isMaximizing) {
@@ -174,10 +176,11 @@ function evaluateBoard(depth) {
     score -= amountOfXInRowy('w', 1) / 2
     if (findCountOf('w') === 0) score *= 2
     if (findCountOf('b') === 0) score /= 2
+    if(draw()) score /= 2
     return score + depth
 }
 function draw() {
-    if (findLegalMoves('w')[0] === undefined & findCountOf('w') !== 0 | findLegalMoves('b')[0] === undefined && findCountOf('b') !== 0) return true
+    if (findLegalMoves('w')[0] === undefined | findLegalMoves('b')[0] === undefined) return true
 }
 function amountOfXInRowy(p, row) {
     count = 0
