@@ -4,6 +4,8 @@ let boardHTML = ''
 const whitePiece = num => `<div class="piece white p${num}w" onclick="showGrayMoves(event)">w</div>`
 const grayPiece = (num, spot) => `<div class="piece gray g${num}g" onclick="moveTo(${spot}, ${num})">g</div>`
 const blackPiece = num => `<div class="piece black p${num}b">b</div>`
+const kingBlack = num => `<div class="king KB k${num}b">♚</div>`
+const kingWhite = num => `<div class="king KW 100 k${num}w" onclick="showGrayMoves(event)">♔</div>`
 for(i = 0; i<index**2;i++) {
     boardHTML += `<div class="cube c${i}a center-div"></div>`
 }
@@ -29,6 +31,7 @@ for(i = 0; i<index**2;i++) {
 let grayMoves = []
 function showGrayMoves(e) {
     classNum = Number(e.target.className.split(' ')[2].replace(/[^0-9]/g, ''))
+    console.log(classNum)
     let [row, col] = TTAFN(classNum)
     if (grayMoves[0] !== undefined) {
         grayMoves.forEach(move => {
@@ -70,7 +73,8 @@ function moveTo(spot, num) {
     else if (spot === 2) {grid[row+1][col-1] = null; q(`c${TTNFA([row+1, col-1])}a`).innerHTML = ''}
     else if (spot === 3) {grid[row+2][col+2] = null; q(`c${TTNFA([row+2, col+2])}a`).innerHTML = ''; grid[row+1][col+1] = null; q(`c${TTNFA([row+1, col+1])}a`).innerHTML = ''}
     else if (spot === 4) {grid[row+2][col-2] = null; q(`c${TTNFA([row+2, col-2])}a`).innerHTML = ''; grid[row+1][col-1] = null; q(`c${TTNFA([row+1, col-1])}a`).innerHTML = ''}
-    checkIfGameIsOver()
+    makeAking()
+    if(checkIfGameIsOver()) return
     q('result').innerHTML = 'bot thinking...'
     botTurn()
 }
@@ -116,6 +120,12 @@ async function botTurn() {
     }
     q('result').innerHTML = 'Your turn'
     checkIfGameIsOver()
+}
+function makeAking() {
+    for(let col = 0; col<index;col++) {
+        if (grid[0][col] === 'w') {grid[0][col] = 'kw'; q(`c${TTNFA([0, col])}a`).innerHTML = kingWhite(TTNFA([0, col]))}
+        else if (grid[7][col] === 'b') {grid[7][col] = 'kb'; q(`c${TTNFA([7, col])}a`).innerHTML = kingBlack(TTNFA([0, col]))}
+    }
 }
 function minimax(depth, isMaximizing) {
     if (depth <= 0 | draw() | findCountOf('b') === 0 | findCountOf('w') === 0) {
@@ -282,19 +292,21 @@ function TTAFN(num) {
     return [row, col]
 }
 function checkIfGameIsOver() {
-    if (draw()) {
-        q('result').innerHTML = 'Draw!!!'
-    }
-    else if(findCountOf('b') === 0) {
+    if(findCountOf('b') === 0) {
         q('result').innerHTML = 'You won!!'
+        return true
     }
     else if (findCountOf('w') === 0) {
         q('result').innerHTML = 'You lost!!'
+        return true
     }
     else if(findLegalMoves('w') === 0) {
         q('result').innerHTML = 'You lost!!'
+        return true
     }
     else if(findLegalMoves('b') === 0) {
         q('result').innerHTML = 'You won!!'
+        return true
     }
+    return false
 }
