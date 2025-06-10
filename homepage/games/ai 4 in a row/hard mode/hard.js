@@ -1,4 +1,4 @@
-let index = 7
+let index = 9
 let boardHTML = ''
 for(let i=0; i<index**2;i++) {
     boardHTML += `<div class='cube c${i}a'></div>`
