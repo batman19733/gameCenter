@@ -64,4 +64,6 @@
 }
 .KW {
     color: white;
+    background-color: var(--light-gray);
+    cursor: pointer;
 }

@@ -5,7 +5,7 @@ const whitePiece = num => `<div class="piece white p${num}w" onclick="showGrayMo
 const grayPiece = (num, spot) => `<div class="piece gray g${num}g" onclick="moveTo(${spot}, ${num})">g</div>`
 const blackPiece = num => `<div class="piece black p${num}b">b</div>`
 const kingBlack = num => `<div class="king KB k${num}b">♚</div>`
-const kingWhite = num => `<div class="king KW 100 k${num}w" onclick="showGrayMoves(event)">♔</div>`
+const kingWhite = num => `<div class="KW 100 k${num}w king" onclick="showGrayMoves(event)">♔</div>`
 for(i = 0; i<index**2;i++) {
     boardHTML += `<div class="cube c${i}a center-div"></div>`
 }
@@ -30,8 +30,10 @@ for(i = 0; i<index**2;i++) {
 }
 let grayMoves = []
 function showGrayMoves(e) {
+    makeAking()
     classNum = Number(e.target.className.split(' ')[2].replace(/[^0-9]/g, ''))
-    console.log(classNum)
+    num3 = Number(e.target.className.split(' ')[1].replace(/[^0-9]/g, ''))
+
     let [row, col] = TTAFN(classNum)
     if (grayMoves[0] !== undefined) {
         grayMoves.forEach(move => {
@@ -40,6 +42,43 @@ function showGrayMoves(e) {
             grayMoves = []
         })
     } // remove old gray pieces
+
+    if (num3 == 100) {
+        if (grid[row-1]?.[col-1] === null) {
+            q(`c${TTNFA([row-1, col-1])}a`).innerHTML = grayPiece(TTNFA([row-1, col-1]), 11)
+            grayMoves.push([row-1, col-1])
+        }
+        if (grid[row-1]?.[col+1] === null) {
+            q(`c${TTNFA([row-1, col+1])}a`).innerHTML = grayPiece(TTNFA([row-1, col+1]), 22)
+            grayMoves.push([row-1, col+1])
+        }
+        if(grid[row-1]?.[col-1] === 'b' & grid[row-2]?.[col-2] === null) {
+            q(`c${TTNFA([row-2, col-2])}a`).innerHTML = grayPiece(TTNFA([row-2, col-2]), 33)
+            grayMoves.push([row-2, col-2])
+        }
+        if(grid[row-1]?.[col+1] === 'b' & grid[row-2]?.[col+2] === null) {
+            q(`c${TTNFA([row-2, col+2])}a`).innerHTML = grayPiece(TTNFA([row-2, col+2]), 44)
+            grayMoves.push([row-2, col+2])
+        }
+        if (grid[row+1]?.[col-1] === null) {
+            q(`c${TTNFA([row+1, col-1])}a`).innerHTML = grayPiece(TTNFA([row+1, col-1]), 5)
+            grayMoves.push([row+1, col-1])
+        }
+        if (grid[row+1]?.[col+1] === null) {
+            q(`c${TTNFA([row+1, col+1])}a`).innerHTML = grayPiece(TTNFA([row+1, col+1]), 6)
+            grayMoves.push([row+1, col+1])
+        }
+        if(grid[row+1]?.[col-1] === 'b' & grid[row+2]?.[col-2] === null) {
+            q(`c${TTNFA([row+2, col-2])}a`).innerHTML = grayPiece(TTNFA([row+2, col-2]), 7)
+            grayMoves.push([row+2, col-2])
+        }
+        if(grid[row+1]?.[col+1] === 'b' & grid[row+2]?.[col+2] === null) {
+            q(`c${TTNFA([row+2, col+2])}a`).innerHTML = grayPiece(TTNFA([row+2, col+2]), 8)
+            grayMoves.push([row+2, col+2])
+        }
+        return
+    }
+
 
     if (grid[row-1]?.[col-1] === null) {
         q(`c${TTNFA([row-1, col-1])}a`).innerHTML = grayPiece(TTNFA([row-1, col-1]), 1)
@@ -67,14 +106,23 @@ function moveTo(spot, num) {
         })
     } // remove old gray pieces
     let [row, col] = TTAFN(num)
-    grid[row][col] = 'w'
-    q(`c${num}a`).innerHTML = whitePiece(num)
-    if (spot === 1) {grid[row+1][col+1] = null; q(`c${TTNFA([row+1, col+1])}a`).innerHTML = ''}
-    else if (spot === 2) {grid[row+1][col-1] = null; q(`c${TTNFA([row+1, col-1])}a`).innerHTML = ''}
-    else if (spot === 3) {grid[row+2][col+2] = null; q(`c${TTNFA([row+2, col+2])}a`).innerHTML = ''; grid[row+1][col+1] = null; q(`c${TTNFA([row+1, col+1])}a`).innerHTML = ''}
-    else if (spot === 4) {grid[row+2][col-2] = null; q(`c${TTNFA([row+2, col-2])}a`).innerHTML = ''; grid[row+1][col-1] = null; q(`c${TTNFA([row+1, col-1])}a`).innerHTML = ''}
+    if (spot === 1 | spot === 2 | spot === 3 | spot === 4) {
+        grid[row][col] = 'w'
+        q(`c${num}a`).innerHTML = whitePiece(num)
+    } else {
+        grid[row][col] = 'kw'
+        q(`c${num}a`).innerHTML = kingWhite(num)
+    }
+
+    if (spot === 1 | spot === 11) {grid[row+1][col+1] = null; q(`c${TTNFA([row+1, col+1])}a`).innerHTML = ''}
+    else if (spot === 2 | spot === 22) {grid[row+1][col-1] = null; q(`c${TTNFA([row+1, col-1])}a`).innerHTML = ''}
+    else if (spot === 3 | spot === 33) {grid[row+2][col+2] = null; q(`c${TTNFA([row+2, col+2])}a`).innerHTML = ''; grid[row+1][col+1] = null; q(`c${TTNFA([row+1, col+1])}a`).innerHTML = ''}
+    else if (spot === 4 | spot === 44) {grid[row+2][col-2] = null; q(`c${TTNFA([row+2, col-2])}a`).innerHTML = ''; grid[row+1][col-1] = null; q(`c${TTNFA([row+1, col-1])}a`).innerHTML = ''}
+    else if (spot === 5) {grid[row-1][col+1] = null; q(`c${TTNFA([row-1, col+1])}a`).innerHTML = ''}
+    else if (spot === 6) {grid[row-1][col-1] = null; q(`c${TTNFA([row-1, col-1])}a`).innerHTML = ''}
+    else if (spot === 7) {grid[row-2][col+2] = null; q(`c${TTNFA([row-2, col+2])}a`).innerHTML = ''; grid[row-1][col+1] = null; q(`c${TTNFA([row-1, col+1])}a`).innerHTML = ''}
+    else if (spot === 8) {grid[row-2][col-2] = null; q(`c${TTNFA([row-2, col-2])}a`).innerHTML = ''; grid[row-1][col-1] = null; q(`c${TTNFA([row-1, col-1])}a`).innerHTML = ''}
     makeAking()
-    if(checkIfGameIsOver()) return
     q('result').innerHTML = 'bot thinking...'
     botTurn()
 }
@@ -90,7 +138,7 @@ async function botTurn() {
         if (move.kill !== undefined) {
             grid[move.kill.row][move.kill.col] = null
         }
-        score = minimax(5, false)
+        score = minimax(4, false)
         grid[move.put.row][move.put.col] = null
         grid[move.remove.row][move.remove.col] = 'b'
         if (move.kill !== undefined) {
@@ -119,12 +167,12 @@ async function botTurn() {
         q(`c${TTNFA([bestMove.kill.row, bestMove.kill.col])}a`).innerHTML = '' // kill
     }
     q('result').innerHTML = 'Your turn'
-    checkIfGameIsOver()
+    makeAking()
 }
 function makeAking() {
     for(let col = 0; col<index;col++) {
         if (grid[0][col] === 'w') {grid[0][col] = 'kw'; q(`c${TTNFA([0, col])}a`).innerHTML = kingWhite(TTNFA([0, col]))}
-        else if (grid[7][col] === 'b') {grid[7][col] = 'kb'; q(`c${TTNFA([7, col])}a`).innerHTML = kingBlack(TTNFA([0, col]))}
+        else if (grid[7][col] === 'b') {grid[7][col] = 'kb'; q(`c${TTNFA([7, col])}a`).innerHTML = kingBlack(TTNFA([7, col]))}
     }
 }
 function minimax(depth, isMaximizing) {
@@ -177,38 +225,32 @@ function minimax(depth, isMaximizing) {
     }
 }
 function evaluateBoard(depth) {
+    if (findCountOf('w') === 0) {return 10000}
+    if (findCountOf('b') === 0) {return -10000}
     let score = 0
-    score += findCountOf('b')
-    score -= findCountOf('w')
-    score += amountOfXInRowy('b', 7) * 2
-    score -= amountOfXInRowy('w', 0) * 2
-    score += amountOfXInRowy('b', 6) / 2
-    score -= amountOfXInRowy('w', 1) / 2
-    if (findCountOf('w') === 0) score *= 2
-    if (findCountOf('b') === 0) score /= 2
-    if(draw()) score /= 2
-    return score + depth
+
+    score += findCountOf('kb') * 5
+    score -= findCountOf('kw') * 10
+    score += (findCountOf('b')-1) * 3
+    score -= findCountOf('w') * 3
+
+    score += findLegalMoves('b').length * 0.5
+    score -= findLegalMoves('w').length * 0.5
+
+    score += depth
+    return score
 }
 function draw() {
-    if (findLegalMoves('w')[0] === undefined | findLegalMoves('b')[0] === undefined) return true
-}
-function amountOfXInRowy(p, row) {
-    count = 0
-    for(let col = 0; col < index; col ++) {
-        if (grid[row][col] === p) {count++}
-    }; return count
+    if (findLegalMoves('w')[0] === undefined & findLegalMoves('b')[0] === undefined & findCountOf('b') !== 0 & findCountOf('w') !== 0) return true
 }
 function findCountOf(p) {
     count = 0
     for(let row = 0; row< index; row++) {
         for(let col=0; col<index; col++) {
             if (grid[row][col] === p) {
-                count++
-            }
-        }
-    }
-    return count
-}
+                count++}}}
+    return count}
+
 function findLegalMoves(p) {
     let putANDremoveBlack = []
     let putANDremoveWhite = []
@@ -230,19 +272,46 @@ function findLegalMoves(p) {
                                 remove: { row: row-1, col: col+1}
                             })
                         }
-                        if(grid[row-1]?.[col-1] === 'w' & grid[row-2]?.[col-2] === 'b') {
+                        if((grid[row-1]?.[col-1] === 'w' | grid[row-1]?.[col-1] === 'KW') & grid[row-2]?.[col-2] === 'b') {
                             putANDremoveBlack.push({
                                 put: {row, col},
                                 remove: { row: row-2, col: col-2},
                                 kill: { row: row-1, col: col-1}
                             })
                         }
-                        if(grid[row-1]?.[col+1] === 'w' & grid[row-2]?.[col+2] === 'b') {
+                        if((grid[row-1]?.[col+1] === 'w' | grid[row-1]?.[col-1] === 'KW') & grid[row-2]?.[col+2] === 'b') {
                             putANDremoveBlack.push({
                                 put: {row, col},
                                 remove: { row: row-2, col: col+2},
                                 kill: { row: row-1, col: col+1}
                             })
+                        }
+                        if (findCountOf('kb') > 0) {
+                            if(grid[row+1]?.[col-1] === 'kb') {
+                                putANDremoveBlack.push({
+                                put: {row, col},
+                                remove: {row: row+1, col: col-1}
+                            })}
+
+                            if(grid[row+1]?.[col+1] === 'kb') {
+                                putANDremoveBlack.push({
+                                put: {row, col},
+                                remove: {row: row+1, col: col+1}
+                            })}
+
+                            if((grid[row+1]?.[col-1] === 'w' | grid[row+1]?.[col-1] === 'kw') & grid[row+2]?.[col-2] === 'kb') {
+                            putANDremoveBlack.push({
+                                put: {row, col},
+                                remove: { row: row+2, col: col-2},
+                                kill: { row: row+1, col: col-1}
+                            })}
+
+                            if((grid[row+1]?.[col+1] === 'w' | grid[row+1]?.[col+1] === 'kw') & grid[row+2]?.[col+2] === 'kb') {
+                            putANDremoveBlack.push({
+                                put: {row, col},
+                                remove: { row: row+2, col: col+2},
+                                kill: { row: row+1, col: col+1}
+                            })}
                         }
                     } else { // black
                     if(grid[row+1]?.[col-1] === 'w') {
@@ -257,20 +326,48 @@ function findLegalMoves(p) {
                             remove: { row: row+1, col: col+1}
                         })
                     }
-                    if(grid[row+1]?.[col-1] === 'b' & grid[row+2]?.[col-2] === 'w') {
+                    if((grid[row+1]?.[col-1] === 'b' | grid[row-1]?.[col-1] === 'kb') & grid[row+2]?.[col-2] === 'w') {
                         putANDremoveWhite.push({
                             put: {row, col},
                             remove: { row: row+2, col: col-2},
                             kill: { row: row+1, col: col-1}
                         })
                     }
-                    if(grid[row+1]?.[col+1] === 'b' & grid[row+2]?.[col+2] === 'w') {
+                    if((grid[row+1]?.[col+1] === 'b' | grid[row-1]?.[col-1] === 'kb') & grid[row+2]?.[col+2] === 'w') {
                         putANDremoveWhite.push({
                             put: {row, col},
                             remove: { row: row+2, col: col+2},
                             kill: { row: row+1, col: col+1}
                         })
                         }
+
+                    if (findCountOf('kw') > 0) {
+                        if(grid[row+1]?.[col-1] === 'kw') {
+                            putANDremoveBlack.push({
+                            put: {row, col},
+                            remove: {row: row+1, col: col-1}
+                        })}
+
+                        if(grid[row+1]?.[col+1] === 'kw') {
+                            putANDremoveBlack.push({
+                            put: {row, col},
+                            remove: {row: row+1, col: col+1}
+                        })}
+
+                        if((grid[row+1]?.[col-1] === 'b' | grid[row+1]?.[col-1] === 'kb') & grid[row+2]?.[col-2] === 'kw') {
+                        putANDremoveBlack.push({
+                            put: {row, col},
+                            remove: { row: row+2, col: col-2},
+                            kill: { row: row+1, col: col-1}
+                        })}
+
+                        if((grid[row+1]?.[col+1] === 'b' | grid[row+1]?.[col+1] === 'kb') & grid[row+2]?.[col+2] === 'kw') {
+                        putANDremoveBlack.push({
+                            put: {row, col},
+                            remove: { row: row+2, col: col+2},
+                            kill: { row: row+1, col: col+1}
+                        })}
+                    }
                 } // white
                 }
             }
