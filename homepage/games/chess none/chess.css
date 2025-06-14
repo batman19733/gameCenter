@@ -5,6 +5,8 @@
     display: grid;
     grid-template-columns: repeat(8, 1fr) !important;
     grid-template-rows: repeat(8, 1fr) !important;
+    border: solid 12px var(--light-dark);
+    border-radius: 10px;
 }
 .cube {
     width: 100%;

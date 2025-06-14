@@ -70,7 +70,6 @@ async function kill(e) {
 }
 let colorPiece = []
 async function moveTo(e) {
-    makeQueen()
     if (enable[0] !== undefined) {
         enable.forEach(spot => {
             let [row, col] = spot
@@ -102,6 +101,7 @@ async function moveTo(e) {
     let [row2, col2] = AFN(oldNum)
     grid[row2][col2] = null
     q('tr').innerHTML = 'Bot thinking...'
+    makeQueen()
     await new Promise(x => setTimeout(x, 10))
     botTurn()
 }

@@ -1,4 +1,4 @@
-let currentDepth = 2
+let currentDepth = 3
 let lastMove;
 function botTurn() {
     if (lastMove !== undefined) {
@@ -49,12 +49,13 @@ function botTurn() {
     disable = false
     const endTime = performance.now();
     const estimatedTimeFor10Runs = (endTime - startTime) * 10;
-    if (estimatedTimeFor10Runs <= 3500) {
+    console.log(estimatedTimeFor10Runs/10)
+    if (estimatedTimeFor10Runs <= 2222) {
         currentDepth++;
     }
 }
 function minimax(depth, isMaximizing, alpha = -Infinity, beta = Infinity) {
-   if (depth === 0 | isDraw() | didXwin('w') | didXwin('b')) {
+   if (depth === 0 /*| isDraw() | didXwin('w') | didXwin('b')*/) {
        return evaluateBoard()
    }
 
