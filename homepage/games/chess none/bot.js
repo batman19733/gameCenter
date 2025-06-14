@@ -49,7 +49,7 @@ function botTurn() {
     disable = false
     const endTime = performance.now();
     const estimatedTimeFor10Runs = (endTime - startTime) * 10;
-    console.log(estimatedTimeFor10Runs/10)
+    console.log(`bots turn: ${estimatedTimeFor10Runs/10} with depth of: ${currentDepth}`)
     if (estimatedTimeFor10Runs <= 2222) {
         currentDepth++;
     }
@@ -107,62 +107,67 @@ let tillEndSpots = []
 let tillEndRemoveSpot = []
 function findLegalMoves(color) {
     let legalMoves = []
+    const dir = color === 'b' ? 1 : -1;
+    const startRow = color === 'b' ? 1 : 6;
+    const enemyColor = color === 'b' ? 'w' : 'b';
     for(let i = 0; i<index**2;i++) {
         let [r, c] = AFN(i)
-        if (grid[r][c] !== null) {
-            let side = grid[r][c]
-            side = side.split('').pop()
+        const square = grid[r][c];
+        if (square !== null) {
+            let side = square.split('').pop()
             if (side === color) {
-                let piece = grid[r][c].split('') // to here
+                let piece = square.split('') // to here
                 piece.pop()
                 piece = piece.join().replaceAll(',', '')
                 if (piece === 'pawn') {
-                    if (r === (color === 'b' ? 1:6)) {
-                        if (grid[r+(color === 'b' ? 2:-2)]?.[c] === null && grid[r+(color === 'b' ? 1:-1)]?.[c] === null) {
+                    if (r === startRow) {
+                        if (grid[r+dir]?.[c] === null && grid[r+dir*2]?.[c] === null) {
                             
-                            legalMoves.push({put: [r+(color === 'b' ? 1:-1), c], remove: [r, c]})
-                            legalMoves.push({put: [r+(color === 'b' ? 2:-2), c], remove: [r, c]})
+                            legalMoves.push({put: [r+dir, c], remove: [r, c]})
+                            legalMoves.push({put: [r+dir*2, c], remove: [r, c]})
                         }
-                        else if (grid[r+(color === 'b' ? 1:-1)]?.[c] === null) {
-                            legalMoves.push({put: [r+(color === 'b' ? 1:-1), c], remove: [r, c]})
+                        else if (grid[r+dir]?.[c] === null) {
+                            legalMoves.push({put: [r+dir, c], remove: [r, c]})
                         } // move 
 
-                        let leftKill = grid[r+(color === 'b' ? 1:-1)]?.[c-1]
+                        let leftKill = grid[r+dir]?.[c-1]
                         if (leftKill) {leftKill = leftKill.split('').pop()}
 
-                        let rightKill = grid[r+(color === 'b' ? 1:-1)]?.[c+1]
+                        let rightKill = grid[r+dir]?.[c+1]
                         if (rightKill) {rightKill = rightKill.split('').pop()}
 
-                        if (leftKill === (color === 'b'? 'w':'b')) {
-                            legalMoves.push({put: [r+(color === 'b' ? 1:-1), c-1], remove: [r, c]})
+                        if (leftKill === enemyColor) {
+                            legalMoves.push({put: [r+dir, c-1], remove: [r, c]})
                         } 
-                        if (rightKill === (color === 'b'? 'w':'b')) {
-                            legalMoves.push({put: [r+(color === 'b' ? 1:-1), c+1], remove: [r, c]})
+                        if (rightKill === enemyColor) {
+                            legalMoves.push({put: [r+dir, c+1], remove: [r, c]})
                         }// kill
                     } else {
-                        if (r+1 > 7) return
-                        let nextColor = grid[r+(color === 'b'? 1:-1)]?.[c]
+                        if (r + dir > 7 || r + dir < 0) return;
+                        let nextColor = grid[r+dir]?.[c]
 
                         if (nextColor === null) {
-                            legalMoves.push({put: [r+(color === 'b' ? 1:-1), c], remove: [r, c]}) // move
+                            legalMoves.push({put: [r+dir, c], remove: [r, c]}) // move
                         }
 
-                        let leftKill = grid[r+(color === 'b' ? 1:-1)]?.[c-1] // kill
+                        let leftKill = grid[r+dir]?.[c-1] // kill
                         if (leftKill !== null & leftKill !== undefined) {leftKill = leftKill.split('').pop()}
 
-                        let rightKill = grid[r+(color === 'b' ? 1:-1)]?.[c+1]
+                        let rightKill = grid[r+dir]?.[c+1]
                         if (rightKill !== null & rightKill !== undefined) {rightKill = rightKill.split('').pop()}
 
-                        if (leftKill === (color === 'b'? 'w':'b')) {
-                            legalMoves.push({put: [r+(color === 'b' ? 1:-1), c-1], remove: [r, c]})
+                        if (leftKill === enemyColor) {
+                            legalMoves.push({put: [r+dir, c-1], remove: [r, c]})
                         } 
-                        if (rightKill === (color === 'b'? 'w':'b')) {
-                            legalMoves.push({put: [r+(color === 'b' ? 1:-1), c+1], remove: [r, c]})
+                        if (rightKill === enemyColor) {
+                            legalMoves.push({put: [r+dir, c+1], remove: [r, c]})
                         }// kill
                     }
                 }
                 if (piece !== 'pawn') {
-                    moves = pieces[piece].legalMoves
+                    const pieceData = pieces[piece];
+                    if (!pieceData) continue;
+                    const moves = pieceData.legalMoves;
                     if (moves[0] === '...') {
                         tillEndSpots = []
                         tillEndRemoveSpot = [r, c]
