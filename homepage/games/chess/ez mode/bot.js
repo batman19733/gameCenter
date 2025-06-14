@@ -1,4 +1,4 @@
-let currentDepth = 3
+let currentDepth = 2
 let lastMove;
 function botTurn() {
     if (lastMove !== undefined) {
@@ -45,13 +45,17 @@ function botTurn() {
     q(`c${NFA([removeR, removeC])}`).innerHTML = ''
     makeQueen()
     q('tr').innerHTML = 'Your turn'
+    let result = endGameIfNoKing()
+    if(result === true) {return}
     disableKill = false
     disable = false
     const endTime = performance.now();
     const estimatedTimeFor10Runs = (endTime - startTime) * 10;
-    console.log(`bots turn: ${estimatedTimeFor10Runs/10} with depth of: ${currentDepth}`)
-    if (estimatedTimeFor10Runs <= 2222) {
+    if (estimatedTimeFor10Runs <= 2200) {
         currentDepth++;
+    }
+    if (estimatedTimeFor10Runs/10 >= 6000) {
+        currentDepth--;
     }
 }
 function minimax(depth, isMaximizing, alpha = -Infinity, beta = Infinity) {
@@ -140,7 +144,7 @@ function findLegalMoves(color) {
                             legalMoves.push({put: [r+(color === 'b' ? 1:-1), c+1], remove: [r, c]})
                         }// kill
                     } else {
-                        if (r+1 > 7) return
+                        if (r+1 > 7) break
                         let nextColor = grid[r+(color === 'b'? 1:-1)]?.[c]
 
                         if (nextColor === null) {

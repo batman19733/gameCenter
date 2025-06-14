@@ -40,3 +40,9 @@
     height: 70%;
     background-color: gray;
 }
+.back-to-homePage {
+    padding: 10px 20px;
+}
+.back-down {
+    top: 3.3em;
+}

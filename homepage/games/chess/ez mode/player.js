@@ -64,6 +64,8 @@ async function kill(e) {
     lastPiece.pop()
     lastPiece = lastPiece.join('')
     g$q([[row, col]], lastPiece, 'white')
+    let result = endGameIfNoKing()
+    if(result === true) {return}
     q('tr').innerHTML = 'Bot thinking...'
     await new Promise(x => setTimeout(x, 10))
     botTurn()
@@ -297,4 +299,10 @@ function AFN(num) {
     row = Math.floor(num / index)
     col = num % index
     return [row, col]
+}
+function endGameIfNoKing() {
+    const pieces = countAllPieces()
+    if (pieces.kingw === 0 ) {true; q('tr').innerHTML = 'black won!'; return true}
+    else if (pieces.kingb === 0 ) {true; q('tr').innerHTML = 'white won!'; return true}
+    return false
 }
