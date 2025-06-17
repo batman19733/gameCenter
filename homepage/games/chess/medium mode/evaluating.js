@@ -1,9 +1,9 @@
-function evaluateBoard(depth) {
-    let score = depth
+function evaluateBoard() {
+    let score = 0
 
     let piecesAmount = checkAmountOfEveryThing()
 
-    if (piecesAmount.blackKing === 0) score -= -99999
+    if (piecesAmount.blackKing === 0) score -= 99999
     if (piecesAmount.whiteKing === 0) score += 9999
 
     score += piecesAmount.blackPawn * 1

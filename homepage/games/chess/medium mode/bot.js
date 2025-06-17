@@ -30,25 +30,30 @@ function botTurn() {
 }
 function minimax(depth, max, alpha = -Infinity, beta = Infinity) {
     if (depth === 0 || amountOfKings('w') === 0 || amountOfKings('b') === 0) {
-        return evaluateBoard(depth)
+        return evaluateBoard()
     }
 
     if (max) {
         let bestScore = -Infinity
         const moves = findLegalMoves('b')
-        for (let i =0;i<moves.length;i++) {
+        for (let i = 0 ; i<moves.length;i++) {
             const move = moves[i]
             let {put, remove} = move
             let wasR = grid[remove]
             let wasP = grid[put]
             grid[remove] = 0
             grid[put] = wasR
-            let score = minimax(depth-1, false, alpha, beta)
+            let score = minimax(depth - 1, false, alpha, beta)
             grid[remove] = wasR
             grid[put] = wasP
             if (score > bestScore) {
                 bestScore = score
             }
+            alpha = Math.max(alpha, bestScore)
+            if (beta <= alpha) {
+                break
+            }
+
         }
         return bestScore
     } else {
@@ -66,6 +71,10 @@ function minimax(depth, max, alpha = -Infinity, beta = Infinity) {
             grid[put] = wasP
             if (score < bestScore) {
                 bestScore = score
+            }
+            beta = Math.min(beta, bestScore)
+            if (beta <= alpha) {
+                break
             }
         }
         return bestScore
