@@ -1,10 +1,10 @@
-function evaluateBoard() {
+function evaluateBoard(depth) {
     let score = 0
 
     let piecesAmount = checkAmountOfEveryThing()
 
-    if (piecesAmount.blackKing === 0) score -= 99999
-    if (piecesAmount.whiteKing === 0) score += 9999
+    if (piecesAmount.blackKing === 0) {score -= 99999; score -= depth}
+    if (piecesAmount.whiteKing === 0) {score += 9999; score += depth}
 
     score += piecesAmount.blackPawn * 1
     score -= piecesAmount.whitePawn * 1
@@ -21,6 +21,8 @@ function evaluateBoard() {
     score += piecesAmount.blackQueen * 9
     score -= piecesAmount.whiteQueen * 9
 
+    score += findLegalMoves('b').length * 0.1;
+    score -= findLegalMoves('w').length * 0.1;
     return score
 }
 function checkAmountOfEveryThing() {

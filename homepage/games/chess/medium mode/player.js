@@ -36,7 +36,7 @@ g$q([60], 'king', 'w')
 
 
 let disableMove = false
-function moveTo(event) {
+async function moveTo(event) {
     if (disableMove) return
     disableMove = true
     for (let i=0;i<showenAvaMoves.length;i++) {
@@ -58,6 +58,8 @@ function moveTo(event) {
     q(`c${remove}`).innerHTML = ''
     grid[classNum] = pieces[was].grid('w')
     q(`c${classNum}`).innerHTML = pieces[was].qury(classNum, 'w')
+    q('tr').innerHTML = 'bot thinking...'
+    await new Promise(x => setTimeout(x, 10))
     botTurn()
 }
 let showenAvaMoves = []
@@ -107,14 +109,7 @@ function findLegalMoves(color) {
                 if (i > index**2-index && color === 'b') continue
                 const oneJump = i + (color === 'b' ? index:-index)
                 const twoJUmp = i + (color === 'b' ? index * 2:-index * 2)
-                if (Math.floor(i/index) === (color === 'b' ? 1:6)) {
-                    if (grid[oneJump] === 0 && grid[twoJUmp] === 0) {
-                        legalMoves.push({put: twoJUmp, remove: i})
-                    } //move 2
-                }  
-                if (grid[i + (color === 'b' ? index:-index)] === 0) {
-                    legalMoves.push({put: oneJump, remove: i})
-                } // move 
+
                 const col = i % index
 
                 // check right capture
@@ -140,6 +135,16 @@ function findLegalMoves(color) {
                         legalMoves.push({ put: killLeft, remove: i });
                     }
                 }
+
+                if (Math.floor(i/index) === (color === 'b' ? 1:6)) {
+                    if (grid[oneJump] === 0 && grid[twoJUmp] === 0) {
+                        legalMoves.push({put: twoJUmp, remove: i})
+                    } //move 2
+                }  
+                if (grid[i + (color === 'b' ? index:-index)] === 0) {
+                    legalMoves.push({put: oneJump, remove: i})
+                } // move 
+                
             } else if (grid[i] === (color === 'b'? 2:8)) {
                 moveTillEnd(i, [1,-1,8,-8], color)
             } else if (grid[i] === (color === 'b' ? 3:9)) {
