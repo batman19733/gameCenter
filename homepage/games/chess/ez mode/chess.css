@@ -5,7 +5,8 @@
     display: grid;
     grid-template-columns: repeat(8, 1fr) !important;
     grid-template-rows: repeat(8, 1fr) !important;
-    border: solid 12px var(--light-dark);
+    border: solid var(--light-dark);
+    border-width: min(12px, 3vw);
     border-radius: 10px;
 }
 .cube {
@@ -18,7 +19,7 @@
     flex-direction: column;
 }
 .piece {
-    font-size: 75px;
+    font-size: min(80px, 11vw);
 }
 .white {
     cursor: pointer;
@@ -45,4 +46,7 @@
 }
 .back-down {
     top: 3.3em;
+}
+.tr {
+    font-size: min(60px, 20vw);
 }

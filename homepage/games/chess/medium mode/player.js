@@ -32,11 +32,12 @@ g$q([4], 'king', 'b')
 g$q([60], 'king', 'w')
 
 //test
+// g$q([8,9,10], 'pawn', 'w')
 
-
-
+let disableAll = false
 let disableMove = false
 async function moveTo(event) {
+    if (disableAll) return
     if (disableMove) return
     disableMove = true
     for (let i=0;i<showenAvaMoves.length;i++) {
@@ -58,6 +59,10 @@ async function moveTo(event) {
     q(`c${remove}`).innerHTML = ''
     grid[classNum] = pieces[was].grid('w')
     q(`c${classNum}`).innerHTML = pieces[was].qury(classNum, 'w')
+    let amountOfPiece = checkAmountOfEveryThing()
+    if (amountOfPiece.blackKing ==0) {disableAll = true; q('tr').innerHTML = 'white won!'; return}
+    if (amountOfPiece.whiteKing ==0) {disableAll = true; q('tr').innerHTML = 'black won!'; return}
+    makeQueen()
     q('tr').innerHTML = 'bot thinking...'
     await new Promise(x => setTimeout(x, 10))
     botTurn()
@@ -65,6 +70,7 @@ async function moveTo(event) {
 let showenAvaMoves = []
 let lastClick;
 function displayLegalMoves(event) {
+    if (disableMove) return
     if (showenAvaMoves[0] !== undefined) {
         for (let i=0;i<showenAvaMoves.length;i++) {
             let s = showenAvaMoves[i]
@@ -229,4 +235,17 @@ function AFN(num) {
     row = Math.floor(num / index)
     col = num % index
     return [row, col]
+}
+function makeQueen() {
+    for (let i = 0; i < index**2; i++) {
+        const isWhitePawn = grid[i] === 7;
+        const isBlackPawn = grid[i] === 1;
+        if (isWhitePawn && Math.floor(i / index) === 0) {
+            grid[i] = 11; // white queen
+            q(`c${i}`).innerHTML = pieces['queen'].qury(i, 'w');
+        } else if (isBlackPawn && Math.floor(i / index) === index - 1) {
+            grid[i] = 5; // black queen
+            q(`c${i}`).innerHTML = pieces['queen'].qury(i, 'b');
+        }
+    }
 }

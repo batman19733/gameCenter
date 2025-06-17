@@ -21,8 +21,8 @@ function evaluateBoard(depth) {
     score += piecesAmount.blackQueen * 9
     score -= piecesAmount.whiteQueen * 9
 
-    score += findLegalMoves('b').length * 0.1;
-    score -= findLegalMoves('w').length * 0.1;
+    score += findLegalMoves('b').length * 0.0001;
+    score -= findLegalMoves('w').length * 0.0001;
     return score
 }
 function checkAmountOfEveryThing() {

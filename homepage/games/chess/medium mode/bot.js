@@ -32,8 +32,11 @@ function botTurn() {
     grid[put] = removed
     let removedPiece = NumPieces[removed].piece
     let removedColor = NumPieces[removed].color
-    q(`c${put}`).innerHTML = pieces[removedPiece].qury(put, removedColor)
     grid[remove] = 0
+    let amountOfPiece = checkAmountOfEveryThing()
+    if (amountOfPiece.blackKing ==0) {disableAll = true; q('tr').innerHTML = 'white won!'; return}
+    if (amountOfPiece.whiteKing ==0) {disableAll = true; q('tr').innerHTML = 'black won!'; return}
+    q(`c${put}`).innerHTML = pieces[removedPiece].qury(put, removedColor)
     q(`c${remove}`).innerHTML = ''
     q(`c${put}`).style.backgroundColor = 'lightgreen'
     q(`c${remove}`).style.backgroundColor = 'darkgreen'
@@ -45,7 +48,7 @@ function botTurn() {
     } else if (amountOfTime > 5500) {
         currentDepth--
     }
-    q('tr').innerHTML = 'Your turn'
+    q('tr').innerHTML = `Move Took: ${(amountOfTime/1000).toFixed(3)}sec, depth: ${currentDepth}`
     disableMove = false
 }
 function minimax(depth, max, alpha = -Infinity, beta = Infinity) {
