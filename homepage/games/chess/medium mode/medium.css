@@ -19,10 +19,11 @@ body {
 .tr {
     font-size: min(40px, 8vw);
     margin-bottom: 50px;
+    text-align: center;
 }
 .board {
-    width: min(85vw, 600px);
-    height: min(85vw, 600px);
+    width: min(90vw, 600px);
+    height: min(90vw, 600px);
     background-color: var(--light-gray);
     display: grid;
     grid-template-columns: repeat(8, 1fr);

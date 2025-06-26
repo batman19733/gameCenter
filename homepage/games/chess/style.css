@@ -10,7 +10,7 @@ body {
     align-items: center;
 }
 .title {
-    font-size: 60px;
+    font-size: min(60px, 11vw);
 }
 
 .modes {
@@ -18,7 +18,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 20px;
-    width: 800px;
+    width: min(800px, 95vw);
 }
 
 .mode {
@@ -33,6 +33,7 @@ body {
     background-color: white;
     box-shadow: var(--light-shadow);
     transition: transform 0.4s;
+    border: var(--light-border);
 }
 .mode:hover {
     transform: translateY(-5px) scale(0.97);
@@ -40,4 +41,27 @@ body {
 }
 .mode:active {
     transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .modes {
+        width: 100vw;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
+        place-items: center;
+        grid-gap: 10px;
+    }
+    .mode {
+        width: 85vw;
+        font-size: min(20px, 6vw);
+        padding: 20px, 7px;
+    }
+    .title {
+        width: 100vw;
+        display: grid;
+        justify-content: center;
+    }
+    .all {
+        align-items: center;
+    }
 }

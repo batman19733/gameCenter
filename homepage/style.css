@@ -46,7 +46,7 @@ body {
     justify-content: center;
 }
 .game {
-    width: max(175px, 13vw);
+    width: min(175px, 40vw);
     height: 295px;
     background-color: white;
     display: flex;
@@ -72,6 +72,7 @@ body {
     font-size: 22px;
     font-weight: 500;
     color: #1a1a1a;
+    text-align: center;
 }
 .img {
     margin-top: 25px;
@@ -108,4 +109,16 @@ img {
 .tool-frame:active {
     box-shadow: inset 7px 7px 18px #246997,
                 inset -7px -7px 18px #44c7ff;
+}
+@media (max-width: 375px) {
+    .game {
+        width: 80vw;
+        height: 80vh;
+    }
+    .img {
+        transform: scale(0.7);
+        width: 100vw;
+        height: 100vh;
+    }
+    
 }
