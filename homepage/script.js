@@ -36,7 +36,7 @@ const games = [{
     filename: 'chess'
 }, {
     name: 'snake',
-    filename: 'snake none'
+    filename: 'snake'
 }, {
     name: 'css tools',
     filename: 'tool'
