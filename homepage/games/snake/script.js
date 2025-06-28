@@ -103,7 +103,7 @@ function updateScore() {
 function putSnake() {
     let last = snake[snake.length-1]
     let [r,c] = last
-    q(`c${NFA([r,c])}`).classList.add('tail')
+    // q(`c${NFA([r,c])}`).classList.add('tail')
 
     for(let i =0;i<snake.length;i++) {
         let part = snake[i]
@@ -112,10 +112,10 @@ function putSnake() {
         let [r,c] = snake[0]
         q(`c${NFA([row,col])}`).innerHTML = pices.body(NFA(part))
         q(`p${NFA([r,c])}`).style.backgroundColor = 'blue'
-        q(`c${NFA([r,c])}`).style.backgroundColor = 'red'
+        q(`c${NFA([r,c])}`).classList.add('neck')
         if (way) {
             let [a,b] = way
-            if (NFA([r-a,c-b]) % 2 === 0) {q(`c${NFA([r-a,c-b])}`).style.backgroundColor = 'darkgreen'} else {q(`c${NFA([r-a,c-b])}`).style.backgroundColor = 'green'}
+            q(`c${NFA([r-a,c-b])}`).classList.remove('neck')
 
             if (way[0] === -1 && way[1] === 0) {
                 q(`p${NFA([r,c])}`).classList.add('up')

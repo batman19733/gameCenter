@@ -38,6 +38,9 @@ const games = [{
     name: 'snake',
     filename: 'snake'
 }, {
+    name: 'W.I.P game',
+    filename: 'none'
+}, {
     name: 'css tools',
     filename: 'tool'
 }

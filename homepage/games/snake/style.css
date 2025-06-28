@@ -6,16 +6,20 @@
     border-width: min(15px, 4vw);
     border-radius: min(20px, 5vw);
     display: grid;
-}
+    background-color: darkgreen;}
 .cube {
     aspect-ratio: 1;
     width: 100%;
     height: 100%;
 }
 .body {
-    width: 100%;
-    height: 100%;
-    background-color: red;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    background-color: lightgreen;
+    border-radius: 50%;
+    border: solid 3px;
+    z-index: 20;
+    position: relative;
 }
 .apple {
     width: 100%;
@@ -85,4 +89,21 @@
     100% {
         opacity: 0.7;
     }
+}
+
+.neck {
+    position: relative;
+}
+.neck::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    background-color: lightgreen;
+    border-radius: 50%;
+    border: solid 3px;
+    top: 0;
+    left: 0;
+    z-index: 5;
 }
