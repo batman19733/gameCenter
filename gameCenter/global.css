@@ -35,7 +35,7 @@ body {
 }
 
 
-.back-to-homePage { /* back button: "←"*/
+.back-to-homePage { /* back button: "←" or "→" or "↑" or "↓"*/
     position: fixed;
     text-decoration: none;
     color: var(--text-important);
@@ -66,6 +66,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 25px;
+    translate: -50% -50%;
 }
 .center-div {
     display: flex;
