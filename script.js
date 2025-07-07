@@ -42,7 +42,7 @@ const games = [{
     filename: 'tool'
 }, {
     name: 'web designs',
-    filename: 'next-web'
+    filename: 'AREA-webDesigns'
 }
 ]
 
@@ -53,8 +53,8 @@ games.forEach(game => {
         document.querySelector('.games').innerHTML += `<div class="game red" onclick='window.location.href="games/${game.filename}"'><div class="name red">${game.name}</div><div class="img"><img src="imgs/none.png" alt=""></div></div>` 
     } else if (game.filename === 'tool') {
         document.querySelector('.games').innerHTML += `<div class="game tool tool-frame" onclick='window.location.href="games/${game.filename}"'><div class="name tool-name">${game.name}</div><div class="img tool">⚙️</div></div>`
-    } else if (game.filename.includes('next')) {
-        document.querySelector('.games').innerHTML += `<div class="game" onclick='window.location.href="games/${game.filename}"'><div class="name">${game.name}</div><div class="img center-div"><div class="circle center-div">→</div></div></div>`
+    } else if (game.filename.includes('AREA')) {
+        document.querySelector('.games').innerHTML += `<div class="game AREA" onclick='window.location.href="${game.filename}"'><div class="name">${game.name}</div><div class="img center-div"><div class="circle center-div">→</div></div></div>`
     } else {
         document.querySelector('.games').innerHTML += `<div class="game" onclick='window.location.href="games/${game.filename}"'><div class="name">${game.name}</div><div class="img"><img src="imgs/${game.filename}.png" alt=""></div></div>`
     }
