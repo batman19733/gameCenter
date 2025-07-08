@@ -5,6 +5,9 @@ let EZresult;
 let EZcheck = ''
 let EZgrid;
 
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
+
+
 q('diff').innerHTML = '<div class="text">what difficulty do you want to play in?</div><div class="buttons"><div class="button" onclick="play(`ez`)">ez mode</div><div class="button red" onclick="play(`medium`)">medium mode</div><div class="button" onclick="play(`hard`)">hard mode</div><div class="button" onclick="play(`minimax`)">minimax mode</div>'
 
 function play(mode) {

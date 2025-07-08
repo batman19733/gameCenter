@@ -7,6 +7,9 @@ const pices = {
     apple: (num) => `<div class="apple a${num}"></div>`
 }
 
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
+
+
 let boardHTML = ''
 for (let i=0;i<index**2;i++) {
     boardHTML += `<div class="cube c${i}"></div>`

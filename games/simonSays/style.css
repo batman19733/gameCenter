@@ -67,6 +67,9 @@ body {
     margin-bottom: 2rem;
     color: black;
 }
+body.dark .start {
+    background-color: #1e1e1e;
+}
 
 .start:hover {
     transform: translateY(-2px);
@@ -92,6 +95,9 @@ body {
     min-width: 60px;
     min-height: 60px;
 }
+body.dark .light {
+    background-color: #1e1e1e;
+}
 
 .light:hover {
     transform: scale(1.05);
@@ -112,6 +118,10 @@ body {
     box-shadow: var(--light-shadow);
     transition: all 0.2s ease;
     margin-top: 2rem;
+}
+body.dark .play-again-button {
+    background-color: #1e1e1e;
+    color: gray;
 }
 
 .play-again-button:hover {

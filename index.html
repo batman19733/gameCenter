@@ -15,6 +15,17 @@
     <div class="bottom">
         <div class="games"></div>
     </div>
+
+    <div class="dark-mode">
+        <div class="modes" onclick="document.body.classList.toggle('dark'); document.querySelector('.dark-mode-text').innerHTML = document.querySelector('.dark-mode-text').innerHTML === 'Dark Mode' ? 'White Mode' : 'Dark Mode'; saveTheme()">
+            <div class="ball"></div>
+        </div>
+        <div style="font-size: 25px;" class="dark-mode-text">
+            White Mode
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    <script src="theme.js"></script>
 </body>
 </html>

@@ -1,5 +1,8 @@
 let lightsHTML = ''
 
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
+
+
 score = 0
 for(let i=1;i<=8;i++) {
     lightsHTML += `<div class="light l${i}a"></div>`
@@ -42,7 +45,7 @@ const check = async e => {
     if (path[count] === playerPath[count]) {
         q(`l${className}a`).style.backgroundColor = 'lightgreen';
         await new Promise(x => setTimeout(x, 300));
-        q(`l${className}a`).style.backgroundColor = 'var(--dark-white)';
+        q(`l${className}a`).style.backgroundColor = theme === 'black' ? '#1e1e1e':'var(--dark-white)';
         if (count + 1 === path.length) {
             playerPath = [];
             another();
@@ -92,7 +95,7 @@ async function another() {
         let spot = path[i];
         q(`l${spot}a`).style.backgroundColor = 'red';
         await new Promise(x => setTimeout(x, 500));
-        q(`l${spot}a`).style.backgroundColor = 'var(--dark-white)';
+        q(`l${spot}a`).style.backgroundColor = theme === 'black' ? '#1e1e1e':'var(--dark-white)';
     }
     
     q('turn').innerHTML = 'Your turn.';

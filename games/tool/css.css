@@ -60,6 +60,10 @@ h1 {
     background-color: #f8f9fa;
     border-bottom: 1px solid #eee;
 }
+body.dark .code-header {
+    background-color: #1e1e1e;
+    color: gray;
+}
 
 .code-title {
     font-weight: 600;

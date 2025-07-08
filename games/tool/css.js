@@ -51,3 +51,5 @@ function copyCode() {
 
 // Load the CSS content when the page loads
 document.addEventListener('DOMContentLoaded', fetchAndDisplayCSS);
+
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}

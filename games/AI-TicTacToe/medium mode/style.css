@@ -63,6 +63,10 @@ body {
                  -8px -8px 16px #f9f9f9;
     cursor: pointer;
 }
+body.dark .PlayAgainButton {
+    box-shadow:  8px 8px 16px #1e1e1e,
+                 -8px -8px 16px #232323;
+}
 .PlayAgainButton:active {
     box-shadow: inset 8px 8px 16px #c7c7c7,
                 inset -8px -8px 16px #f9f9f9;

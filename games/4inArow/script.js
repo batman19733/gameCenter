@@ -1,4 +1,5 @@
 // localStorage.clear()
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
 let html = ''
 let move = JSON.parse(localStorage.getItem('move')) || 'red'
 girdRowsColumns = 9

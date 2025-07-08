@@ -1,3 +1,6 @@
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
+
+
 class TicTacToe {
     constructor() {
         // Load saved game state or initialize new game

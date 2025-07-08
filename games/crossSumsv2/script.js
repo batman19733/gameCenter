@@ -1,3 +1,5 @@
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
+
 const index = 6
 const size = `7vw`
 const sizeNum = 7

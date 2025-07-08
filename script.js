@@ -1,33 +1,27 @@
 const games = [{
     name: '4 in a row',
     filename: '4inArow',
-},
-{
-    name: 'cookie clicker v2',
+},{
+    name: 'cookie clicker',
     filename: 'cookieClicker',
-},
-{
+},{
     name: 'guess the number',
     filename: 'guessTheNumber',
-},
-{
+},{
     name: 'Tic Tac Toe',
     filename: 'tictactoe',
-},
-{
-    name: 'cross numbers v2',
+},{
+    name: 'cross numbers',
     filename: 'crossSumsv2',
-},
-{
+},{
     name: 'AI Tic Tac Toe',
     filename: 'AI-TicTacToe',
-},
-{
+},{
     name: 'simon says',
-    filename: 'simon says',
+    filename: 'simonSays',
 },{
     name: 'ai 4 in a row',
-    filename: 'ai 4 in a row',
+    filename: 'ai4inArow',
 }, {
     name: 'checkers<br>not finished',
     filename: 'checkers'
@@ -56,6 +50,6 @@ games.forEach(game => {
     } else if (game.filename.includes('AREA')) {
         document.querySelector('.games').innerHTML += `<div class="game AREA" onclick='window.location.href="${game.filename}"'><div class="name">${game.name}</div><div class="img center-div"><div class="circle center-div">→</div></div></div>`
     } else {
-        document.querySelector('.games').innerHTML += `<div class="game" onclick='window.location.href="games/${game.filename}"'><div class="name">${game.name}</div><div class="img"><img src="imgs/${game.filename}.png" alt=""></div></div>`
+        document.querySelector('.games').innerHTML += `<div class="game" onclick='window.location.href="games/${game.filename}"'><div class="name">${game.name}</div><div class="img" style="background-image: url(imgs/${game.filename}-dark.png);"><img class="real-img" src="imgs/${game.filename}.png" alt=""></div></div>`
     }
 })

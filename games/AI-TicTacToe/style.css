@@ -45,6 +45,10 @@ body {
     text-align: center;
     box-shadow: var(--light-shadow);
 }
+body.dark .button {
+    background-color: #1e1e1e;
+    color: gray;
+}
 
 .button:hover {
     transform: translateY(-2px);
@@ -66,6 +70,10 @@ body {
 }
 
 .red {
+    background-color: var(--error-red);
+    color: white;
+}
+body.dark .red {
     background-color: var(--error-red);
     color: white;
 }

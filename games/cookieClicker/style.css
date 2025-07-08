@@ -28,6 +28,7 @@ body {
     z-index: 10;
 }
 
+
 .shop-title {
     width: 100%;
     background-color: white;
@@ -40,12 +41,19 @@ body {
     color: var(--text-important);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+body.dark .shop-title {
+    background-color: #1e1e1e;
+    color: gray;
+}
 
 .shop-body {
     width: 100%;
     height: calc(100vh - 80px);
     padding: 1.5rem;
     overflow-y: auto;
+}
+body.dark .shop-body {
+    background-color: #333;
 }
 
 /* Item Styles */
@@ -58,6 +66,10 @@ body {
     cursor: pointer;
     border-radius: 1rem;
     transition: all 0.2s ease;
+}
+body.dark .item {
+    background-color: #1e1e1e;
+    color: gray;
 }
 
 .item:hover {
@@ -72,6 +84,9 @@ body {
     font-size: 1.25rem;
     font-weight: 500;
     text-align: center;
+}
+body.dark .item-name {
+    color: gray;
 }
 
 .item-price-lvl {
@@ -111,11 +126,16 @@ body {
     height: 220px;
     border: none;
     border-radius: 50%;
-    background: var(--primary-bg);
+    background: white;
     box-shadow: 20px 20px 60px #c5c5c5,
                 -20px -20px 60px #ffffff;
     cursor: pointer;
     transition: transform 0.2s ease;
+}
+body.dark .cookie {
+    box-shadow: 14px 14px 30px #1e1e1e,
+                -14px -14px 30px #232323;
+    background-color: #1e1e1e;
 }
 
 .cookie:hover {

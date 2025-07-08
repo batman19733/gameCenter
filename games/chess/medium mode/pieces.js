@@ -39,3 +39,5 @@ const NumPieces = {
     11: { piece: 'king', color: 'w' },
     12: { piece: 'queen', color: 'w' }
 };
+
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}

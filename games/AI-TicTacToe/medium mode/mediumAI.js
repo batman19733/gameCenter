@@ -2,6 +2,9 @@ let boardHTML = ''
 let grid = new Array(9).fill('');
 let disabled = false
 
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
+
+
 for(let i=1;i<=9;i++) {
     boardHTML += `<div class="cube c${i}a"></div>`
 }

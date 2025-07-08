@@ -4,6 +4,7 @@ if (window.innerWidth <= 450) {
     q('PlayAgainButton').style.top = '80%'
 }
 
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
 
 let boardHTML = ''
 for(let i=0; i<index**2;i++) {

@@ -2,6 +2,9 @@ let boardHTML = ''
 let disabled = false
 let botDisabled = false
 
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
+
+
 for(let i=0;i<=8;i++) {
     boardHTML += `<div class="cube c${i}a"></div>`
 }

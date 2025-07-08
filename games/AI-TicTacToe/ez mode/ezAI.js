@@ -5,6 +5,8 @@ let EZresult;
 let EZcheck = ''
 let EZgrid;
 
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
+
 for(let i=1;i<=9;i++) {
     boardHTML += `<div class="cube c${i}a"></div>`
 }

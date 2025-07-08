@@ -1,4 +1,4 @@
-let index = 9
+let index = 7
 let boardHTML = ''
 for(let i=0; i<index**2;i++) {
     boardHTML += `<div class='cube c${i}a'></div>`
@@ -6,16 +6,13 @@ for(let i=0; i<index**2;i++) {
 q('board').innerHTML = boardHTML
 let grid = Array.from({ length: index }, () => Array(index).fill(''));
 
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
+
+
 let disabled = false
-let lastPlayed = undefined
 const check = async e => {
     if (disabled) return
     disabled = true
-    if (lastPlayed !== undefined) {
-        let [row, col] = lastPlayed
-        q(`c${turnToNumberFromArray([row, col])}a`).style.backgroundColor = 'lightblue'
-        lastPlayed = undefined
-    }
     const classNumber = Number(e.target.className.split(' ')[1].replace('c','').replace('a',''))
     q(`c${classNumber}a`).innerHTML = 'p'
     q(`c${classNumber}a`).style.backgroundColor = 'salmon'
@@ -36,7 +33,7 @@ async function bestMove() {
     let bestScore = -Infinity
     for (let [row, col] of nums) {
         grid[row][col] = 'b'
-        let score = minimax(4, false)
+        let score = minimax(6, false)
         grid[row][col] = ''
         if (score > bestScore) {
             bestScore = score
@@ -45,8 +42,7 @@ async function bestMove() {
     }
     grid[move.row][move.col] = 'b'
     q(`c${turnToNumberFromArray([move.row, move.col])}a`).innerHTML = 'b'
-    q(`c${turnToNumberFromArray([move.row, move.col])}a`).style.backgroundColor = 'lightgreen'
-    lastPlayed = [move.row, move.col]
+    q(`c${turnToNumberFromArray([move.row, move.col])}a`).style.backgroundColor = 'lightblue'
     q(`c${turnToNumberFromArray([move.row, move.col])}a`).removeEventListener('click', check)
     checkIfGameIsOver()
     disabled = false
@@ -128,10 +124,10 @@ function hasXinArow(move1 ,move2, move3, move4) {
     for(let row=0;row<index-3;row++) {for(let col=0;col<index-3;col++) {if(grid[row][col] === move1 && grid[row+1][col+1] === move2 && grid[row+2][col+2] === move3 && grid[row+3][col+3] === move4) {return true}}}
 }
 function detectWinBy(move) {
-    for(let row=0;row<index;row++) {for(let col=0;col<index-3;col++) {if(grid[row][col] === move && grid[row][col+1] === move && grid[row][col+2] === move && grid[row][col+3] === move) {return [[row, col], [row, col+1], [row, col+2], [row, col+3]]}}}
-    for(let row=3;row<index;row++) {for(let col=0;col<index;col++) {if(grid[row][col] === move && grid[row-1][col] === move && grid[row-2][col] === move && grid[row-3][col] === move) {return [[row, col], [row-1, col], [row-2, col], [row-3, col]]}}}
-    for(let row=3;row<index;row++) {for(let col=0;col<index-3;col++) {if(grid[row][col] === move && grid[row-1][col+1] === move && grid[row-2][col+2] === move && grid[row-3][col+3] === move) {return [[row, col], [row-1, col+1], [row-2, col+2], [row-3, col+3]]}}}
-    for(let row=0;row<index-3;row++) {for(let col=0;col<index-3;col++) {if(grid[row][col] === move && grid[row+1][col+1] === move && grid[row+2][col+2] === move && grid[row+3][col+3] === move) {return [[row, col], [row+1, col+1], [row+2, col+2], [row+3, col+3]]}}}
+    for(let row=0;row<index;row++) {for(let col=0;col<index-3;col++) {if(grid[row][col] === move && grid[row][col+1] === move && grid[row][col+2] === move && grid[row][col+3] === move) {return true}}}
+    for(let row=3;row<index;row++) {for(let col=0;col<index;col++) {if(grid[row][col] === move && grid[row-1][col] === move && grid[row-2][col] === move && grid[row-3][col] === move) {return true}}}
+    for(let row=3;row<index;row++) {for(let col=0;col<index-3;col++) {if(grid[row][col] === move && grid[row-1][col+1] === move && grid[row-2][col+2] === move && grid[row-3][col+3] === move) {return true}}}
+    for(let row=0;row<index-3;row++) {for(let col=0;col<index-3;col++) {if(grid[row][col] === move && grid[row+1][col+1] === move && grid[row+2][col+2] === move && grid[row+3][col+3] === move) {return true}}}
     return false
 }
 async function moveDownByNumber(classNumber) {
@@ -154,7 +150,7 @@ async function moveDownByNumber(classNumber) {
 }
 function checkIfGameIsOver() {
     if(detectWinBy('p')) {gameOver('you won!'); return}
-    else if(detectWinBy('b')) {gameOver('bot won!'); let spots = detectWinBy('b'); spots.forEach(spot => {let [row, col] = spot; q(`c${turnToNumberFromArray([row, col])}a`).style.backgroundColor = 'lightgreen'})}
+    else if(detectWinBy('b')) {gameOver('bot won!'); return}
     else if(draw()) {gameOver('draw!'); return}
 }
 function draw() {

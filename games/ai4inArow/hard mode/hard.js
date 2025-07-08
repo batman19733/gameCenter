@@ -6,6 +6,9 @@ for(let i=0; i<index**2;i++) {
 q('board').innerHTML = boardHTML
 let grid = Array.from({ length: index }, () => Array(index).fill(''));
 
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
+
+
 let disabled = false
 const check = async e => {
     if (disabled) return

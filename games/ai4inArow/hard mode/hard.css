@@ -12,15 +12,15 @@ body {
     background-color: var(--default-bg);
 }
 .board {
-    width: min(90vw, 600px);
-    height: min(90vw, 600px);
+    width: min(80vw, 600px);
+    height: min(80vw, 600px);
     background-color: rgb(70, 70, 70);
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-gap: 5px;
-    padding: 20px;
-    border-top-left-radius: 35px;
-    border-top-right-radius: 35px;
+    padding: min(20px, 5%);
+    border-top-left-radius: min(35px, 6%);
+    border-top-right-radius: min(35px, 6%);
 }
 .cube {
     display: flex;
@@ -30,6 +30,7 @@ body {
     border-radius: 18%;
     aspect-ratio: 1 / 1;
     color: transparent;
+    cursor: pointer;
 }
 .all {
     display: flex;
@@ -60,19 +61,6 @@ a:hover {
     background-color: #f0f0f0;
 }
 
-.PlayAgainButton {
-    margin-left: 50px;
-    font-size: 30px;
-    padding: 10px;
-    border-radius: 15px;
-    box-shadow:  8px 8px 16px #c7c7c7,
-                 -8px -8px 16px #f9f9f9;
-    cursor: pointer;
-}
-.PlayAgainButton:active {
-    box-shadow: inset 8px 8px 16px #c7c7c7,
-                inset -8px -8px 16px #f9f9f9;
-}
 .modes {
     color: var(--text-primary, #1a1a1a);
     position: absolute;
@@ -90,5 +78,8 @@ a:hover {
 .modes:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #f0f0f0;
+}
+body.dark a {
+    background-color: #1e1e1e;
+    color: gray;
 }

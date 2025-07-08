@@ -35,6 +35,10 @@ body {
     transition: transform 0.4s;
     border: var(--light-border);
 }
+body.dark .mode {
+    background-color: #1e1e1e;
+    color: gray;
+}
 .mode:hover {
     transform: translateY(-5px) scale(0.97);
     background-color: var(--darker-white);

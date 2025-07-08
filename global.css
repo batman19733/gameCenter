@@ -8,6 +8,10 @@
 }
 body {
     background-color: var(--default-bg);
+    transition: background-color 0.3s;
+}
+body.dark {
+    background-color: #333;
 }
 
 :root {
@@ -30,6 +34,7 @@ body {
     --normal-red: #dc2626;
     --dark-red: #b91c1c;
     --blueish-color: #3498db;
+    --light-green: #4ade80;
 
     --light-border: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -48,6 +53,10 @@ body {
     cursor: pointer;
     z-index: 99;
 }
+body.dark .back-to-homePage {
+    background-color: var(--light-dark);
+    color: gray;
+}
 .back-to-homePage:hover {
     transform: translateX(-1px);
     box-shadow: var(--very-light-shadow);
@@ -55,6 +64,9 @@ body {
 .back-to-homePage:active {
     transform: translateX(-2px);
     box-shadow: var(--light-inset-shadow);
+}
+body.dark .back-to-homePage:active {
+    box-shadow: none;
 }
 .back-down {
     top: 3em;

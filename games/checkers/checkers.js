@@ -1,6 +1,9 @@
 const index = 8
 let boardHTML = ''
 
+let theme = localStorage.getItem('theme');if (theme === 'black') {document.body.classList.add('dark')}
+
+
 const whitePiece = num => `<div class="piece white p${num}w" onclick="showGrayMoves(event)">w</div>`
 const grayPiece = (num, spot) => `<div class="piece gray g${num}g" onclick="moveTo(${spot}, ${num})">g</div>`
 const blackPiece = num => `<div class="piece black p${num}b">b</div>`
